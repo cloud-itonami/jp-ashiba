@@ -1,0 +1,4 @@
+{:profile :jp-ashiba
+ :entrypoint ashiba.registry/dispatch
+ :graphs {:bmc "load -> ingest -> score -> report"}
+ :tasks ["health" "load_bmc" "score_bmc" "run_bmc"]}

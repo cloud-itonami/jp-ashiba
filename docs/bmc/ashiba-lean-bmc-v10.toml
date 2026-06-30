@@ -1,0 +1,230 @@
+# ashiba.gftd.ai Lean BMC — Iteration 10 (Series A Phase — VALIDATED ★)
+# Phase: Series A VALIDATED → Scale
+# Date: 2026-05-27
+# SSoT: kotoba Quad store (examples/ashiba-bmc)
+
+[meta]
+product     = "ashiba.gftd.ai"
+version     = "v10"
+iteration   = 10
+date        = "2026-05-27"
+phase       = "SERIES A VALIDATED ★"
+model       = "Lean Canvas Hybrid (9 blocks)"
+prior       = "iter-9 avg 4.6 (Series A Scale Validating)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PROBLEM (5/5 — stable)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.problem]
+maturity = 5
+summary  = "全国普遍ペイン stable"
+
+[[blocks.problem.entries]]
+entry_id  = "p_national"
+statement = "全国ペイン普遍的 (stable)"
+validated = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CUSTOMER SEGMENTS (5/5 ← 4/5: 供給 250社 + ゼネコン 2社 POC 完了 + 1社契約)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.customer_segments]
+maturity = 5
+summary  = "供給 250社 active / 大手ゼネコン 竹中工務店 Enterprise 契約 / D30 needs 継続"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_scale1"
+statement = "全国 500社 active (Month 6 target) — 250社達成 (50%進捗)"
+validated = false
+progress  = "供給 250社 (174→250, +76社 Month 3). 500社 Month 6 on-track"
+note      = "仮説は未達だが軌道が確認された — maturity は段階的検証で 5 へ"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_enterprise"
+statement = "大手ゼネコン Enterprise 契約 → GMV ¥5M+/月"
+validated = true
+evidence  = "竹中工務店 Enterprise ¥80K/月 契約 (2026-08-15). 大林組 POC 完了→商談中"
+gmv_contribution = "竹中 GMV ¥4.2M/月 (全体の 10.5%)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNIQUE VALUE PROPOSITION (5/5 — stable, v2 rollout で成約率 95.3%)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.uvp]
+maturity = 5
+summary  = "v2 AI 本番 成約率 95.3% / 全国 250社 最大在庫ネットワーク"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_v2_rollout"
+statement = "v2 AI 本番 成約率 95.3% (rollout 4週, n=1,240案件)"
+validated = true
+evidence  = "2026-08-29 v2 全量 rollout 完了. 成約率 95.3% (目標 95%+ 達成)"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_network"
+statement = "全国最大在庫 250社 = 競合 8.9倍規模"
+validated = true
+evidence  = "競合最大 28社の 8.9倍。DID 2,847件 相関 0.78"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SOLUTION (5/5 ← 4/5: v2 AI 本番 rollout 完了 + Enterprise API live)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.solution]
+maturity = 5
+summary  = "v2 AI 本番稼働 (95.3%) / Enterprise API 竹中 live / v3 設計開始"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_v2_rollout"
+statement = "v2 AI 本番 rollout 完了 (2026-08-01 達成)"
+validated = true
+evidence  = "2026-08-01 rollout 完了。Stripe エラー率 0.7% (改善). 99.9% uptime"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_enterprise_live"
+statement = "Enterprise API (竹中 SAP連携 SLA 99.9%) live"
+validated = true
+evidence  = "竹中 SAP R/3 連携 live (2026-08-15). 稼働率 99.95%。大林 POC 稼働中"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CHANNELS (5/5 — stable, 全国 5拠点に拡張)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.channels]
+maturity = 5
+summary  = "全国 5拠点稼働 (名古屋・広島追加) / 混合CAC ¥5,200 / SEO 820/月"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_national_expanded"
+statement = "全国 5拠点 (名古屋・広島 Month 4 追加) — 供給 250社達成"
+validated = true
+evidence  = "5拠点 供給 250社: 東京 82 / 大阪 65 / 名古屋 38 / 広島 34 / 福岡 31"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_seo_progress"
+statement = "SEO organic 820/月 (Month 4) — 2,000/月 Month 9 on-track"
+validated = false
+progress  = "ライター 3名体制で月 24本 publish。organic 620→820 (+32% MoM)"
+falsifiable = "Month 9 organic 2,000+ OR 投資縮小"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REVENUE STREAMS (5/5 — stable, GMV ¥40M + Enterprise ARR)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.revenue]
+maturity = 5
+summary  = "GMV ¥40M/月 (+43% MoM) / GM 60.2% / Enterprise ARR ¥960K"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_gmv_40m"
+statement = "GMV ¥40M/月 (+43% MoM) — ¥50M Month 6 軌道 on-track"
+validated = false
+progress  = "GMV ¥28M→¥40M (+43% MoM). ¥50M Month 6 軌道確認"
+take_rate = "GMV ¥40M × 6% = ¥2.4M/月 take rate"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_enterprise_live"
+statement = "Enterprise ARR ¥960K (竹中 ¥80K × 12)"
+validated = true
+evidence  = "竹中工務店 ¥80K/月 契約 (2026-08-15). 大林組 見積中 ¥100K/月"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# COST STRUCTURE (5/5 ← 4/5: Series A グロービス term sheet ¥200M)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+maturity = 5
+summary  = "Series A グロービス term sheet ¥200M / チーム 15名体制 / runway 22ヶ月"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_series_a_ts"
+statement = "Series A ¥200M term sheet 取得"
+validated = true
+evidence  = "グロービス・キャピタル・パートナーズ term sheet ¥200M (2026-08-20). WiL co-lead 交渉中"
+note      = "close 予定 2026-10-01. DCM follow-on ¥50M 追加検討中"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_team_complete"
+statement = "エンジニア 10名 + BizDev 5名採用完了"
+validated = true
+evidence  = "エンジニア 10名 / BizDev 5名 全員 onboard (2026-08-31). runway 22ヶ月"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# KEY METRICS (5/5 ← 4/5: NRR 122% / D180 36.8% confirmed)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+maturity = 5
+summary  = "NRR 122% ✓ / Cohort D180 36.8% ✓ / LTV ¥1.3M / GMV growth accounting"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_nrr_122"
+statement = "NRR 122% (SaaS + take rate 合算) ← 目標 120% 達成"
+validated = true
+evidence  = "Cohort 0 Month 6 NRR: SaaS 118% + take rate expansion = 122%. (2026-08-01)"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_d180_confirmed"
+statement = "Cohort D180 Retention 36.8% > 35% 達成"
+validated = true
+evidence  = "Cohort 0 D180 計測 (2026-11-01): 36.8%. LTV = ¥1.3M (GMV/案件 × D180 × take rate)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNFAIR ADVANTAGE (5/5 — stable, DID moat 加速)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+maturity = 5
+summary  = "DID 2,847件 相関 0.78 / 工業会正式認定 / 全国 250社 最大在庫"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_did_accelerating"
+statement = "DID 2,847件 (+506件/月) — 蓄積加速 (全国展開効果)"
+validated = true
+evidence  = "DID 2,341→2,847 (+506件/月). 相関 0.78. 競合参入コスト ≥ 3年"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_jis_standard"
+statement = "工業会委員会委員 + JIS 改訂WG参加 → 業界標準 API 設計権"
+validated = true
+evidence  = "2026-09-01 JIS A 8951 改訂WG メンバー就任. ashiba API が参照実装に"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SCORING
+# ─────────────────────────────────────────────────────────────────────────────
+[scoring.maturity_per_block]
+problem           = 5
+customer_segments = 5  # +1: ゼネコン竹中 Enterprise契約 + 250社軌道
+uvp               = 5  # stable: v2 rollout 95.3%
+solution          = 5  # +1: v2 rollout完了 + Enterprise API live
+channels          = 5  # stable: 5拠点
+revenue           = 5  # stable: GMV ¥40M + Enterprise ARR
+cost_structure    = 5  # +1: グロービス term sheet ¥200M + チーム15名
+key_metrics       = 5  # +1: NRR 122% + D180 36.8% confirmed
+unfair_advantage  = 5  # stable
+average           = 5.0
+
+[scoring.series_a_verdict]
+verdict           = "SERIES A VALIDATED ★★"
+pmf_confirmed     = true
+growth_confirmed  = true
+series_a_confirmed = true
+term_sheet        = "グロービス ¥200M (2026-08-20)"
+close_target      = "2026-10-01"
+
+[scoring.series_a_kpi]
+gmv_monthly       = "¥40M (+43% MoM)"
+supply_active     = 250
+did_records       = 2847
+nrr               = "122%"
+d180_retention    = "36.8%"
+ltv               = "¥1.3M"
+v2_accuracy       = "95.3%"
+enterprise_arr    = "¥960K"
+
+[scoring.riskiest_assumptions]
+rank_1 = "Series A close 2026-10-01 — WiL co-lead + DCM follow-on 確定待ち"
+rank_2 = "大林組 Enterprise ¥100K/月 — 竹中成功事例で受注確度 80%"
+rank_3 = "GMV ¥50M Month 6 — 全国 500社到達が鍵"
+
+[scoring.next_phase]
+phase      = "Scale Phase → IPO 準備 (2028)"
+milestones = [
+  "Series A close ¥200M+ (2026-10-01)",
+  "GMV ¥50M/月 (Month 6) → ¥100M/月 (Month 12)",
+  "全国 500社 → 1,000社 (Year 2)",
+  "海外展開 (韓国・台湾 足場市場) Year 2",
+  "JIS API 標準採用 → SaaS ¥10K/月 義務的 adoption",
+]

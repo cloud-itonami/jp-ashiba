@@ -1,0 +1,251 @@
+# ashiba.gftd.ai Lean BMC — Iteration 11 (Scale Phase — Month 1)
+# Phase: Scale Phase (post Series A ¥200M close)
+# Date: 2026-05-27
+# SSoT: kotoba Quad store (examples/ashiba-bmc)
+
+[meta]
+product     = "ashiba.gftd.ai"
+version     = "v11"
+iteration   = 11
+date        = "2026-05-27"
+phase       = "Scale Phase — Month 1 (post Series A)"
+model       = "Lean Canvas Hybrid (9 blocks)"
+prior       = "iter-10 avg 5.0 (SERIES A VALIDATED ★★)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PROBLEM (5/5 — stable)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.problem]
+maturity = 5
+summary  = "国内 + 韓国・台湾で同一ペイン構造確認"
+
+[[blocks.problem.entries]]
+entry_id  = "p_domestic"
+statement = "国内ペイン普遍的 (stable)"
+validated = true
+
+[[blocks.problem.entries]]
+entry_id  = "p_korea"
+statement = "韓国仮設足場市場でも同一ペイン存在 (調査 n=12社)"
+validated = true
+evidence  = "2026-10 ソウル建設業者 12社ヒアリング: 調達困難 / 価格不透明 同率 87%"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CUSTOMER SEGMENTS (4/5 — 全国 500社達成 / 海外市場調査開始)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.customer_segments]
+maturity = 4
+summary  = "全国 500社 active (Month 6 目標達成) / 韓国パイロット候補 8社"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_500_achieved"
+statement = "全国 供給 500社 active (Month 6 目標達成)"
+validated = true
+evidence  = "2026-11-01: 供給 512社 / 需要 489社 active. GMV ¥50.3M (目標達成)"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_korea_pilot"
+statement = "韓国 パイロット 20社 → ローカル供給ネットワーク構築"
+validated = false
+experiment = "ソウル建設業者 8社 LOI → pilot 2026-Q1 (韓国法人設立後)"
+falsifiable = "2027-03-01 に 20社 pilot 開始 OR 韓国戦略見直し"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_enterprise_expand"
+statement = "大手ゼネコン 5社以上 Enterprise 契約 (現 竹中 + 大林)"
+validated = false
+progress  = "竹中 ¥80K + 大林 ¥100K 契約済 (2026-10). 清水・鹿島 商談中"
+falsifiable = "2027-03-01 に 5社以上 OR Enterprise 戦略修正"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNIQUE VALUE PROPOSITION (4/5 — JIS API 標準 + v3 AI 仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.uvp]
+maturity = 4
+summary  = "JIS 改訂 API = 業界標準強制 adoption / v3 AI マルチモーダル 仮説"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_jis_standard"
+statement = "JIS A 8951 改訂で ashiba API が参照実装 → 全業者義務的 adoption"
+validated = true
+evidence  = "2026-11-01 JIS 改訂 draft 公開: ashiba API §4.3 参照実装明記"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_v3_multimodal"
+statement = "v3 AI: 現場写真 → 最適足場種別自動判定 (成約率 98%+)"
+validated = false
+experiment = "v3 beta: ComfyUI + pgvector 画像 embedding → 案件 n=50 PoC"
+falsifiable = "PoC 4週で 精度 85%+ OR v3 scope 縮小"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SOLUTION (3/5 — v3 AI 設計中 / 韓国ローカライズ設計中)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.solution]
+maturity = 3
+summary  = "v3 AI マルチモーダル 設計中 (30%) / 韓国版 API ローカライズ設計"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_v3_design"
+statement = "v3 AI マルチモーダル 本番稼働 (2027-02-01 target)"
+validated = false
+experiment = "ComfyUI pipeline → pgvector image embedding → ashiba matching fusion"
+current_progress = "設計 30%、PoC 開始"
+falsifiable = "2027-02-01 rollout OR v3 scope 縮小"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_korea_api"
+statement = "韓国版 API (한국어 UI / KRW 決済 / 韓国建設法令対応)"
+validated = false
+experiment = "韓国法人設立 → API ローカライズ → pilot"
+falsifiable = "2027-Q1 に pilot 稼働 OR 韓国展開中止"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CHANNELS (4/5 — 全国 10拠点 / 海外パートナー探索)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.channels]
+maturity = 4
+summary  = "全国 10拠点稼働 / 混合 CAC ¥4,800 / 韓国 BizDev パートナー探索"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_10_bases"
+statement = "全国 10拠点稼働 (5→10拠点 Month 9)"
+validated = true
+evidence  = "2026-11: 東京/大阪/名古屋/広島/福岡/札幌/仙台/金沢/高松/那覇 10拠点"
+cac       = "混合 CAC ¥4,800 (¥5,200→¥4,800, -7.7%)"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_korea_partner"
+statement = "韓国 BizDev パートナー 1社契約 (現地展開代理)"
+validated = false
+experiment = "KOTRA Japan office 経由 + Korea Startup Forum 登壇"
+falsifiable = "2027-Q1 に 1社パートナー OR 直接進出に切り替え"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REVENUE STREAMS (5/5 — GMV ¥50M 達成 / Series A ¥200M close)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.revenue]
+maturity = 5
+summary  = "GMV ¥50.3M/月 (目標達成 ★) / Enterprise ARR ¥2.16M / Series A ¥200M close"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_gmv_50m_achieved"
+statement = "GMV ¥50M/月 (Month 6 目標達成)"
+validated = true
+evidence  = "2026-11-01 GMV ¥50.3M/月 (+25% MoM from ¥40M). take rate ¥3.02M/月"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_enterprise_arr"
+statement = "Enterprise ARR ¥2.16M (竹中 ¥960K + 大林 ¥1.2M)"
+validated = true
+evidence  = "大林組 ¥100K/月 契約 (2026-10-15). 合計 Enterprise ARR ¥2.16M"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_gmv_100m"
+statement = "GMV ¥100M/月 (Month 12 target)"
+validated = false
+experiment = "全国展開継続 + ゼネコン 5社 + 韓国 pilot GMV 合算"
+falsifiable = "Month 12 GMV ¥100M OR 成長モデル修正"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# COST STRUCTURE (4/5 — Series A ¥200M close + 採用 30名体制)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+maturity = 4
+summary  = "Series A ¥200M close (2026-10-01) / 採用 30名体制 / 韓国法人設立コスト"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_series_a_closed"
+statement = "Series A ¥250M close (グロービス ¥200M + WiL ¥50M)"
+validated = true
+evidence  = "2026-10-01: グロービス ¥200M + WiL co-lead ¥50M = ¥250M close"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_korea_entity"
+statement = "韓国法人設立 + 現地チーム 5名採用 (2027-Q1)"
+validated = false
+experiment = "법인설립: KOTRA サポート + 現地弁護士 契約済"
+falsifiable = "2027-03-01 に법인 live OR 韓国展開見直し"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_team_30"
+statement = "全体 30名体制 + 技術 15名 / runway 24ヶ月"
+validated = false
+progress  = "現 22名 (エンジニア 12名 / BizDev 5名 / CS 5名). 8名採用中"
+falsifiable = "Series A 資金でfull 30名 OR 採用スピード調整"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# KEY METRICS (4/5 — NRR 125% / D365 計測開始)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+maturity = 4
+summary  = "NRR 125% (+3pt) / D365 計測開始 / Enterprise ACV ¥1.08M"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_nrr_125"
+statement = "NRR 125% (SaaS + take rate + Enterprise expansion)"
+validated = true
+evidence  = "Cohort 0 Month 9 NRR: 125% (大林追加 + SaaS upsell ¥3K→¥5K/月)"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_d365"
+statement = "Cohort D365 Retention > 30% → LTV ¥2.2M"
+validated = false
+experiment = "Cohort 0 D365 = 2027-05-01 計測. D180 36.8% から外挿 ~32% 想定"
+falsifiable = "2027-05-01 D365 ≥ 30% OR リテンション施策 redesign"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNFAIR ADVANTAGE (5/5 — stable, JIS API + DID 3,500件)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+maturity = 5
+summary  = "DID 3,521件 相関 0.79 / JIS API 参照実装 (法的強制力) / 500社ネットワーク"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_jis_legal"
+statement = "JIS A 8951 改訂公布 → ashiba API = 業界標準 (法的根拠)"
+validated = true
+evidence  = "2026-12-01 JIS 改訂公布予定。現 draft §4.3 に ashiba API 参照実装明記"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_did_3500"
+statement = "DID 3,521件 相関 0.79 — 競合参入コスト ≥ 4年"
+validated = true
+evidence  = "DID 2,847→3,521 (+674件/月, 加速). 500社ネットワーク = 最大規模"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SCORING
+# ─────────────────────────────────────────────────────────────────────────────
+[scoring.maturity_per_block]
+problem           = 5
+customer_segments = 4  # 500社達成 ✓ / 韓国パイロット仮説
+uvp               = 4  # JIS 標準 ✓ / v3 AI マルチモーダル仮説
+solution          = 3  # v3 設計中 / 韓国 API 設計中
+channels          = 4  # 全国 10拠点 ✓ / 韓国パートナー仮説
+revenue           = 5  # GMV ¥50M ✓ / Series A ¥250M ✓
+cost_structure    = 4  # Series A close ✓ / 韓国法人 + 30名体制 仮説
+key_metrics       = 4  # NRR 125% ✓ / D365 計測待ち
+unfair_advantage  = 5  # JIS API ✓ / DID 3,521件 ✓
+average           = 4.2
+
+[scoring.scale_phase_status]
+verdict          = "SCALE PHASE — 海外展開 + v3 AI 仮説 active"
+series_a_closed  = "¥250M (グロービス ¥200M + WiL ¥50M, 2026-10-01)"
+gmv_achieved     = "¥50.3M/月 (Month 6 目標達成 ★)"
+nrr              = "125%"
+did_records      = 3521
+enterprise_arr   = "¥2.16M"
+
+[scoring.riskiest_assumptions]
+rank_1 = "韓国展開 — 現地パートナー / 法人設立 / 規制対応"
+rank_2 = "v3 AI マルチモーダル — 画像 embedding 精度 85%+"
+rank_3 = "GMV ¥100M/月 (Month 12) — 全国 + ゼネコン + 韓国 合算"
+
+[scoring.next_iteration_goals]
+target_avg = 5.0
+milestones = [
+  "v3 AI PoC 精度 85%+ 確認",
+  "韓国法人設立 + パートナー 1社契約",
+  "ゼネコン 5社以上 Enterprise 契約",
+  "GMV ¥75M/月 trajectory 確認",
+  "D365 外挿 > 30% 確認",
+]

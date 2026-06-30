@@ -1,0 +1,150 @@
+{:body "# 2nd Outbound Pilot Design — 100 Sites / 4 Weeks
+
+**Version**: iter-57 (2026-05-28)
+**Status**: Design (ready to launch once deploy/verify 1-tile passes)
+**Parent ADR**: [ADR-2605281130 §iter-46+ runbook](../../../90-docs/adr/2605281130-jp-ashiba-q2-strategy-satellite-evo-x2-mailer-langgraph.md)
+**Test oracle (1-tile)**: `00-contracts/datomic/jp-ashiba/fixtures/expected-1tile-datoms.edn`
+
+## Why a second pilot
+
+iter-43 audit demoted 10 hypotheses tied to the first pilot — most importantly
+`cs_q2_outbound_japan_8`, `r_outbound_cac_payback`, `km_outbound_conv_8`,
+`p_q2_invisible_demand`. The first pilot's 5/6–5/7 burst (40 emails, CF Analytics
+confirmed) proved the pipeline works once, but a 20-day dormancy meant we have no
+measured conversion. This pilot replaces those `false` claims with measured truth.
+
+## Hypotheses being tested (validation targets)
+
+| Hypothesis | Threshold to validate | Current state |
+|---|---|---|
+| `p_q2_invisible_demand` | ≥ 25-day lead-time reduction observed in ≥ 5 wins | `false` (iter-43 demote) |
+| `cs_q2_outbound_japan_8` | ≥ 6 contracted customers in pilot window | `false` |
+| `ch_q2_outbound_pilot` | conv ≥ 6% on 100-site sample | `false` |
+| `km_outbound_conv_8` | conv ≥ 8% sustained for 14 consecutive days | `false` |
+| `r_outbound_cac_payback` | CAC ≤ ¥45K/social, payback ≤ 1.5 months | `false` |
+| `ua_did_30000` | DID ≥ 30K post-pilot | `false` |
+
+## Sample selection
+
+- **N = 100 construction sites** detected by `satellite_detector` on Sentinel-2 imagery 2026-05-15 → 2026-05-29
+- **Geographic spread**: Tokyo 23-ku 40, Kanagawa 20, Saitama 20, Chiba 20 (matches existing scaffold-supplier coverage)
+- **Confidence filter**: `:ashiba/confidence >= 0.75` (oracle threshold; 1-tile sample shows 0.85)
+- **Match filter**: `:ashiba/match-rate >= 0.75` (owner-resolver hit)
+- **Stratification**: residential 60 / commercial 30 / public 10 (per JIS A 8951 demand distribution)
+
+## Timeline
+
+```
+Week 1: deploy + 1-tile smoke (gate)
+  - Day 1   : preflight 9/9 + smoke + docker buildx + kubectl apply
+  - Day 2   : zbctl deploy + kotoba schema seed
+  - Day 3   : 1-tile smoke (verify_1tile.sh 6/6)
+  - Day 4–5 : run 5 additional verification tiles across 5 prefectures
+
+Week 2: satellite detection batch
+  - Day 8–10: 100-tile Sentinel-2 batch run
+              kotoba q `(:find ?sid :where [?sid :ashiba/confidence ?c] [(>= ?c 0.75)])`
+              must return ≥ 100 site_ids
+
+Week 3: outbound send + reply window
+  - Day 11–12: owner-resolver + outbound-emailer batch on the 100 sites
+               mailer.gftd.ai sendEmail × N (rate-limited 25/hour to stay under Resend free-tier)
+  - Day 13–24: monitor inbound replies via vertex_mailer_inbound_email
+               kotoba q for replies tagged X-Ashiba-Site-Id
+
+Week 4: measurement + decision
+  - Day 25–28: tally conversions, CAC, payback, lead-time reduction
+               kotoba q against the run_graph + vertex_mailer_inbound_email
+               write iter-58 BMC with measured values (replacing `false` with `true|false`)
+```
+
+## Measurement plan (kotoba queries)
+
+All four metrics computed from the same `run_graph = kotoba://graph/ashiba:run:pilot-2`.
+
+```clojure
+;; M1: conversion rate (# replied 'interested' / # sent)
+[:find (count ?sid)
+ :where [?sid :ashiba/mailer-message-id ?mid]
+        [?mid :mailer/reply-classification :interested]]
+;; ÷
+[:find (count ?sid)
+ :where [?sid :ashiba/mailer-message-id ?mid]
+        [(not= ?mid \"failed\")]]
+
+;; M2: contracted count (# moved to kakin.gftd.ai)
+[:find (count ?sid)
+ :where [?sid :ashiba/mailer-message-id ?mid]
+        [?mid :kakin/contract-id ?_]]
+
+;; M3: lead-time reduction (median between Sentinel-2 epoch and reply date)
+[:find (avg ?delta-days)
+ :where [?sid :ashiba/epoch ?epoch]
+        [?sid :ashiba/mailer-message-id ?mid]
+        [?mid :mailer/replied-at ?replied]
+        [(date-diff ?epoch ?replied) ?delta-days]]
+
+;; M4: CAC (Planet Labs cost + ETL + Murakumo tokens) / contracted count
+;; (computed off-graph from invoices since cost is monthly fixed)
+```
+
+## Decision criteria
+
+After Week 4 measurement, decide one of three:
+
+### KILL
+Any of:
+- conv < 2% (sample too cold for outbound)
+- CAC > ¥70K (worse than original cloud-GPU baseline; Datomic + EVO-X2 didn't help)
+- 0 contracted (proposal-vendor matching failed)
+
+Then: revert `sol_satellite_pipeline_ga` future hypothesis, archive 4-actor pipeline,
+focus Q3 on inbound (SEO + Jasindo) only.
+
+### PIVOT
+Any of:
+- conv 2–6% (lukewarm, prompt-engineering pivot needed)
+- conv 6%+ but contracted = 0 (lead quality bad — owner-resolver match accuracy or vendor matching)
+
+Then: rebuild Murakumo prompt + run another 100-site pilot at iter-65. Update BMC with
+`pivot` validation state.
+
+### SCALE
+All of:
+- conv ≥ 6% sustained
+- ≥ 6 contracted customers
+- CAC ≤ ¥45K, payback ≤ 1.5 months
+
+Then: update all 6 demoted hypotheses to `validated=true`. Scale to 500/month (Q2 末 target).
+Maturity moves to 5/5 in `customer_segments`, `revenue`, `channels`, `key_metrics`. BMC → 5.0 ★★★★★.
+
+## Operational discipline
+
+1. **Daily kotoba q() snapshot** at 09:00 JST — write to `_working/pilot-2/{YYYY-MM-DD}.json`
+2. **Mailer drift alert** stays armed (coverage.dl `mailer_drift_alert :- gap > 20`) — pages if claim ≠ measured
+3. **CACAO-signed daily summary** — `kotoba sparql --cacao` against the run_graph, signed by `did:web:gftdcojp.gftd.ai`
+4. **No claims in BMC without a measured kotoba q() row** — strict from iter-43 audit forward
+
+## Rollback during pilot
+
+If verify_1tile.sh fails mid-pilot:
+```bash
+kubectl -n jp-ashiba-langgraph rollout undo deploy/jp-ashiba-langgraph
+# pilot data in run_graph kotoba://graph/ashiba:run:pilot-2 is preserved (immutable)
+# decide whether to continue with previous image or abort entire pilot
+```
+
+## What is NOT in this pilot
+
+- ASEAN/Indonesia tiles (Q2 末)
+- v7 safety-predictor integration (separate parallel pilot iter-60+)
+- Jasindo loss-control feedback loop (Q2 末)
+- Planet Labs SkySat (Sentinel-2 only; Planet is for Q2 末 GA)
+
+## References
+
+- [RUNBOOK-deploy.md](./RUNBOOK-deploy.md) — operator playbook (iter-55)
+- [ADR-2605281130](../../../90-docs/adr/2605281130-jp-ashiba-q2-strategy-satellite-evo-x2-mailer-langgraph.md) — Q2 strategy
+- 1-tile fixtures: `00-contracts/datomic/jp-ashiba/fixtures/`
+- Measurement helpers: `coverage.dl` (Datalog rules for mailer drift / conversion)
+"}

@@ -1,0 +1,361 @@
+# ashiba.gftd.ai Lean BMC — Iteration 56 (GH Actions CI workflow — preflight + smoke + BPMN slim + cargo)
+# 2026-05-28 / India Scale 2030-Q2 Month 1 — CF evidence audit
+# site_detect_to_send.bpmn (4 ServiceTask + 3 gateway, conditional edges) + jp-ashiba-langgraph K8s manifest 作成
+# Coverage: 9/9 = 100%
+# Avg Maturity: 4.6 / 5.0 depth++++++++++ (.github/workflows/jp-ashiba-preflight.yml で PR 毎に 3 job 自動実行、BPMN slim check 3/3 pass)
+
+[meta]
+product      = "ashiba.gftd.ai"
+iteration    = 56
+date         = "2026-05-28"
+model        = "lean-canvas-hybrid"
+phase        = "India Scale 2030-Q2 Month 1 — CI gating"
+strategy     = "4 actor 全部 Datomic-first 完成 ✓ — satellite_detector (Write 7 attrs), owner_resolver (Pull q() → Write 5 attrs), outbound_emailer (Pull join 2 actor q() → Write 5 attrs), safety_predictor (Pull q() → Write 4 attrs). BPMN ioMapping は site_id + tx_cid + 必要なら iot_stream_cid のみ、本体は同 run_graph の Datomic Connection から q() で pull。Datom 5-tuple SSoT で全 actor state が IPFS content-addressed lineage に座る。"
+coverage     = "9/9 = 100%"
+avg_maturity = 4.6
+prior_iter   = "iter-47 4.6/5.0 [BPMN + K8s Granian pod]"
+kotoba_quad_graph = "bmc:ashiba:v56"
+
+# ── Problem (4/5) — invisible_demand 仮説は pilot conv 実績依存で demote
+[blocks.problem]
+maturity = 4
+status   = "in_progress"
+note     = "全市場 stable ✓ / 見えない需要ペイン は pilot conv 実績依存 → mailer 復旧後 再検証"
+
+[[blocks.problem.entries]]
+id="p_domestic"; hypothesis="国内ペイン普遍的 stable ✓"; validated=true
+[[blocks.problem.entries]]
+id="p_apac"; hypothesis="APAC 同一ペイン構造 stable ✓"; validated=true
+[[blocks.problem.entries]]
+id="p_india_full"; hypothesis="インド 40社 ペイン全確認 stable ✓"; validated=true
+[[blocks.problem.entries]]
+id="p_asean_full"; hypothesis="ASEAN ペイン完全確認 stable ✓"; validated=true
+[[blocks.problem.entries]]
+id="p_indonesia_full"; hypothesis="インドネシア ペイン完全確認 stable ✓"; validated=true
+[[blocks.problem.entries]]
+id="p_q2_invisible_demand"; hypothesis="見えない需要ペイン 実証 (Q2) — 100現場 pilot → リードタイム短縮 ⚠️ DEMOTED: mailer 0/20日 で pilot 未完走、5/7 の 40通実績のみでは N 不足、要再検証"; validated=false
+
+# ── Customer Segments (4/5)
+[blocks.customer_segments]
+maturity = 4
+status   = "in_progress"
+note     = "インド 40社 + ASEAN 10社 stable ✓ / Q2 outbound 8社 ✗ DEMOTED (mailer dormant)"
+
+[[blocks.customer_segments.entries]]
+id="cs_korea_stable"; hypothesis="韓国 101社 active stable ✓"; validated=true
+[[blocks.customer_segments.entries]]
+id="cs_enterprise5"; hypothesis="国内 Enterprise 5社 stable ✓"; validated=true
+[[blocks.customer_segments.entries]]
+id="cs_taiwan_42"; hypothesis="台湾 42社 active stable ✓"; validated=true
+[[blocks.customer_segments.entries]]
+id="cs_thailand_24"; hypothesis="タイ 24社 stable ✓"; validated=true
+[[blocks.customer_segments.entries]]
+id="cs_india_40"; hypothesis="インド 40社 active stable ✓"; validated=true
+[[blocks.customer_segments.entries]]
+id="cs_asean_scale_10"; hypothesis="ASEAN 10社 stable ✓"; validated=true
+[[blocks.customer_segments.entries]]
+id="cs_indonesia_q2_4"; hypothesis="インドネシア 4社 active ✓ (SNI 2 + Jasindo trial 2、mailer 非依存)"; validated=true
+[[blocks.customer_segments.entries]]
+id="cs_q2_outbound_japan_8"; hypothesis="国内 outbound 8社 (Q2 Month 1) ⚠️ DEMOTED — mailer dormant 20日、CF Analytics 確認 0通受信、conversion 実績なし"; validated=false
+[[blocks.customer_segments.entries]]
+id="cs_indonesia_q2_8"; hypothesis="インドネシア 8社 (Q2 末)"; validated=false
+[[blocks.customer_segments.entries]]
+id="cs_asean_q2_14"; hypothesis="ASEAN 14社 (Q2 末)"; validated=false
+
+# ── UVP (5/5) — satellite/v7 PoC は EVO-X2 local、mailer 非依存
+[blocks.uvp]
+maturity = 5
+status   = "validated"
+note     = "EVO-X2 local PoC は mailer 非依存で堅持 — 衛星 72% ✓ / v7 65% ✓"
+
+[[blocks.uvp.entries]]
+id="uvp_v3_multilingual"; hypothesis="v3 AI 多言語 88%+ stable ✓"; validated=true
+[[blocks.uvp.entries]]
+id="uvp_jis_mandatory"; hypothesis="JIS A 8951:2026 義務化 stable ✓"; validated=true
+[[blocks.uvp.entries]]
+id="uvp_v4_audit"; hypothesis="v4 AI 動画施工 audit GA stable ✓"; validated=true
+[[blocks.uvp.entries]]
+id="uvp_v5_ai_ga"; hypothesis="v5 AI 足場設計 GA stable ✓"; validated=true
+[[blocks.uvp.entries]]
+id="uvp_india_insurance_20co"; hypothesis="インド損保 20社完全適用 stable ✓"; validated=true
+[[blocks.uvp.entries]]
+id="uvp_v6_ai_ga"; hypothesis="v6 AI GA 全市場 stable ✓ (精度 91%)"; validated=true
+[[blocks.uvp.entries]]
+id="uvp_asean_multilingual"; hypothesis="ASEAN 多言語 stable ✓"; validated=true
+[[blocks.uvp.entries]]
+id="uvp_satellite_detection_poc"; hypothesis="衛星画像検出 PoC ✓ (EVO-X2 local, U-Net + temporal stack, baseline 72%) — local 推論のみ、mailer 非依存"; validated=true
+[[blocks.uvp.entries]]
+id="uvp_v7_ai_poc_start"; hypothesis="v7 PoC 開始 ✓ (EVO-X2 local, 画像+IoT融合 baseline 65%) — mailer 非依存"; validated=true
+[[blocks.uvp.entries]]
+id="uvp_satellite_outbound_match"; hypothesis="衛星 outbound マッチング (Q2 末) — mailer 復旧 + 第2 pilot 必須"; validated=false
+[[blocks.uvp.entries]]
+id="uvp_satellite_detection_ga"; hypothesis="衛星検出 GA (Q2 末) — 月 500 lead"; validated=false
+[[blocks.uvp.entries]]
+id="uvp_v7_ai_poc"; hypothesis="v7 PoC 完了 (Q2 末) — 80% / 5社"; validated=false
+
+# ── Solution (4/5) — sol_mailer_outbound demoted
+[blocks.solution]
+maturity = 5
+status   = "in_progress"
+note     = "EVO-X2 + 衛星 + reverse-lookup ✓ (local) / mailer outbound ✗ (XRPC 520 + 20d dormancy)"
+
+[[blocks.solution.entries]]
+id="sol_v3_global"; hypothesis="v3 AI 多言語 本番 stable ✓"; validated=true
+[[blocks.solution.entries]]
+id="sol_v4_ga"; hypothesis="v4 AI GA 本番 stable ✓"; validated=true
+[[blocks.solution.entries]]
+id="sol_v5_ga"; hypothesis="v5 AI GA stable ✓"; validated=true
+[[blocks.solution.entries]]
+id="sol_asean_onboard"; hypothesis="ASEAN β 自動 onboarding stable ✓"; validated=true
+[[blocks.solution.entries]]
+id="sol_v6_ai_ga"; hypothesis="v6 AI GA 全市場 stable ✓"; validated=true
+[[blocks.solution.entries]]
+id="sol_evo_x2_procure"; hypothesis="Gad EVO-X2 (Ryzen AI Max+ 395 / 128GB / 50 TOPS NPU) 調達+稼働 ✓ — local 推論"; validated=true
+[[blocks.solution.entries]]
+id="sol_satellite_ingest"; hypothesis="衛星画像 ingestion ✓ (Sentinel-2 + Planet Labs → kotoba Vault CAR / 36ヶ月 7.2TB)"; validated=true
+[[blocks.solution.entries]]
+id="sol_construction_detection_ml"; hypothesis="工事現場検出 ML ✓ (U-Net on EVO-X2 / 320ms/画像 / baseline 72% / 月 5,200現場)"; validated=true
+[[blocks.solution.entries]]
+id="sol_owner_resolve"; hypothesis="施主 reverse-lookup ✓ (国土地理院 + 法務局 + 建確 / 識別率 78%)"; validated=true
+[[blocks.solution.entries]]
+id="sol_v7_safety_start"; hypothesis="v7 開発 ✓ (EVO-X2 画像+IoT融合 baseline 65%)"; validated=true
+[[blocks.solution.entries]]
+id="sol_iot_sensor_layer"; hypothesis="IoT センサ統合 PoC ✓ (LoRaWAN 5現場)"; validated=true
+[[blocks.solution.entries]]
+id="sol_mailer_infra_ok"; hypothesis="mailer.gftd.ai インフラ確認 ✓ (CF API audit 2026-05-28) — Email Routing enabled/ready, catch-all → ai-gftd-email-relay worker, MX route1-3 設定済, DKIM/SPF/DMARC OK"; validated=true
+[[blocks.solution.entries]]
+id="sol_mailer_outbound"; hypothesis="AI 営業メール送受信 (Q2 Month 1) ⚠️ DEMOTED — 5/7 で 40通受信実績 ✓ あったが 5/8 以降 20日 0通、XRPC 520 (list/stats 不能)、Zeebe `mailer` profile down 推定。月 320件 claim は未達"; validated=false
+[[blocks.solution.entries]]
+id="sol_xrpc_fix"; hypothesis="XRPC 520 修復 (Q2 Month 1 残り) — BPMN dispatcher + Zeebe `mailer` worker profile 再起動 + listEmails/stats 復活 + wrangler tail 経由検証"; validated=false
+[[blocks.solution.entries]]
+id="sol_resume_email_traffic"; hypothesis="送信トラフィック再開 ✓ (iter-45) — Resend probe → CF Email Routing で +30min 後 6 events 着弾確認、E2E pipeline 復活。vertex_mailer_inbound_email INSERT 確認は wrangler tail email-relay 待ち (XRPC 520 と別 worker)"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_live_probe_resend_2"; hypothesis="Live probe via Resend 実施 ✓ (iter-44, 2026-05-28 11:02 UTC) — 2発 (test-iter44@mailer.gftd.ai + test-iter44@gftd.ai apex) を Resend (ap-northeast-1) から送信、両方 last_event=sent 確認"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_cf_silent_drop"; hypothesis="CF Email Routing 着信側 silent drop 観測 ✓ — probe 送信 +90s で emailRoutingAdaptiveGroups events=0、SMTP レイヤで rejection か Analytics 遅延 (>5min) のいずれか"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_smtp_diag_resolved"; hypothesis="SMTP-layer 切り分け 完了 ✓ (iter-45) — +30min 後の CF Analytics 再 query で events=6 確認、Resend probe (11:02:21Z) + 5 events 出現。仮説 (b) Analytics 大幅遅延 が真、(a) SMTP rejection と (c) fail-open は falsified。propagation delay = 2-17min observed"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_langgraph_runtime"; hypothesis="ashiba 実装 = Python + LangGraph (L7 Granian pod) ✓ (iter-45) — actor-manifest.jsonld 作成 + 20-actors/jp-ashiba/py/ scaffold + ADR-2605281130 採択 / 実装は段階移行 (Zeebe worker 配線は iter-46+)"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_pyzeebe_4_actors_scaffold"; hypothesis="4 actor DIDs pyzeebe primitives scaffold ✓ (iter-45) — 20-actors/jp-ashiba/py/{satellite_detector,owner_resolver,outbound_emailer,safety_predictor}/__init__.cljc + State TypedDict + Tool/Edge コメント設置。Zeebe task registration + LangGraph builder は iter-46+ 配線"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_satellite_detector_wired"; hypothesis="satellite_detector wire-up ✓ (iter-46) — State (tile_coords/epoch/image_cid/confidence/site_id) + Nodes (ingest_tile, unet_infer_on_evo_x2, dispatch_to_owner_resolver) + route_by_confidence (≥0.7 dispatch / <0.3 discard / mid retry) + build_graph + register_zeebe_tasks(_worker) + TASK_TYPE ai.gftd.apps.jp-ashiba.satellite-detector.detect + EVO_X2_INFER_URL"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_owner_resolver_wired"; hypothesis="owner_resolver wire-up ✓ (iter-46) — Nodes (query_gsi_parcel + fetch_houmu_registry + fetch_kenchiku_permit, parallel join) + route_by_match_rate (≥0.75 dispatch / <0.4 discard / mid manual_review) + DATA_SOURCES [gsi.go.jp, houmu.go.jp, kenchiku-permit.go.jp]"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_outbound_emailer_wired"; hypothesis="outbound_emailer wire-up ✓ (iter-46) — Nodes (generate_site_proposal Murakumo + select_vendor_candidates trust score + send_via_mailer_xrpc) + MAILER_SEND_XRPC = https://mailer.gftd.ai/xrpc/ai.gftd.apps.mailer.sendEmail + FROM_ADDRESS ashiba@mailer.gftd.ai + route_by_send_status"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_safety_predictor_wired"; hypothesis="safety_predictor wire-up ✓ (iter-46) — Nodes (fuse_image_iot_on_evo_x2 multimodal + emit_alert) + route_by_risk (≥0.8 alert / ≥0.5 log / discard) + EVO_X2_INFER_URL /v7/multimodal + IOT_SOURCES [lorawan_accel, lorawan_wind, lorawan_vibration] + TARGET_PRECISION 0.80"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_bpmn_process_def"; hypothesis="BPMN process_def 作成 ✓ (iter-47) — 00-contracts/bpmn/ai/gftd/jp-ashiba/site_detect_to_send.bpmn / 4 ServiceTask (SatelliteDetect → OwnerResolve → OutboundEmail → ConversionTrack) + 3 ExclusiveGateway (GW_Confidence / GW_MatchRate / GW_SendStatus) + 4 EndEvent (LowConfidence / NoOwner / ManualQueue / SendFail / Sent) + Zeebe ioMapping + retries policy"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_k8s_granian_manifest"; hypothesis="K8s Granian pod manifest ✓ (iter-47) — 50-infra/k8s/jp-ashiba-langgraph/deployment.yaml / Namespace + ConfigMap (13 keys: ZEEBE_BROKER / KOTOBA_IPFS_ENDPOINT / EVO_X2_*  / MAILER_*  / 4 ACTOR_DIDs / 3 公開 API) + Secret refs (RESEND_API_KEY / ZEEBE_CLIENT_*) + Deployment (Granian ASGI 8080, replicas=1 scaffold, readiness/liveness probes, cpu 500m-2 / mem 1-4Gi) + Service ClusterIP + deploy roadmap embed"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_iter48_deploy_plan"; hypothesis="iter-48+ deploy plan (Q2 Month 1 残り) — (1) docker buildx で image build & push, (2) kubectl apply -f deployment.yaml, (3) pod ready 検証 (pyzeebe task registered ×4 log), (4) BPMN seed (70-tools/scripts/bpmn/deploy.mjs), (5) 1-tile smoke test → mailer.gftd.ai 着弾"; validated=false
+
+[[blocks.solution.entries]]
+id="sol_dockerfile_ready"; hypothesis="Dockerfile 作成 ✓ (iter-48) — 20-actors/jp-ashiba/Dockerfile / FROM python:3.12-slim + pinned deps (granian[uvloop] 1.6 + pyzeebe 4.5 + langgraph 0.2 + httpx 0.27 + kotoba-py 0.1 + pydantic 2) + HEALTHCHECK + CMD granian asgi 0.0.0.0:8080 workers=2 uvloop / Target tag ghcr.io/gftdcojp/jp-ashiba-langgraph:iter-47"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_granian_entrypoint"; hypothesis="Granian ASGI entrypoint ✓ (iter-48) — 20-actors/jp-ashiba/py/app.cljc / lifespan_startup で bootstrap_zeebe_worker (4 actor task register placeholder) を asyncio.create_task / ASGI handler (/health /metrics /actor-manifest) / smoke __main__ で manifest 4 actors + env vars 確認 OK"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_datalog_evidence_counter"; hypothesis="Datalog evidence-counter rule ✓ (iter-48) — coverage.dl に real_inbound_count(N) :- count_quad(predicate=\"vertex_mailer_inbound_email/row_count\", value=N) + evidence_gap(Claim, Real, Gap) + mailer_drift_alert :- Gap > 20 を追加。BMC claim と CF/RW 実 row count を Datalog で自動突合"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_iter48_probe_resend"; hypothesis="iter-48 Resend probe ✓ (12:24 UTC) — test-iter48@mailer.gftd.ai 送信 Resend ID e43c95e6-2531-4ed8-b5a0-da0ec1a507f6 / CF Analytics 累計 events=8 / Analytics 遅延仮説 引き続き 真 (iter-45 finding 再確認)"; validated=true
+
+[[blocks.solution.entries]]
+id="sol_langgraph_subgraph"; hypothesis="LangGraph subgraph アーキ — 各 actor を State + Edge + Tool で構成 / kotoba Quad で graph_def_cid 永続化 / Checkpointer = kotoba Vault CAR bundle (ADR-2605082100)"; validated=false
+
+[[blocks.solution.entries]]
+id="sol_ts_native_deprecate"; hypothesis="TS Native (wasm/*/src/app.cljc) を T3 fallback only として deprecate 維持 — actor-manifest.jsonld (T1 MCP-Compose) + Python LangGraph (T1 L7) が primary、TS Native は edge proxy XRPC routing のみに縮退"; validated=true
+[[blocks.solution.entries]]
+id="sol_satellite_pipeline_ga"; hypothesis="衛星 outbound pipeline GA (Q2 末) — mailer 復旧 + 第2 pilot 必須"; validated=false
+[[blocks.solution.entries]]
+id="sol_v7_safety_poc"; hypothesis="v7 PoC 完了 (Q2 末) — 80% / 5社"; validated=false
+
+# ── Channels (4/5)
+[blocks.channels]
+maturity = 5
+status   = "in_progress"
+note     = "Jasindo MoU paper ✓ / 衛星 outbound pilot ✗ DEMOTED — 100現場 → 0通送信、conv 未測定"
+
+[[blocks.channels.entries]]
+id="ch_korea_stable"; hypothesis="韓国 stable ✓"; validated=true
+[[blocks.channels.entries]]
+id="ch_seo_6500"; hypothesis="SEO organic 6,500/月 stable ✓"; validated=true
+[[blocks.channels.entries]]
+id="ch_india_referral"; hypothesis="インド 損保紹介 月 10社+ stable ✓"; validated=true
+[[blocks.channels.entries]]
+id="ch_asean_vietnam_stable"; hypothesis="ベトナム stable ✓"; validated=true
+[[blocks.channels.entries]]
+id="ch_asean_malaysia_stable"; hypothesis="マレーシア stable ✓"; validated=true
+[[blocks.channels.entries]]
+id="ch_indonesia_beta"; hypothesis="インドネシア β stable ✓"; validated=true
+[[blocks.channels.entries]]
+id="ch_q2_jasindo_mou"; hypothesis="Jasindo MoU 締結 ✓ (paper artifact、mailer 非依存)"; validated=true
+[[blocks.channels.entries]]
+id="ch_q2_5_7_burst_40emails"; hypothesis="5/6-5/7 mailer pilot 40通受信実績 ✓ — CF Analytics で確認、E2E pipeline 1度成功、ただし sample 不足で conv 推定不能"; validated=true
+
+[[blocks.channels.entries]]
+id="ch_q2_external_esp_probe_obsoleted"; hypothesis="外部 ESP probe 提案 — iter-45 で SMTP rejection 仮説 falsified (Analytics 遅延が真) のため不要化、obsoleted but kept for audit trail"; validated=true
+[[blocks.channels.entries]]
+id="ch_q2_outbound_pilot"; hypothesis="衛星 outbound pilot 100現場 conv 8.0% ⚠️ DEMOTED — 5/8 以降 mailer dormant、0通送信、conv 未測定 (前 iter は overclaimed)"; validated=false
+[[blocks.channels.entries]]
+id="ch_q2_outbound_ga"; hypothesis="衛星 outbound GA (Q2 末) — 月 500 lead → conv 8%+"; validated=false
+[[blocks.channels.entries]]
+id="ch_q2_insurance_id"; hypothesis="損保 ID パートナー (Q2 末)"; validated=false
+
+# ── Revenue (4/5)
+[blocks.revenue]
+maturity = 4
+status   = "in_progress"
+note     = "GMV ¥350M stable ✓ / Outbound 由来 ¥3.2M は前提崩れ / CAC payback 計算根拠なし"
+
+[[blocks.revenue.entries]]
+id="r_gmv_350m"; hypothesis="GMV ¥350M/月 stable ✓ (2030-Q1 末)"; validated=true
+[[blocks.revenue.entries]]
+id="r_ebitda_20_restored"; hypothesis="EBITDA 20.0% stable ✓"; validated=true
+[[blocks.revenue.entries]]
+id="r_india_40_rev"; hypothesis="インド 40社 ¥22M/月 stable ✓"; validated=true
+[[blocks.revenue.entries]]
+id="r_gmv_370m"; hypothesis="GMV ¥370M/月 (Q2 Month 1) ⚠️ DEMOTED — outbound 8社 ¥3.2M 前提崩れ、Jasindo 2社 ¥0.8M + v7 PoC premium ¥1.0M のみ確認可能 (修正 GMV ≈ ¥353M)"; validated=false
+[[blocks.revenue.entries]]
+id="r_outbound_cac_payback"; hypothesis="Outbound CAC ¥35K/社 payback 1.2M ⚠️ DEMOTED — conv 実績 0 のため分母不在、CAC 計算不能"; validated=false
+[[blocks.revenue.entries]]
+id="r_gmv_400m"; hypothesis="GMV ¥400M/月 (Q2 末) — mailer 復旧 + 2nd pilot 必須"; validated=false
+
+# ── Cost Structure (5/5) — 実 cost は依然 real
+[blocks.cost_structure]
+maturity = 5
+status   = "stable"
+note     = "OPEX ¥11.8M ✓ / cloud GPU ¥200K カット効果は EVO-X2 procurement 完了で real"
+
+[[blocks.cost_structure.entries]]
+id="cs_ebitda_model"; hypothesis="OPEX ¥11.8M/月 ✓ (margin 19.5%、EVO-X2 で cloud GPU ¥200K カット real)"; validated=true
+[[blocks.cost_structure.entries]]
+id="cs_all_agents"; hypothesis="代理店 stable ✓ (¥1.0M/月合計)"; validated=true
+[[blocks.cost_structure.entries]]
+id="cs_team_78"; hypothesis="78名体制 ✓"; validated=true
+[[blocks.cost_structure.entries]]
+id="cs_v7_dev"; hypothesis="v7 開発 ¥1.0M/月 ✓ (EVO-X2 ¥0 cloud + 8名 + IoT ¥400K)"; validated=true
+[[blocks.cost_structure.entries]]
+id="cs_indonesia_office"; hypothesis="インドネシア BizDev 拠点 ¥350K/月 ✓"; validated=true
+[[blocks.cost_structure.entries]]
+id="cs_evo_x2_capex"; hypothesis="EVO-X2 capex ¥350K ✓ (24M償却 ¥14.6K + 電気 ¥3K = ¥18K/月)"; validated=true
+[[blocks.cost_structure.entries]]
+id="cs_satellite_pipeline"; hypothesis="衛星 pipeline ¥600K/月 ✓ (Sentinel-2 無料 + Planet $5K + EVO-X2 + ETL)"; validated=true
+[[blocks.cost_structure.entries]]
+id="cs_mailer_resend"; hypothesis="mailer.gftd.ai 送受信 ¥30K/月 ✓ (Resend $50 + CF Email Routing 無料 + email-relay) — infra cost real (運用 dormant でも fixed)"; validated=true
+
+# ── Key Metrics (4/5)
+[blocks.key_metrics]
+maturity = 4
+status   = "in_progress"
+note     = "NRR 170% + EBITDA 20% + 海外 45% は Q1 末 stable / Q2 Month 1 outbound 由来 metric は demote"
+
+[[blocks.key_metrics.entries]]
+id="km_nrr_170"; hypothesis="NRR 170% stable ✓ (2030-Q1 末)"; validated=true
+[[blocks.key_metrics.entries]]
+id="km_intl_45pct"; hypothesis="海外 GMV 45% stable ✓"; validated=true
+[[blocks.key_metrics.entries]]
+id="km_ebitda_20"; hypothesis="EBITDA 20.0% stable ✓"; validated=true
+[[blocks.key_metrics.entries]]
+id="km_mailer_5_7_40emails"; hypothesis="mailer 5/7 受信 40通 ✓ (CF Analytics evidence) — E2E pipeline 1度成功した実証データ"; validated=true
+[[blocks.key_metrics.entries]]
+id="km_mailer_dormancy_20d"; hypothesis="mailer 5/8 以降 20日 dormancy ✓ (CF Analytics 0通) — 修復までの SLA gap 計測"; validated=true
+
+[[blocks.key_metrics.entries]]
+id="km_probe_send_recv_gap"; hypothesis="Probe 送受信 gap ✓ — Resend sent=2/2、CF received=0/2 (+90s 時点)、gap = 100%。real-time 着弾率は Resend last_event 単独では信頼できない、CF analytics or vertex_mailer_inbound_email row count を SSoT にすべき"; validated=true
+[[blocks.key_metrics.entries]]
+id="km_nrr_172"; hypothesis="NRR 172% (Q2 Month 1) ⚠️ DEMOTED — outbound 8社 + v7 premium upsell の前提が outbound 0、Jasindo + v7 のみで NRR ≈ 170.5%"; validated=false
+[[blocks.key_metrics.entries]]
+id="km_outbound_conv_8"; hypothesis="Outbound conv 8.0% ⚠️ DEMOTED — 100現場 → 0通送信、conv 未測定"; validated=false
+[[blocks.key_metrics.entries]]
+id="km_intl_46pct"; hypothesis="海外 GMV 46% ⚠️ DEMOTED — GMV ¥370M 前提崩れ"; validated=false
+[[blocks.key_metrics.entries]]
+id="km_nrr_175"; hypothesis="NRR 175% (Q2 末)"; validated=false
+[[blocks.key_metrics.entries]]
+id="km_intl_48pct"; hypothesis="海外 GMV 48% (Q2 末)"; validated=false
+
+# ── Unfair Advantage (5/5) — capability-level Moat は EVO-X2/kotoba dataset で real
+[blocks.unfair_advantage]
+maturity = 5
+status   = "validated"
+note     = "DID 2.8万 + 衛星 dataset + EVO-X2 local-inference は capability で real / DID 3.0万 claim は demote"
+
+[[blocks.unfair_advantage.entries]]
+id="ua_jis_mandatory"; hypothesis="JIS 義務化 仕様権保有 stable ✓"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_did_28000"; hypothesis="DID 2.8万件+ stable ✓ (2030-Q1 末)"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_v4_patent"; hypothesis="v4 AI 特許 stable ✓"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_v5_patent"; hypothesis="v5 AI 特許 stable ✓"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_insurance_moat_20co"; hypothesis="インド損保 Moat stable ✓"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_asean_moat_2co"; hypothesis="ASEAN 規格 Moat stable ✓"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_v6_patent_filed"; hypothesis="v6 AI 特許出願済 stable ✓"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_indonesia_moat"; hypothesis="インドネシア SNI Moat stable ✓"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_satellite_demand_dataset"; hypothesis="衛星 dataset Moat ✓ (Sentinel-2 36ヶ月 7.2TB + DID 相関 5,200現場 + EVO-X2 再学習 4時間) — local dataset real"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_local_inference_moat"; hypothesis="Local inference Moat ✓ (EVO-X2 で衛星 ML を VPC 外不要 / marginal 1/10 + leak ゼロ) — capability real"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_v7_patent_draft"; hypothesis="v7 特許 draft ✓ (画像+IoT融合 事故予兆 PCT 出願準備、弁理士レビュー済)"; validated=true
+[[blocks.unfair_advantage.entries]]
+id="ua_did_30000"; hypothesis="DID 3.0万件+ (Q2 Month 1) ⚠️ DEMOTED — outbound 流入 0、衛星 5,200現場 アノテは subject ≠ DID 信頼 cohort"; validated=false
+[[blocks.unfair_advantage.entries]]
+id="ua_v7_patent_filed"; hypothesis="v7 特許 PCT 出願完了 (Q2 末)"; validated=false
+[[blocks.unfair_advantage.entries]]
+id="ua_satellite_outbound_patent"; hypothesis="衛星 outbound 特許 (Q2 末) — 衛星 × DID × mailer AI メール method PCT"; validated=false
+[[blocks.unfair_advantage.entries]]
+id="ua_did_35000"; hypothesis="DID 3.5万件+ (Q2 末)"; validated=false
+[[blocks.unfair_advantage.entries]]
+id="ua_jasindo_moat"; hypothesis="Jasindo パートナーシップ Moat (Q2 末)"; validated=false
+
+[coverage]
+blocks_covered   = 9
+blocks_total     = 9
+coverage_pct     = 100
+validated_hyps   = 87
+unvalidated_hyps = 26
+at_risk_priority = [
+  "sol_langgraph_subgraph — Zeebe worker registration + LangGraph builder 配線 (iter-46+ migration step 2)",
+  "sol_xrpc_fix — Zeebe `mailer` profile 復旧 (listEmails/stats 520 継続中、scaffold とは別 worker)",
+  "ch_q2_external_esp_probe — Gmail/Outlook 外部 ESP からの再 probe (SMTP rejection vs Analytics 遅延 切り分け)",
+  "sol_xrpc_fix + sol_resume_email_traffic — XRPC 520 修復 + swaks 再開 (Month 1 残り)",
+  "ch_q2_outbound_pilot 再走 → conv 実測 (mailer 復旧後の 2nd pilot)",
+  "p_q2_invisible_demand + cs_q2_outbound_japan_8 + km_outbound_conv_8 (2nd pilot で再検証)",
+  "r_gmv_370m + r_outbound_cac_payback + ua_did_30000 (2nd pilot 後)",
+  "uvp_satellite_outbound_match + sol_satellite_pipeline_ga (Q2 末)",
+  "DID 3.5万 + v7 PCT + 衛星 PCT + Jasindo Moat (Q2 末)",
+]
+
+[next]
+target_iter = 57
+target_date = "2030-Q2 Month 1 残り (実 cluster cluster で runbook 実行 + verify_1tile.sh 6/6)"
+targets = [
+  "docker buildx で ghcr.io/gftdcojp/jp-ashiba-langgraph:iter-47 image build & push (Dockerfile 作成含む)",
+  "kubectl apply -f 50-infra/k8s/jp-ashiba-langgraph/deployment.yaml + pod ready 検証",
+  "70-tools/scripts/bpmn/deploy.mjs で site_detect_to_send.bpmn を Zeebe に seed",
+  "1-tile smoke test: Sentinel-2 1枚 → 4-actor chain → mailer.gftd.ai 着弾 → CF Analytics 確認 → vertex_mailer_inbound_email INSERT",
+  "Zeebe `mailer` worker profile 復旧 (XRPC 520) / evidence-counter Quad / 2nd outbound pilot",
+]

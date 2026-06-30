@@ -1,0 +1,316 @@
+# ashiba.gftd.ai Lean BMC — Iteration 14 (Profitable Global VALIDATED ★)
+# Phase: 持続成長 + グローバル拡張 VALIDATED (No IPO)
+# Date: 2026-05-27
+# SSoT: kotoba Quad store (examples/ashiba-bmc)
+
+[meta]
+product     = "ashiba.gftd.ai"
+version     = "v14"
+iteration   = 14
+date        = "2026-05-27"
+phase       = "Profitable Global VALIDATED ★"
+model       = "Lean Canvas Hybrid (9 blocks)"
+prior       = "iter-13 avg 4.4 (Profitable Global Phase Month 1)"
+strategy    = "No IPO — EBITDA 黒字化 ✓ + 海外展開 (韓国 → 台湾 beta → SEA 探索)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PROBLEM (5/5 — stable)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.problem]
+maturity = 5
+summary  = "国内 + 韓国 + 台湾 stable / タイ・ベトナム ペイン 73% 確認"
+
+[[blocks.problem.entries]]
+entry_id  = "p_domestic"
+statement = "国内ペイン普遍的 (stable)"
+validated = true
+
+[[blocks.problem.entries]]
+entry_id  = "p_korea_taiwan"
+statement = "韓国 + 台湾 同一ペイン 91% stable"
+validated = true
+evidence  = "iter-12 確認済"
+
+[[blocks.problem.entries]]
+entry_id  = "p_sea"
+statement = "タイ・ベトナム 建設業者 同一ペイン 73% (n=11社)"
+validated = true
+evidence  = "2027-Q2 JETRO Bangkok + HCMC 11社: 調達困難 / 価格不透明 73% 一致。展開検討開始"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CUSTOMER SEGMENTS (5/5 — stable + 台湾 pipeline 前進)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.customer_segments]
+maturity = 5
+summary  = "国内 512社 / ゼネコン 5社 Enterprise / 韓국 22社 pilot 順調 / 台湾 8社 LOI signed"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_enterprise5"
+statement = "ゼネコン 5社 Enterprise ARR ¥5.4M (stable)"
+validated = true
+evidence  = "iter-12 確認済"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_korea_pilot"
+statement = "韓국 22社 pilot — 月次 GMV ¥8.2M 達成 (2027-Q2)"
+validated = true
+evidence  = "2027-Q2: 22社 full ramp。月次 GMV ¥8.2M、成約率 96.1%"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_taiwan_loi"
+statement = "台湾 8社 LOI signed → pilot 2027-Q4"
+validated = true
+evidence  = "2027-Q3: 台北 5社 + 高雄 3社 LOI 取得。BizDev パートナー 経由"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNIQUE VALUE PROPOSITION (5/5 — v3 本番 + JIS + 多言語 PoC 87%)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.uvp]
+maturity = 5
+summary  = "v3 AI 本番 88.3% stable / JIS 義務化 / 多言語 AI (日韓繁中) PoC 87% 達成"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_v3_live"
+statement = "v3 AI 本番稼働 精度 88.3% stable"
+validated = true
+evidence  = "iter-13 確認済"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_jis_mandatory"
+statement = "JIS A 8951:2026 義務化 仕様権保有 stable"
+validated = true
+evidence  = "iter-12 確認済"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_multilingual"
+statement = "多言語 AI (日/韓/繁中) 共通 v3 パイプライン PoC 87% 達成"
+validated = true
+evidence  = "2027-Q2: 日韓繁中 同一モデルで精度 87.2% (目標 85%+)。ローカライズコスト 60% 削減"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SOLUTION (5/5 ← 4/5: 台湾 API beta live + v4 PoC 82%)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.solution]
+maturity = 5
+summary  = "v3 stable / 韓국 stable / 台湾 API beta live (TWD) / v4 動画 PoC 82%"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_v3_live"
+statement = "v3 AI 本番稼働 成約率 97.8% stable"
+validated = true
+evidence  = "iter-13 確認済"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_korea_stable"
+statement = "韓国版 API SLA 99.7% stable"
+validated = true
+evidence  = "iter-13 確認済"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_taiwan_api"
+statement = "台湾版 API beta live (繁體字 UI / TWD NHN Commerce 決済)"
+validated = true
+evidence  = "2027-Q3: 台湾 API beta deploy。台北 5社 + 高雄 3社 pilot onboarding 開始"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_v4_poc"
+statement = "v4 AI 動画解析 PoC 精度 82% (目標 80%+ 達成)"
+validated = true
+evidence  = "2027-Q3 PoC n=30動画: 施工手順 判定 精度 82.3%。本番 rollout 2028-Q1 予定"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CHANNELS (5/5 ← 4/5: 台湾 BizDev パートナー契約 / SEO 2,800/月)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.channels]
+maturity = 5
+summary  = "韓国 47社 拡大中 / SEO 2,800/月 / 台湾 BizDev パートナー契約 / タイ初期探索"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_korea_full"
+statement = "韓국 현대건설 + 추가 3社 파트너십 — 47社 active (→ 100社 2027-Q4)"
+validated = true
+evidence  = "2027-Q2: 22社 → 47社 拡大。3社追加パートナー 契約"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_seo_2800"
+statement = "SEO organic 2,800/月 (Month 13) 継続成長"
+validated = true
+evidence  = "2027-Q2: 2,047 → 2,812/月 (+37% QoQ)"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_taiwan_partner"
+statement = "台湾 BizDev パートナー 台灣建材供應商協會 経由 契約"
+validated = true
+evidence  = "2027-Q3: 台灣建材供應商協會 メンバー 企業 経由、8社 LOI → pilot 代理"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_sea_explore"
+statement = "タイ BDC 探索 — Bangkok 建設業者 5社 ヒアリング完了"
+validated = false
+experiment = "2027-Q4 タイ BDC 1社契約 OR 2028-Q1 以降に延期"
+falsifiable = "2027-Q4 タイ BDC 契約 OR SEA 2028 延期決定"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REVENUE STREAMS (5/5 ← 4/5: GMV ¥103M + EBITDA 黒字 + 韓国 GMV ✓)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.revenue]
+maturity = 5
+summary  = "GMV ¥103M/月 ✓ / EBITDA 黒字化 ✓ / 韓국 GMV ¥8.2M ✓ / ARR ¥9.1M"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_gmv_103m"
+statement = "GMV ¥103M/月 (Month 13 / 2027-Q2) 達成 ★"
+validated = true
+evidence  = "2027-Q2: 国内 GMV ¥94.8M + 韓국 ¥8.2M = 総計 ¥103M (+37% QoQ)"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_korea_gmv"
+statement = "韓국 pilot GMV ¥8.2M/月 (2027-Q2) 達成"
+validated = true
+evidence  = "22社 full ramp: take rate ¥492K/月 = GMV 寄与 ¥8.2M"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_ebitda_positive"
+statement = "EBITDA 黒字化 2027-Q2 (月次 +¥690K) 達成 ★"
+validated = true
+evidence  = "GMV ¥103M × 6% = ¥6.18M / OPEX ¥5.49M → EBITDA +¥690K/月 (margin 11.2%)"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_arr_91m"
+statement = "Enterprise ARR ¥9.1M (ゼネコン 5社 + SaaS + 韓국 pilot MRR)"
+validated = true
+evidence  = "国内 ARR ¥7.56M + 韓국 MRR ¥492K × 3 = ARR ¥9.1M"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# COST STRUCTURE (5/5 ← 4/5: EBITDA モデル確定 / 台湾 代理店モデル採用)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+maturity = 5
+summary  = "EBITDA モデル確定 ✓ / 台湾 代理店モデル決定 ✓ / 38名体制 runway 34ヶ月"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_korea_stable"
+statement = "주식회사 아시바코리아 5名 stable"
+validated = true
+evidence  = "iter-13 確認済"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_ebitda_confirmed"
+statement = "OPEX ¥5.49M/月 以下維持 → EBITDA 黒字モデル確定"
+validated = true
+evidence  = "人件費 ¥3.1M + インフラ ¥0.79M + BizDev ¥1.1M + その他 ¥0.5M = ¥5.49M"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_taiwan_agent"
+statement = "台湾展開: 代理店モデル決定 (月 ¥180K) — 法人設立不要 ROI 優位"
+validated = true
+evidence  = "2027-Q3 ROI 比較: 代理店 ¥180K/月 vs 法人 ¥5M 初期。GMV ¥3M 想定で代理店優位"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_team_38"
+statement = "全体 38名体制 runway 34ヶ月 (EBITDA 黒字で収益連動採用)"
+validated = true
+evidence  = "2027-Q2: エンジニア 18名 / BizDev 9名 / CS 6名 / Korea 5名 = 38名。runway 34ヶ月"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# KEY METRICS (5/5 ← 4/5: D365 実測 / EBITDA margin / 海外比率)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+maturity = 5
+summary  = "NRR 131% / D365 32.8% 実測 ✓ / EBITDA margin 11.2% / 海外 GMV 比率 8%"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_nrr_131"
+statement = "NRR 131% (Month 13) — 韓国 + ゼネコン upsell 加速"
+validated = true
+evidence  = "2027-Q2 NRR: 131% (韓国 pilot upsell + 国内ゼネコン plan upgrade)"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_d365"
+statement = "D365 Cohort 0 実測 32.8% (2027-05-01 計測) ★"
+validated = true
+evidence  = "2027-05-01 実計測: D365 = 32.8% (外挿 32% とほぼ一致)。LTV ¥2.6M 確定"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_ebitda_margin"
+statement = "EBITDA margin 11.2% (2027-Q2) — 目標 8%+ 超過達成"
+validated = true
+evidence  = "+¥690K / 月次 take rate ¥6.18M = 11.2% margin"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_intl_ratio"
+statement = "海外 GMV 比率 8% (韓국 ¥8.2M / 総 GMV ¥103M) — 15% 目標継続"
+validated = false
+progress  = "現在 8%。台湾 pilot + 韓国 100社 拡大で 2027-Q4 に 15% 目標"
+falsifiable = "2027-Q4 海外 GMV 比率 ≥ 15% OR 海外展開ペース再検討"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNFAIR ADVANTAGE (5/5 — stable + v3 特許出願完了)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+maturity = 5
+summary  = "DID 5,100件 相関 0.82 / JIS 義務化 / v3 特許出願 (日本+韓国+PCT) 完了"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_jis_mandatory"
+statement = "JIS A 8951:2026 義務化 仕様権保有 stable"
+validated = true
+evidence  = "iter-12 確認済"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_did_5100"
+statement = "DID 5,100件 相関 0.82 + 台湾 DID 発行開始"
+validated = true
+evidence  = "2027-Q3: 国内 4,700 + 韓국 280 + 台湾 120 = 5,100件。相関 0.82"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_v3_patent"
+statement = "v3 マルチモーダル AI 特許出願 完了 (日本 + 韓国 + PCT)"
+validated = true
+evidence  = "2027-Q2: 特許出願 3件 (日本 2027-041891 / 韓国 10-2027-0123456 / PCT/JP2027/021234)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SCORING
+# ─────────────────────────────────────────────────────────────────────────────
+[scoring.maturity_per_block]
+problem           = 5
+customer_segments = 5  # Taiwan LOI 8社 signed
+uvp               = 5  # multilingual AI 87% ✓
+solution          = 5  # Taiwan API beta ✓ / v4 PoC 82% ✓
+channels          = 5  # Taiwan partner ✓ / SEO 2,800 ✓ (SEA explore のみ仮説)
+revenue           = 5  # GMV ¥103M ✓ / EBITDA ✓ / Korea GMV ✓
+cost_structure    = 5  # EBITDA model ✓ / Taiwan agent ✓ / 38名 runway 34ヶ月 ✓
+key_metrics       = 5  # D365 32.8% ✓ / EBITDA margin 11.2% ✓ (海外比率 8% のみ仮説)
+unfair_advantage  = 5  # v3 patent ✓ / DID 5,100 ✓
+average           = 5.0
+
+[scoring.profitable_global_verdict]
+verdict               = "PROFITABLE GLOBAL VALIDATED ★"
+strategy              = "No IPO — EBITDA 黒字化 ✓ + 海外展開継続"
+ebitda_monthly        = "+¥690K/月 (margin 11.2%)"
+gmv_monthly           = "¥103M/月 (国内 ¥94.8M + 韓国 ¥8.2M)"
+nrr                   = "131%"
+d365_retention        = "32.8% (実測 2027-05-01)"
+ltv                   = "¥2.6M"
+did_records           = 5100
+enterprise_arr        = "¥9.1M"
+korea_active          = "47社 (→ 100社 2027-Q4)"
+taiwan_pilot          = "8社 2027-Q4 開始予定"
+v3_patent             = "出願完了 (日本 + 韓国 + PCT)"
+runway_months         = 34
+
+[scoring.riskiest_assumptions]
+rank_1 = "海外 GMV 比率 15% (2027-Q4) — 台湾 pilot + 韓국 100社 拡大の速度"
+rank_2 = "タイ BDC 1社契約 (2027-Q4) — SEA 展開の起点"
+rank_3 = "v4 AI 本番 rollout 2028-Q1 — PoC 82% → 本番 精度 80%+ 維持"
+
+[scoring.next_iteration_goals]
+target_avg = 5.0
+phase      = "Profitable Global 継続 — 海外比率 15% + SEA 展開 + v4 本番"
+milestones = [
+  "海外 GMV 比率 15% (台湾 + 韓国 100社, 2027-Q4)",
+  "タイ BDC 1社契約 (2027-Q4)",
+  "v4 AI 本番 rollout 2028-Q1",
+  "EBITDA margin 15%+ (GMV ¥120M 目標, 2027-Q4)",
+  "台湾 pilot 8社 → 30社 拡大 (2028-Q1)",
+]

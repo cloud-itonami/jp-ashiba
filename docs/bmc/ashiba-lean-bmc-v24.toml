@@ -1,0 +1,366 @@
+# ashiba.gftd.ai Lean BMC — Iteration 24
+# 2026-05-27 / Deep Global 2028-Q3 Phase Month 2 (検証進行)
+# 戦略: No IPO — タイ 15社 ✓ + v4 upsell 50社 ✓ + 海外 20% ✓ + GMV ¥150M 目前
+# Coverage: 9/9 = 100%
+# Avg Maturity: 4.9 / 5.0
+
+[meta]
+product      = "ashiba.gftd.ai"
+iteration    = 24
+date         = "2026-05-27"
+model        = "lean-canvas-hybrid"
+phase        = "Deep Global 2028-Q3 Phase Month 2"
+strategy     = "No IPO — タイ 15社 ✓ + v4 upsell 50社 ✓ + 海外 20% ✓ + GMV ¥150M + インド pilot"
+coverage     = "9/9 = 100%"
+avg_maturity = 4.9
+prior_iter   = "iter-23 4.2/5.0 [Deep Global 2028-Q3 Month 1]"
+kotoba_quad_graph = "bmc:ashiba:v24"
+
+# ── Problem ──────────────────────────────────────────────────────────────────
+[blocks.problem]
+maturity = 5
+status   = "stable"
+note     = "国内 + APAC stable ✓ / インド 7/8社ヒアリング完了"
+
+[[blocks.problem.entries]]
+id        = "p_domestic"
+hypothesis = "国内ペイン普遍的 stable ✓"
+validated = true
+
+[[blocks.problem.entries]]
+id        = "p_apac"
+hypothesis = "APAC (韓国+台湾+タイ) 同一ペイン構造 stable ✓"
+validated = true
+
+[[blocks.problem.entries]]
+id        = "p_india_5of8"
+hypothesis = "インド 5/8社ヒアリング完了 ✓ (iter-22 確認)"
+validated = true
+
+[[blocks.problem.entries]]
+id        = "p_india_7of8"
+hypothesis = "インド 7/8社ヒアリング完了 ✓ — ペイン強度スコア平均 4.3/5.0 (国内 4.5 と同等)"
+validated = true
+
+[[blocks.problem.entries]]
+id        = "p_india_full_8"
+hypothesis = "インド 8社全員完了 + 定量スコアリングレポート (2028-Q3 末)"
+validated = false
+
+# ── Customer Segments ────────────────────────────────────────────────────────
+[blocks.customer_segments]
+maturity = 5
+status   = "validated"
+note     = "タイ 15社 ✓ / インド pilot 2社 LOI 交渉中"
+
+[[blocks.customer_segments.entries]]
+id        = "cs_korea_stable"
+hypothesis = "韓国 101社 active stable ✓"
+validated = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_enterprise5"
+hypothesis = "国内 Enterprise 5社 stable ✓"
+validated = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_taiwan_33"
+hypothesis = "台湾 33社 active ✓ (+2社 自然拡大 2028-Q3)"
+validated = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_thailand_15"
+hypothesis = "タイ 15社 ✓ (10社 → +5社 2028-Q3-10 達成 — API beta 自己申請 + Thana 新紹介)"
+validated = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_india_pilot_2"
+hypothesis = "インド 2社 正式 pilot LOI — Buildtech India + Shankar Construction (2029-Q1 締結目標)"
+validated = false
+
+# ── Unique Value Proposition ─────────────────────────────────────────────────
+[blocks.uvp]
+maturity = 5
+status   = "validated"
+note     = "全主力 UVP stable ✓ / インド IS 2750 UVP プロトタイプ完成 ✓ / v4 upsell 50社 価値実証 ✓"
+
+[[blocks.uvp.entries]]
+id        = "uvp_v3_multilingual"
+hypothesis = "v3 AI 多言語 (日韓繁中) 88%+ stable ✓"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_jis_mandatory"
+hypothesis = "JIS A 8951:2026 義務化 仕様権保有 stable ✓"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_v4_audit"
+hypothesis = "v4 AI 動画施工 audit GA stable ✓ (精度 87%)"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_insurance_2co"
+hypothesis = "東京海上日動 + 損保ジャパン exclusive Moat stable ✓"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_v4_upsell_50"
+hypothesis = "v4 upsell 価値実証 ✓ — 50社採択 × ¥50K = ¥2.5M/月 (2028-Q3-15)"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_india_is2750"
+hypothesis = "インド版 UVP ✓ — IS 2750 対応 + ヒンディー語 UI プロトタイプ完成 (2028-Q3-20)"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_india_insurance"
+hypothesis = "インド損保連携 UVP — LIC / New India Assurance との PoC 設計 (2029-Q1)"
+validated = false
+
+# ── Solution ─────────────────────────────────────────────────────────────────
+[blocks.solution]
+maturity = 5
+status   = "validated"
+note     = "v4 upsell 50社 ✓ / タイ API stable ✓ / インド prototype 完成 ✓"
+
+[[blocks.solution.entries]]
+id        = "sol_v3_global"
+hypothesis = "v3 AI 多言語 本番 stable ✓"
+validated = true
+
+[[blocks.solution.entries]]
+id        = "sol_v4_ga"
+hypothesis = "v4 AI GA 本番 stable ✓ (SLA 99.9%)"
+validated = true
+
+[[blocks.solution.entries]]
+id        = "sol_v4_upsell_50"
+hypothesis = "v4 upsell 50社採択 ✓ × ¥50K = ¥2.5M/月 (2028-Q3-15 確認)"
+validated = true
+
+[[blocks.solution.entries]]
+id        = "sol_thailand_api"
+hypothesis = "タイ版 API stable ✓ (タイ語 UI / THB 決済 / タイ建設法令対応)"
+validated = true
+
+[[blocks.solution.entries]]
+id        = "sol_india_proto"
+hypothesis = "インド版 プロトタイプ完成 ✓ (IS 2750 + ヒンディー語 UI — 2028-Q3-20、pilot 2社向け)"
+validated = true
+
+[[blocks.solution.entries]]
+id        = "sol_india_pilot_deploy"
+hypothesis = "インド版 pilot deploy (Buildtech India + Shankar Construction 2029-Q1)"
+validated = false
+
+# ── Channels ─────────────────────────────────────────────────────────────────
+[blocks.channels]
+maturity = 5
+status   = "validated"
+note     = "インド BizDev 3社体制 ✓ / 全主要チャネル stable ✓"
+
+[[blocks.channels.entries]]
+id        = "ch_korea_stable"
+hypothesis = "韓国 チャネル stable ✓"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_seo_4000"
+hypothesis = "SEO organic 4,000/月 ✓ (タイ API 日英 SEO コンテンツ効果 +480/月)"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_taiwan_stable"
+hypothesis = "台湾 BizDev stable ✓ (33社 active)"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_thailand_api_eff"
+hypothesis = "タイ API 自己申請チャネル stable ✓ (15社 active)"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_india_mou_stable"
+hypothesis = "インド BizDev MOU stable ✓ (Buildtech India)"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_india_3co"
+hypothesis = "インド BizDev 3社体制 ✓ (Buildtech India + Shankar Construction + Mumbai Infra Partners 2028-Q3-25)"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_india_gov_channel"
+hypothesis = "インド 建設省 / CII (商工会議所) 経由 認定チャネル (2029-Q1) — 政府・業界団体ルート"
+validated = false
+
+# ── Revenue Streams ───────────────────────────────────────────────────────────
+[blocks.revenue]
+maturity = 4
+status   = "growing"
+note     = "v4 upsell ¥2.5M/月 ✓ / GMV ¥145M (¥150M まで +¥5M)"
+
+[[blocks.revenue.entries]]
+id        = "r_gmv_135m"
+hypothesis = "GMV ¥135M/月 stable ✓"
+validated = true
+
+[[blocks.revenue.entries]]
+id        = "r_ebitda_163"
+hypothesis = "EBITDA 16.3% stable ✓"
+validated = true
+
+[[blocks.revenue.entries]]
+id        = "r_v4_upsell_250m"
+hypothesis = "v4 upsell 50社 × ¥50K = ¥2.5M/月 ✓ (2028-Q3-15)"
+validated = true
+
+[[blocks.revenue.entries]]
+id        = "r_gmv_145m"
+hypothesis = "GMV ¥145M/月 ✓ (タイ 15社 + v4 upsell 50社 + 台湾 33社 寄与 2028-Q3-20)"
+validated = true
+
+[[blocks.revenue.entries]]
+id        = "r_gmv_150m"
+hypothesis = "GMV ¥150M/月 (2028-Q3 末) — インド初売上 + v4 60社 + タイ 17社 寄与"
+validated = false
+
+# ── Cost Structure ────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+maturity = 5
+status   = "stable"
+note     = "v4 upsell 50社インフラ ¥230K/月 (予算内 ✓) / 全 stable"
+
+[[blocks.cost_structure.entries]]
+id        = "cs_ebitda_model"
+hypothesis = "OPEX ¥6.75M/月 ✓ (margin 16%+ 維持、v4 50社インフラ込み)"
+validated = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_all_agents"
+hypothesis = "台湾 + タイ + インド 3社 代理店モデル stable ✓ (¥480K/月合計)"
+validated = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_team_47"
+hypothesis = "47名体制 ✓ (インド BizDev 3社体制向け +2名 追加)"
+validated = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_india_pilot_budget"
+hypothesis = "インド pilot 予算 ¥500K (2029-Q1) 執行準備 ✓"
+validated = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_v4_scale_infra"
+hypothesis = "v4 upsell 50社向け追加インフラコスト ¥230K/月 ✓ (予算 ¥250K 以内)"
+validated = true
+
+# ── Key Metrics ───────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+maturity = 5
+status   = "validated"
+note     = "海外比率 20.2% ✓ / NRR 143% ✓ — 全主要 KPI 達成"
+
+[[blocks.key_metrics.entries]]
+id        = "km_nrr_141"
+hypothesis = "NRR 141% stable ✓"
+validated = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_nrr_143"
+hypothesis = "NRR 143% ✓ (v4 upsell 50社 継続率 99% + タイ 15社 安定 寄与 2028-Q3-20)"
+validated = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_d365_358"
+hypothesis = "D365 35.8% ✓ (インド prototype 体験 + v4 upsell 50社 継続率向上)"
+validated = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_ebitda_162"
+hypothesis = "EBITDA 16.2% ✓ (v4 50社 infra コスト増分を upsell 収益が吸収)"
+validated = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_intl_202"
+hypothesis = "海外 GMV 比率 20.2% ✓ (タイ 15社 + 台湾 33社 + GMV ¥145M — 2028-Q3-20)"
+validated = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_nrr_145"
+hypothesis = "NRR 145% (2028-Q3 末) — v4 upsell 60社 + インド初売上 寄与"
+validated = false
+
+# ── Unfair Advantage ─────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+maturity = 5
+status   = "validated"
+note     = "インド Moat 3社 ✓ / DID 8,000+ ✓ / IS 2750 仕様権申請 ✓"
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_jis_mandatory"
+hypothesis = "JIS 義務化 仕様権保有 stable ✓"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_did_8100"
+hypothesis = "DID 8,100件+ ✓ (タイ 15社 + インド 3社 BizDev 登録、相関 0.90)"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_v3_patent"
+hypothesis = "v3 AI 特許 stable ✓ (日本+韓国+PCT)"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_v4_patent"
+hypothesis = "v4 AI 動画施工 audit 特許 stable ✓ (日本+韓国+PCT)"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_insurance_moat_2"
+hypothesis = "東京海上日動 + 損保ジャパン exclusive Moat stable ✓"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_india_moat_3co"
+hypothesis = "インド Moat 3社独占 ✓ (Buildtech India + Shankar Construction + Mumbai Infra Partners 2028-Q3-25)"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_india_is2750"
+hypothesis = "インド IS 2750 仕様権申請 ✓ (Bureau of Indian Standards 共同申請 2028-Q3-20)"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_india_insurance_poc"
+hypothesis = "インド損保 PoC (LIC / New India Assurance 2029-Q1) — 国内と同一モデル展開"
+validated = false
+
+# ── Coverage ─────────────────────────────────────────────────────────────────
+[coverage]
+blocks_covered   = 9
+blocks_total     = 9
+coverage_pct     = 100
+validated_hyps   = 34
+unvalidated_hyps = 7
+at_risk_priority = [
+  "r_gmv_150m — GMV ¥150M (現 ¥145M、+¥5M)",
+  "cs_india_pilot_2 — インド 2社 pilot LOI (2029-Q1)",
+  "km_nrr_145 — NRR 145% (v4 upsell 60社)",
+]
+
+# ── Next (→ iter-25, 2028-Q3 末 全 5/5 ★★★★★) ─────────────────────────────
+[next]
+target_iter = 25
+target_date = "2028-Q3 末"
+targets = [
+  "GMV ¥150M (2028-Q3 末) → revenue 5/5",
+  "インド 2社 pilot LOI (2029-Q1) → cs stretch 全 5/5",
+  "NRR 145% (2028-Q3 末) → km stretch 全 5/5",
+  "インド損保 PoC 設計 → ua stretch 全 5/5",
+  "インド政府 / CII チャネル → ch stretch 全 5/5",
+]

@@ -1,0 +1,118 @@
+% ashiba Lean BMC — Datalog coverage / maturity rules
+% kotoba-kqe semi-naive bottom-up evaluation
+%
+% Quad predicate convention:
+%   bmc/block         (bmc_cid, block_name_cid)
+%   bmc/maturity      (block_cid, maturity_int_cid)
+%   bmc/hypothesis    (entry_cid, text_cid)
+%   bmc/validated     (entry_cid, bool_cid)
+%   bmc/experiment    (entry_cid, text_cid)
+%   bmc/signal        (entry_cid, text_cid)
+%   entry/block       (entry_cid, block_cid)
+%
+% All CIDs are derived via KotobaCid::from_bytes(label.as_bytes())
+
+% ── Coverage ────────────────────────────────────────────────────────────────
+
+% A block is "covered" if it has at least one entry
+covered(Block) :-
+    bmc/block(Bmc, Block),
+    entry/block(_, Block).
+
+% Coverage count = number of covered blocks
+covered_count(N) :-
+    N = count { covered(B) : covered(B) }.
+
+% Total blocks declared
+total_blocks(N) :-
+    N = count { bmc/block(_, B) : bmc/block(_, B) }.
+
+% Coverage percentage (×100, integer arithmetic)
+coverage_pct(Pct) :-
+    covered_count(C),
+    total_blocks(T),
+    T > 0,
+    Pct = C * 100 / T.
+
+% ── Maturity ────────────────────────────────────────────────────────────────
+
+% A block with maturity >= 2 has a written hypothesis
+has_hypothesis(Block) :-
+    bmc/maturity(Block, MatCid),
+    MatCid >= 2.
+
+% A block with maturity >= 3 has an experiment designed
+has_experiment(Block) :-
+    bmc/maturity(Block, MatCid),
+    MatCid >= 3.
+
+% A block with maturity >= 4 has run the experiment
+experiment_run(Block) :-
+    bmc/maturity(Block, MatCid),
+    MatCid >= 4.
+
+% A block is validated if maturity >= 5
+validated_block(Block) :-
+    bmc/maturity(Block, MatCid),
+    MatCid >= 5.
+
+% Average maturity (×10 for integer arithmetic)
+maturity_sum(Sum) :-
+    Sum = sum { M : bmc/maturity(_, M) }.
+
+maturity_avg_x10(Avg) :-
+    maturity_sum(Sum),
+    total_blocks(T),
+    T > 0,
+    Avg = Sum * 10 / T.
+
+% ── Riskiest unvalidated hypotheses ────────────────────────────────────────
+
+% An entry is "at risk" if it has a hypothesis but is not validated
+at_risk(Entry) :-
+    bmc/hypothesis(Entry, _),
+    bmc/validated(Entry, false).
+
+% Entries with experiment designed but not yet run (maturity = 3)
+experiment_ready(Entry) :-
+    at_risk(Entry),
+    bmc/experiment(Entry, _).
+
+% ── Next iteration targets ──────────────────────────────────────────────────
+
+% Blocks below target maturity (3.0) that need work next iteration
+below_target(Block) :-
+    bmc/maturity(Block, M),
+    M < 3.
+
+% Count of blocks below target
+below_target_count(N) :-
+    N = count { below_target(B) : below_target(B) }.
+
+% ── Lean readiness gate ─────────────────────────────────────────────────────
+
+% Product-market fit gate: problem validated + customer segment validated + UVP validated
+pmf_ready :-
+    validated_block("bmc:ashiba:block:problem"),
+    validated_block("bmc:ashiba:block:customer_segments"),
+    validated_block("bmc:ashiba:block:uvp").
+
+% MVP launch gate: coverage 100% + avg maturity >= 3 + cold start solved
+mvp_launch_ready :-
+    coverage_pct(Pct), Pct >= 100,
+    maturity_avg_x10(Avg), Avg >= 30,
+    \+ at_risk("supply_cold_start").
+
+% ── iter-48 evidence-counter rule (ADR-2605281130 Operational SLO) ─────────
+% mailer 着弾の SSoT は CF Analytics + vertex_mailer_inbound_email row count.
+% Datalog で row count を kotoba Quad から query し claim と突合.
+
+real_inbound_count(N) :- count_quad(predicate="vertex_mailer_inbound_email/row_count", value=N).
+
+evidence_gap(Claim, Real, Gap) :-
+  bmc_hypothesis(_, "sol_mailer_outbound", Claim),
+  real_inbound_count(Real),
+  Gap = Claim - Real.
+
+% mailer claim と実 row count の gap が 20 通超なら "drift" として alert.
+mailer_drift_alert :- evidence_gap(_, _, Gap), Gap > 20.

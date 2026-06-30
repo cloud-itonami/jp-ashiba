@@ -1,0 +1,235 @@
+# ashiba.gftd.ai Lean BMC — Iteration 8 (Series A Phase, Month 1)
+# Phase: Growth Phase VALIDATED → Series A Scale
+# Date: 2026-05-27
+# SSoT: kotoba Quad store (examples/ashiba-bmc)
+
+[meta]
+product     = "ashiba.gftd.ai"
+version     = "v8"
+iteration   = 8
+date        = "2026-05-27"
+phase       = "Series A — Scale Phase"
+model       = "Lean Canvas Hybrid (9 blocks)"
+prior_phase = "Growth Phase VALIDATED (iter-7, avg 5.0)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PROBLEM (5/5 stable — inherited, national pain confirmed)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.problem]
+maturity = 5
+summary  = "仮設足場調達困難・価格不透明・工期リスク (全国普遍、stable)"
+
+[[blocks.problem.entries]]
+entry_id  = "p_national"
+statement = "地方圏 30社追加調査: ペイン深度 4.3/5 (全国均一)"
+validated = true
+evidence  = "2026-05-20 地方工務店 n=30 NPS 調査、同一深度確認"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CUSTOMER SEGMENTS (3/5 — 新仮説: 全国 500社 + 大手ゼネコン直販)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.customer_segments]
+maturity = 3
+summary  = "需要: 全国工務店・中堅ゼネコン / 供給: 全国足場業者 500社"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_scale1"
+statement = "全国展開で供給 500社 active (Month 6 達成)"
+validated = false
+experiment = "地方協会 BizDev 3拠点同時展開 (札幌・福岡・仙台) + 全国代理店網"
+falsifiable = "Month 6 末に供給 500社 OR 廃棄"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_enterprise"
+statement = "大手ゼネコン 5社 (売上 ¥100億超) が月次 GMV ¥5M 超利用"
+validated = false
+experiment = "ゼネコン営業 pilot: 竹中・大林・清水・大成・鹿島 各社 POC"
+falsifiable = "2026-09-01 までに 2社以上 POC 完了 OR 廃棄"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNIQUE VALUE PROPOSITION (4/5 — v2 AI 差別化仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.uvp]
+maturity = 4
+summary  = "v2 AI: pgvector + DID multimodal → 成約率 95%+ / 全国最大在庫ネットワーク"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_v2_ai"
+statement = "v2 AI matching (pgvector + DID trust score multimodal) → 成約率 95%+"
+validated = false
+experiment = "v2 beta A/B test: v1 vs v2 on live traffic (n=200 案件)"
+falsifiable = "beta 4週間で成約率 +5pt (94%+) OR v2 設計見直し"
+current_v1 = "v1 成約率 89.7% (iter-7 validated)"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_network"
+statement = "全国最大在庫ネットワーク (500社) = 競合不可能なスイッチングコスト"
+validated = true
+evidence  = "現時点 103社が市場最大規模。DID 信頼スコア 相関 0.76 (iter-7)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SOLUTION (3/5 — v2 AI 実装中、全国インフラ整備)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.solution]
+maturity = 3
+summary  = "v2 AI matching + 全国配送最適化 + ゼネコン向けエンタープライズ API"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_v2_dev"
+statement = "v2 AI matching 本番稼働 (2026-08-01 target)"
+validated = false
+experiment = "v2 開発: pgvector schema 設計完了 → beta → A/B → rollout"
+current_progress = "設計完了、実装 35%"
+falsifiable = "2026-08-01 にロールアウト OR v2 spec 縮小"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_enterprise_api"
+statement = "ゼネコン向け Enterprise API (ERP 連携、SLA 99.9%) 稼働"
+validated = false
+experiment = "竹中工務店 POC: SAP 連携 API 設計 → integration test"
+falsifiable = "2026-09-01 に 1社 live OR API 仕様変更"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CHANNELS (4/5 — 既存チャネル拡張 + 全国代理店)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.channels]
+maturity = 4
+summary  = "SEO + 工業会 + 全国代理店網 + ゼネコン直販"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_national"
+statement = "全国代理店網 10拠点 (Month 6) — 地方協会 BizDev 経由"
+validated = false
+experiment = "札幌・仙台・福岡 3拠点同時 BizDev launch (2026-06-01)"
+falsifiable = "3拠点で各 10社以上 onboard OR チャネル戦略変更"
+current = "東名阪 3拠点稼働、CAC ¥6,200 (iter-7)"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_seo_scale"
+statement = "SEO organic 月間 2,000+ リード (Month 9)"
+validated = false
+experiment = "コンテンツ量産: 足場専門 ライター 2名採用 + 月 20本 publish"
+falsifiable = "Month 9 に organic 2,000+ OR SEO 投資縮小"
+current = "organic 軌道乗り中 (iter-7)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REVENUE STREAMS (4/5 — GMV ¥50M/月 trajectory 仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.revenue]
+maturity = 4
+summary  = "Take rate 6% + SaaS ¥3K/月 + Enterprise ¥50K/月"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_gmv_scale"
+statement = "GMV ¥50M/月 (Month 6) — 全国展開 + ゼネコン"
+validated = false
+experiment = "月次 GMV 追跡: ¥15.9M → ¥25M → ¥35M → ¥50M 軌道確認"
+falsifiable = "Month 6 末に ¥50M OR 成長モデル修正"
+current = "GMV ¥15.9M (iter-7 validated)"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_enterprise_arpu"
+statement = "Enterprise プラン ¥50K/月 (SLA + ERP API + 専任 CS) → ARPU 16× upshift"
+validated = false
+experiment = "竹中 POC 価格交渉: ¥30K / ¥50K / ¥100K 3択テスト"
+falsifiable = "2026-09-01 に 1社 Enterprise 契約 OR プラン価格修正"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# COST STRUCTURE (3/5 — Series A ¥200M 調達・スケール人員)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+maturity = 3
+summary  = "Series A ¥200M close + エンジニア 10名採用 + 地方拠点 3拠点"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_series_a"
+statement = "Series A ¥200M close (2026-Q4)"
+validated = false
+experiment = "VC ピッチ: 国内 Tier-1 3社 + 海外 1社 (2026-07 開始)"
+falsifiable = "2026-12-31 に close OR ブリッジ調達"
+current = "Seed ¥25M term sheet signed (iter-7)"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_team_scale"
+statement = "エンジニア 10名 + BizDev 5名採用、runway 18ヶ月確保"
+validated = false
+experiment = "採用: Wantedly + 紹介 + エンジェル network 並行"
+falsifiable = "Seed 残 + Series A timeline で runway 18ヶ月確保 OR 採用ペース調整"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# KEY METRICS (4/5 — NRR / Cohort D180 / GMV growth rate)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+maturity = 4
+summary  = "GMV growth + NRR + Cohort D180 + Enterprise ARR"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_nrr"
+statement = "NRR (Net Revenue Retention) > 120% (SaaS + take rate 合算)"
+validated = false
+experiment = "コホート別 NRR 計算: Cohort 0 Month 6 データ待ち"
+falsifiable = "Cohort 0 Month 6 で NRR ≥ 120% OR 解約防止策追加"
+current = "D90 42.1% retention (iter-7), NRR 未計測"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_d180"
+statement = "Cohort D180 Retention > 35% → LTV ¥1.2M (GMV × 6%)"
+validated = false
+experiment = "Cohort 0 D180 = 2026-11-01 (6ヶ月後) 計測"
+falsifiable = "D180 ≥ 35% OR リテンション施策 redesign"
+current = "D90 42.1% → D180 は外挿 ~35% 想定"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNFAIR ADVANTAGE (5/5 stable — DID moat + 工業会認定)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+maturity = 5
+summary  = "DID 信頼スコア 1,847件 + 工業会正式認定 + 先行 24ヶ月 + 全国最大在庫 ネットワーク"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_did_moat"
+statement = "DID 1,847件 (相関 0.76) + 2年分の安全点検データ = 複製不可能"
+validated = true
+evidence  = "iter-7 validated. 競合参入コスト: DID 蓄積 ≥ 2年 + 工業会認定が必要"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_association"
+statement = "仮設工業会委員会正式認定 = 規制参入障壁 + 業界標準化推進権"
+validated = true
+evidence  = "2026-07-01 正式認定 (iter-7 confirmed). 新規参入者は認定取得不可"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SCORING
+# ─────────────────────────────────────────────────────────────────────────────
+[scoring.maturity_per_block]
+problem           = 5
+customer_segments = 3  # 新仮説: 全国 500社 + ゼネコン
+uvp               = 4  # v2 AI 仮説 (部分検証)
+solution          = 3  # v2 実装中 35%
+channels          = 4  # 既存チャネル拡張、新チャネル仮説
+revenue           = 4  # GMV ¥50M 仮説
+cost_structure    = 3  # Series A 未 close
+key_metrics       = 4  # NRR / D180 未計測
+unfair_advantage  = 5  # stable
+average           = 3.9
+
+[scoring.series_a_phase_status]
+verdict        = "SERIES A PHASE — Scale Hypotheses Active"
+growth_confirmed = true
+series_a_target  = "¥200M (Q4 2026)"
+nationwide_target = "供給 500社 (Month 6)"
+v2_ai_target     = "成約率 95%+ (2026-08-01)"
+
+[scoring.riskiest_assumptions]
+rank_1 = "Series A ¥200M close — 国内 VC Tier-1 の appetite 未確認"
+rank_2 = "大手ゼネコン直販 — 調達 BPR 変更の意思決定期間 6-18ヶ月"
+rank_3 = "v2 AI 成約率 +5pt — pgvector × DID multimodal の実装難度"
+
+[scoring.next_iteration_goals]
+target_avg = 4.5
+milestones = [
+  "Series A deck 完成 + Tier-1 VC 3社 pitch scheduled",
+  "v2 AI beta 開始 (A/B test live)",
+  "全国代理店 3拠点 launch (札幌・仙台・福岡)",
+  "ゼネコン POC 2社 kick-off",
+]

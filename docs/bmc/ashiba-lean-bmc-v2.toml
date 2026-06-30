@@ -1,0 +1,574 @@
+# ashiba.gftd.ai — Lean Canvas × BMC (kotoba Quad schema)
+# Iteration: 2 / 2026-05-27
+# Delta from v1: 7 blocks upgraded (2→3), unfair_advantage 1→3
+#
+# Coverage:  9/9 blocks = 100%
+# Maturity:  avg 3.0 / 5.0  (実験設計完了、データ収集開始前)
+# Next iter: 4.0 (実験実施 + 初期データ収集済み)
+
+[meta]
+version       = "v2"
+product       = "ashiba.gftd.ai"
+model         = "lean-canvas-hybrid"
+iteration     = 2
+date          = "2026-05-27"
+coverage_pct  = 100
+maturity_avg  = 3.0
+prev_avg      = 2.1
+delta_avg     = 0.9
+next_target   = 4.0
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 1: Problem  (2 → 3)
+# 追加: 具体的インタビュースクリプト + 定量判定基準 + 週次実行プロトコル
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.problem]
+id       = "bmc:ashiba:block:problem"
+maturity = 3
+
+[[blocks.problem.entries]]
+id         = "p1"
+text       = "足場調達に平均3〜5日かかる (電話・FAX・訪問見積)"
+hypothesis = "工務店の60%以上が足場確保に3日以上かけている"
+validated  = false
+experiment = """
+インタビュースクリプト Q1-Q5 (各5分):
+  Q1: 直近3ヶ月で一番大きかった現場の足場はどうやって手配しましたか?
+  Q2: 見積もりを依頼してから業者決定まで何日かかりましたか?
+  Q3: 何社に声をかけましたか? 断られた社はありましたか?
+  Q4: 「もし翌日に3社の見積もりが自動で届いたら」何に使いますか?
+  Q5: 現在の足場調達で一番イライラすることは何ですか?
+
+実施: 工務店・塗装業者 20社 (建設業協会会員名簿から無作為抽出)
+期間: 2週間 (Week 1-2)
+記録: 回答を Notion DB に集計 → Q2の中央値を計算
+"""
+signal     = "Q2中央値 >= 3日 AND Q5で「探す手間」「断られる」が上位2位"
+falsifier  = "Q2中央値 < 2日 → 調達速度は問題ではない → 別の痛点を優先"
+interview_count_target = 20
+
+[[blocks.problem.entries]]
+id         = "p2"
+text       = "遊休在庫が収益化できていない (足場業者側)"
+hypothesis = "中小足場業者の月間稼働率は70%未満"
+validated  = false
+experiment = """
+インタビュースクリプト S1-S5 (各7分):
+  S1: 今月の足場資材の稼働率はどのくらいですか? (感覚値でOK)
+  S2: 閑散期 (12-2月) と繁忙期 (3-6月) の稼働率差はどのくらいですか?
+  S3: 新規の工務店から問い合わせはどうやって来ますか?
+  S4: 「他の業者の在庫を一時的に借りる / 貸す」サービスがあれば使いますか?
+  S5: デジタルでの発注受付に対してどう思いますか?
+
+実施: 仮設工業会認定業者 10社 + 非認定業者 10社
+期間: 2週間 (Week 1-2, 需要側と並行)
+記録: S1の回答を数値化 → 稼働率分布ヒストグラム作成
+"""
+signal     = "稼働率中央値 < 70% AND S4に「使いたい」>= 60%"
+falsifier  = "稼働率 > 85% → 供給ボトルネックは在庫ではなく人員・設備"
+
+[[blocks.problem.entries]]
+id         = "p3"
+text       = "相見積もりに工数がかかり価格透明性がない"
+hypothesis = "工務店の相見積もり取得社数は平均2社未満"
+validated  = false
+experiment = "Q3集計 (p1のインタビューと兼用) → 見積取得社数の平均・中央値計算"
+signal     = "平均見積取得社数 < 2.0"
+falsifier  = "平均 >= 3.0 → 価格透明性より別の痛点を優先"
+
+[blocks.problem.week_plan]
+week1 = "インタビューリスト作成 (20社需要側 + 20社供給側) + スクリプト確定"
+week2 = "インタビュー実施 (需要側10社 + 供給側10社)"
+week3 = "インタビュー実施 (残り各10社) + データ集計"
+week4 = "分析レポート作成 → 仮説採択/棄却判定"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 2: Customer Segments  (2 → 3)
+# 追加: コールドスタート解決ロードマップ + pre-commitment キャンペーン設計
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.customer_segments]
+id       = "bmc:ashiba:block:customer_segments"
+maturity = 3
+
+[[blocks.customer_segments.entries]]
+id          = "cs1"
+side        = "demand"
+name        = "中小工務店 (従業員10名未満)"
+size_est    = "約8万社"
+hypothesis  = "最初の100社はこのセグメントから獲得できる"
+validated   = false
+experiment  = "インタビュー後に「αテスターになりますか?」と聞く → sign-up率計測"
+signal      = "インタビュー20社中 >= 5社が α waitlist に登録"
+falsifier   = "< 2社 → セグメント or 価値提案を変更"
+
+[[blocks.customer_segments.entries]]
+id          = "cs2"
+side        = "demand"
+name        = "塗装・外壁リフォーム業者"
+size_est    = "約2万社"
+hypothesis  = "スポット需要が多く価格感度が高い early adopter"
+validated   = false
+experiment  = "塗装業組合のメーリングリストに1行告知メール → 反応率計測"
+signal      = "CTR > 3% AND waitlist 申込率 > 0.5%"
+
+[[blocks.customer_segments.entries]]
+id          = "cs3"
+side        = "supply"
+name        = "中小足場レンタル・施工会社"
+size_est    = "約5,000〜8,000社"
+hypothesis  = "遊休在庫を抱える業者が pre-commitment に応じる"
+validated   = false
+experiment  = "インタビュー後に「在庫をプラットフォームに登録する書面合意」依頼"
+signal      = "インタビュー20社中 >= 10社 (50%) が書面合意"
+falsifier   = "< 3社 → 供給側の参加障壁が高い → ビジネスモデル見直し"
+
+[blocks.customer_segments.cold_start_roadmap]
+# コールドスタート = 最大のリスク → 供給側先行戦略
+strategy = "Supply-First: 供給側を先に固めてから需要側を招待"
+
+[blocks.customer_segments.cold_start_roadmap.phases]
+phase0_week1_2  = "供給側インタビュー 20社 → pre-commitment 10社書面合意取得"
+phase1_week3_4  = "pre-commitment 10社の在庫データを Google Sheet で手動管理 (No-Code MVP)"
+phase2_week5_8  = "需要側 5社をクローズドβに招待 → 手動マッチング 3件実施"
+phase3_week9_12 = "手動マッチング 10件の NPS 計測 → Product-Market Fit シグナル確認"
+phase4_month4   = "プラットフォーム v1 リリース (自動化率30%)"
+
+[blocks.customer_segments.cold_start_roadmap.success_gates]
+gate1 = "pre-commitment 10社 → phase1 進行"
+gate2 = "手動マッチング 3件成立 → phase2 継続"
+gate3 = "NPS > 30 → 自動化投資 GO"
+abort = "gate1 未達 (< 5社 pre-commitment in 4 weeks) → pivot検討"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 3: Unique Value Proposition  (2 → 3)
+# 追加: LP 3パターン A/Bテスト設計 + コピーバリアント定義
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.uvp]
+id       = "bmc:ashiba:block:uvp"
+maturity = 3
+
+[blocks.uvp.primary]
+headline    = "必要な足場を、必要な時に、5分で見つける"
+subheadline = "AI が現場条件から最適種別・数量を推薦。相見積もりは自動化。"
+hypothesis  = "このコピーが工務店に刺さる (LP CTR > 5%)"
+validated   = false
+
+[[blocks.uvp.ab_test_variants]]
+id       = "variant_a"
+headline = "足場の相見積もりを、1クリックで"
+sub      = "登録業者に自動入札。最安値・最短配送を比較して即決。"
+focus    = "Speed + Price (コスト削減訴求)"
+target   = "価格感度の高い中小工務店"
+
+[[blocks.uvp.ab_test_variants]]
+id       = "variant_b"
+headline = "足場屋に断られない、新しい調達方法"
+sub      = "全国の足場業者があなたの現場に手を挙げる。在庫ゼロの心配なし。"
+focus    = "Availability + Reliability (断られない訴求)"
+target   = "繁忙期に足場確保で困った経験のある工務店"
+
+[[blocks.uvp.ab_test_variants]]
+id       = "variant_c"
+headline = "必要な足場を、5分で見つける"
+sub      = "AI が工法・面積・工期から最適提案。法定安全基準も自動チェック。"
+focus    = "AI + Safety (技術・安全訴求)"
+target   = "コンプライアンス重視の中堅建設会社"
+
+[blocks.uvp.ab_test_protocol]
+platform      = "Google ディスプレイ広告 (建設業界キーワード)"
+budget_jpy    = 50_000  # ¥5万 × 3パターン
+impressions   = 500     # per variant
+duration      = "2週間"
+primary_kpi   = "CTR (%)"
+secondary_kpi = "Waitlist 登録率 (%)"
+winner_criteria = "CTR > 5% AND 登録率 > 2%"
+fallback      = "全パターン失敗 → インタビューから言葉を拾い直す (customer language)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 4: Solution  (2 → 3)
+# 追加: v0 (手動) → v1 (半自動) → v2 (AI) のフェーズ区切り + 6週間ビルドプラン
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.solution]
+id       = "bmc:ashiba:block:solution"
+maturity = 3
+
+[blocks.solution.mvp_philosophy]
+principle = "Concierge MVP — 人間が手動で行うプロセスを検証してから自動化"
+risk      = "最初から自動化するとユーザーが何を価値と感じているかわからない"
+reference = "Airbnb (創業者が自ら撮影), Zappos (在庫なしで受注してから仕入れ)"
+
+[[blocks.solution.versions]]
+version  = "v0 (Concierge MVP, Week 1-8)"
+scope    = [
+  "Google Sheet で供給側在庫を手動管理",
+  "需要側からメール/LINE で問い合わせ受付",
+  "創業チームが手動でマッチング → 電話で業者に確認",
+  "PDF 見積書を手作成して需要側に送付",
+  "Google Form で契約意向を確認",
+]
+not_in_scope = ["AI推薦", "自動入札", "電子契約", "決済"]
+success_criteria = "10件マッチング成立 AND NPS > 30"
+hypothesis       = "手動マッチングでも需要側は「これは便利」と感じる"
+
+[[blocks.solution.versions]]
+version  = "v1 (半自動 MVP, Month 3-6)"
+scope    = [
+  "Webフォームで需要側が条件入力",
+  "登録業者にLINE/メール自動通知",
+  "業者がWebで在庫・価格を入力",
+  "需要側に選択肢提示 → ワンクリック承認",
+  "PDF契約書自動生成 + Gmail送信",
+  "kakin.gftd.ai 連携で請求自動化",
+]
+not_in_scope = ["AI推薦", "写真AI解析", "リアルタイム在庫"]
+success_criteria = "MAU 50社 AND 月間GMV ¥1,000万 AND NPS > 40"
+
+[[blocks.solution.versions]]
+version  = "v2 (AI自動化, Month 7-12)"
+scope    = [
+  "AI見積もり (面積・工法→数量自動算出)",
+  "AI配送最適化 (maps.gftd.ai連携)",
+  "写真AI安全点検解析",
+  "DID信頼スコア公開",
+  "AT Protocol フィード統合",
+]
+success_criteria = "MAU 200社 AND 月間GMV ¥5,000万 AND NPS > 50"
+
+[blocks.solution.week_plan]
+week1_2 = "v0: Google Sheet 在庫DB構築 + 問い合わせフォーム(Tally) 作成"
+week3_4 = "v0: 供給側10社を Sheet に登録 + 需要側5社クローズドβ招待"
+week5_6 = "v0: 手動マッチング 3件実施 + NPS計測 + フィードバック収集"
+week7_8 = "v0: 残り7件マッチング目標 + v1要件定義"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 5: Channels  (2 → 3)
+# 追加: 週次獲得プレイブック + CAC モデル詳細
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.channels]
+id       = "bmc:ashiba:block:channels"
+maturity = 3
+
+[blocks.channels.acquisition_playbook]
+# Week-by-week supply-side acquisition (first 12 weeks)
+week1_2  = "仮設工業会 関東支部 事務局に連絡 → 会員名簿共有交渉 or 勉強会登壇打診"
+week3_4  = "LinkedIn / 建設業SNS でターゲット企業 DM 50通 → インタビュー打診"
+week5_6  = "インタビュー完了業者に pre-commitment 依頼 → 目標: 10社書面合意"
+week7_8  = "仮設工業会 勉強会登壇 (デモ付き) → 追加 20社 pre-commitment 目標"
+week9_12 = "既存 pre-commitment 業者からの紹介 → 目標: 累計 50社"
+
+[[blocks.channels.entries]]
+phase     = "supply_acquisition"
+channel   = "仮設工業会 勉強会登壇 (関東・関西各1回)"
+cac_est   = 5_000   # ¥5,000/社
+weekly_reach = 30   # 1回あたり参加者数
+conversion   = 0.20 # 20%がpre-commitmentに進む想定
+experiment  = "登壇後の名刺交換数 + 翌週フォローアップ成功率を計測"
+signal      = "1回登壇で >= 5社 pre-commitment"
+
+[[blocks.channels.entries]]
+phase     = "demand_acquisition"
+channel   = "建設ERP パートナー (ドラフィ/アンダーツ)"
+cac_est   = 30_000
+experiment = "ERPベンダー2社に「共同マーケティング提案書」提出 → 返答速度・関心度スコア"
+signal    = "2週間以内に1社から面談アポ取得"
+timeline  = "Month 2-3 (v0 完成後)"
+
+[[blocks.channels.entries]]
+phase     = "retention"
+channel   = "LINE公式アカウント (工務店向け)"
+cac_est   = 0
+experiment = "v0マッチング完了後にLINE友達追加依頼 → 登録率計測"
+signal    = "マッチング完了者の >= 80%がLINE登録"
+rationale = "工務店オーナーはEmail よりLINEのレスポンスが5倍速い"
+
+[blocks.channels.cac_model]
+# target: blended CAC < ¥50,000 (LTV ¥500,000 想定 → LTV/CAC = 10x)
+supply_blended_cac = 15_000  # 仮設工業会 + DM + 紹介の加重平均
+demand_blended_cac = 40_000  # ERP + LP + Word of mouth
+ltv_demand_est     = 500_000 # 年間 GMV ¥800万 × 6% × 持続率
+ltv_cac_ratio      = 12.5    # = 500,000 / 40,000
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 6: Revenue Streams  (3 → 3, no change)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.revenue]
+id       = "bmc:ashiba:block:revenue"
+maturity = 3
+
+[[blocks.revenue.streams]]
+id            = "r1"
+priority      = 1
+name          = "成約手数料 (Take Rate 6%)"
+unit_est      = "1成約 = 平均 ¥150万円 → 手数料 ¥9万円"
+mvp_model     = "v0: 手動マッチング後に後払い請求 (成功報酬型)"
+v1_model      = "kakin.gftd.ai Escrow: 需要側が先払い → 配送確認後に供給側に振込"
+hypothesis    = "6% take rate で双方が継続利用する"
+validated     = false
+experiment    = "v0 10件で6%請求 → 継続意向アンケート"
+signal        = "10件中8件が「次も使う」"
+comparable    = "Airbnb 14.2% / タイミー 25% / 建材ECは3-5% → 6%は許容範囲の中央"
+
+[[blocks.revenue.streams]]
+id            = "r2"
+priority      = 2
+name          = "供給側 SaaS (月額 ¥30,000-¥80,000)"
+launch_timing = "v1以降 (Month 4+)"
+hypothesis    = "稼働率改善 ¥200,000/月以上の業者は月額¥30,000を払う"
+validated     = false
+
+[[blocks.revenue.streams]]
+id            = "r3"
+priority      = 3
+name          = "安全点検認証 DID 発行 (¥5,000/回)"
+launch_timing = "v2以降 (Month 7+)"
+
+[blocks.revenue.unit_economics_v0]
+target_matches_month1 = 10
+avg_contract_value    = 1_500_000
+gmv_month1           = 15_000_000
+take_rate            = 0.06
+revenue_month1       = 900_000
+opex_month1          = 7_500_000
+runway_needed_months = 12
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 7: Cost Structure  (2 → 3)
+# 追加: 月次バーンロードマップ + マイルストーン別決断ゲート
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+id       = "bmc:ashiba:block:cost_structure"
+maturity = 3
+
+[blocks.cost_structure.burn_roadmap]
+# Phase 0: Concierge MVP (Month 1-3)  OpEx ¥2M/月
+phase0_opex_monthly = 2_000_000
+phase0_team         = "創業者2名 (エンジニア1 + 営業1)"
+phase0_costs        = [
+  "人件費: ¥1,500,000 (2名分)",
+  "ツール (Notion/Tally/Google Workspace): ¥50,000",
+  "インタビュー交通費: ¥100,000",
+  "LP広告テスト: ¥150,000",
+  "法務 (利用規約/NDA): ¥200,000",
+]
+phase0_decision_gate = "手動マッチング10件 + pre-commitment 50社 → Phase 1 GO"
+phase0_abort_trigger = "Month 3 に pre-commitment < 20社 → pivot"
+
+# Phase 1: v1 開発 (Month 4-6)  OpEx ¥5M/月
+phase1_opex_monthly = 5_000_000
+phase1_team         = "4名 (+ エンジニア2名採用)"
+phase1_costs        = [
+  "人件費: ¥3,500,000 (4名分)",
+  "インフラ (Vultr/CF): ¥500,000",
+  "kakin.gftd.ai 連携開発: ¥500,000",
+  "営業・マーケティング: ¥500,000",
+]
+phase1_decision_gate = "MAU 50社 + GMV ¥1,000万/月 → seed 調達 GO"
+
+# Phase 2: スケール (Month 7-12)  OpEx ¥10M/月
+phase2_opex_monthly = 10_000_000
+phase2_seed_target  = 90_000_000  # ¥9,000万 seed
+phase2_runway       = 9  # months
+
+[blocks.cost_structure.fixed_variable_breakdown]
+# Phase 1 (Month 4-6) breakdown
+personnel   = 3_500_000
+infra       = 500_000
+marketing   = 500_000
+legal       = 200_000
+misc        = 300_000
+total       = 5_000_000
+
+[blocks.cost_structure.unit_economics_cogs]
+# 1件マッチングあたりのコスト (v0 手動)
+time_per_match_hours  = 4.0    # 人件費換算
+cost_per_hour_jpy     = 3_750  # (¥450万/年 ÷ 1200h)
+cogs_per_match        = 15_000 # = 4h × ¥3,750
+gross_margin_pct      = 83.3   # = (¥90,000 - ¥15,000) / ¥90,000
+note                  = "自動化でCOGS → ¥3,000以下、gross margin → 97%"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 8: Key Metrics  (3 → 3, no change)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+id       = "bmc:ashiba:block:key_metrics"
+maturity = 3
+
+[blocks.key_metrics.north_star]
+metric      = "月間 GMV (足場成約総額)"
+current     = 0
+month3      = 15_000_000   # v0: 10件×¥150万
+month6      = 100_000_000  # v1: 67件×¥150万
+year1       = 300_000_000
+year3       = 5_000_000_000
+
+[blocks.key_metrics.leading_indicators]
+# v0フェーズの leading indicators
+supply_precommit   = { target = 50, current = 0, unit = "社" }
+demand_waitlist    = { target = 30, current = 0, unit = "社" }
+interview_done     = { target = 40, current = 0, unit = "社" }
+manual_matches     = { target = 10, current = 0, unit = "件" }
+nps_score          = { target = 30, current = 0, unit = "point" }
+
+[[blocks.key_metrics.aarrr]]
+stage   = "Acquisition"
+metrics = ["供給側登録業者数", "需要側登録社数", "LP訪問数", "waitlist登録率"]
+target_month3 = { supply = 50, demand = 30, lp_visit = 1000, conversion = 0.03 }
+
+[[blocks.key_metrics.aarrr]]
+stage   = "Activation"
+metrics = ["初回マッチング完了率 (30日)", "見積承認率"]
+target  = { first_match = 0.40, quote_approval = 0.60 }
+
+[[blocks.key_metrics.aarrr]]
+stage   = "Retention"
+metrics = ["月次 cohort retention", "平均年間利用回数"]
+target  = { monthly_retention = 0.70, annual_uses = 12 }
+
+[[blocks.key_metrics.aarrr]]
+stage   = "Revenue"
+metrics = ["MRR", "GMV", "take_rate_actual"]
+target_month6 = { mrr = 6_000_000, gmv = 100_000_000 }
+
+[[blocks.key_metrics.aarrr]]
+stage   = "Referral"
+metrics = ["NPS", "organic_referral_rate"]
+target  = { nps = 40, referral = 0.20 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 9: Unfair Advantage  (1 → 3)
+# 追加: 競合マトリクス + 防御可能性スコアリング + 3軸分析
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+id       = "bmc:ashiba:block:unfair_advantage"
+maturity = 3
+
+[blocks.unfair_advantage.competitive_matrix]
+# 競合ポジション分析 (5軸評価: 1-5)
+# axes: speed(調達速度), price(価格透明性), safety(安全基準), ai(AI精度), network(ネットワーク効果)
+
+[[blocks.unfair_advantage.competitive_matrix.competitors]]
+name       = "既存足場業者直販"
+speed      = 1  # 電話・FAX → 3-5日
+price      = 1  # 非透明
+safety     = 3  # 有資格者が対応
+ai         = 1
+network    = 2  # 既存顧客のみ
+
+[[blocks.unfair_advantage.competitive_matrix.competitors]]
+name       = "建材EC (モノタロウ/ダイドレ等)"
+speed      = 4  # 翌日配送
+price      = 5  # 透明
+safety     = 1  # 安全基準チェックなし
+ai         = 2  # 検索のみ
+network    = 3  # 広いが足場専門でない
+
+[[blocks.unfair_advantage.competitive_matrix.competitors]]
+name       = "一般建設マッチング (CAREECON等)"
+speed      = 3
+price      = 3
+safety     = 2  # チェック機能なし
+ai         = 2
+network    = 3
+
+[[blocks.unfair_advantage.competitive_matrix.competitors]]
+name       = "ashiba.gftd.ai (target)"
+speed      = 5  # 5分マッチング
+price      = 5  # 相見積もり自動化
+safety     = 5  # JIS/労安規則内蔵
+ai         = 4  # AI見積もり + 安全点検
+network    = 3  # ローンチ時は弱い → 成長で強化
+
+[[blocks.unfair_advantage.items]]
+id         = "ua1"
+category   = "regulatory_moat"
+name       = "安全基準データベース × 法定義務コンプライアンス"
+desc       = "JIS A 8951/8952 + 労安規則 §559-§575 + 仮設工業会認定基準を機械可読形式でデータ化"
+time_to_copy_months = 9
+defensibility_score = 4  # 1-5
+hypothesis  = "「法定安全チェック自動化」が競合 (一般マッチング) との明確な差別化になる"
+validated   = false
+experiment  = "競合5社のLPをスクレイプ → 安全基準言及率を計測"
+signal      = "競合 5社中 0社が安全基準を訴求している"
+evidence_so_far = "現時点での競合調査: 建材EC・一般マッチング系に安全チェック機能の言及なし (非公式確認)"
+
+[[blocks.unfair_advantage.items]]
+id         = "ua2"
+category   = "data_network_effect"
+name       = "DID 紐付き信頼スコア × AT Protocol 蓄積"
+desc       = "点検記録・成約履歴・評価がDIDに蓄積 → 他プラットフォームへの移転コスト増大"
+time_to_copy_months = 18  # ネットワーク効果の蓄積に時間
+defensibility_score = 5
+moat_type   = "data + switching_cost"
+hypothesis  = "6ヶ月以上継続利用した業者は「信頼スコア」を失うことを嫌い離脱しない"
+validated   = false
+experiment  = "6ヶ月後の cohort に「他プラットフォームに移る障壁は?」調査"
+signal      = ">= 50% が「スコアを失いたくない」と回答"
+
+[[blocks.unfair_advantage.items]]
+id         = "ua3"
+category   = "ecosystem_integration"
+name       = "gftd エコシステム統合 (maps/kakin/yotei/kotoba)"
+desc       = "現場位置・工程・課金・知識グラフが1スタックで統合 → スタンドアロン競合には2-3年の開発コスト"
+time_to_copy_months = 24
+defensibility_score = 4
+hypothesis  = "gftd 既存 app ユーザーが最初のβユーザーになる"
+validated   = false
+experiment  = "gftd の他 app (maps/kakin) のユーザーリストに ashiba 案内 → 転換率計測"
+signal      = "転換率 > 10% (コールドリードの5倍以上)"
+
+[blocks.unfair_advantage.moat_summary]
+# 総合防御可能性スコア (加重平均)
+regulatory_weight  = 0.30
+data_network_weight = 0.40
+ecosystem_weight   = 0.30
+weighted_score     = 4.3  # = 4×0.3 + 5×0.4 + 4×0.3
+time_horizon_years  = 3
+conclusion = "Year 3 までに data network effect moat が最も強くなる見込み"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LEAN CANVAS SCORING (Iteration 2)
+# ─────────────────────────────────────────────────────────────────────────────
+[scoring]
+iteration    = 2
+date         = "2026-05-27"
+coverage_pct = 100
+
+[scoring.maturity_per_block]
+problem             = 3  # +1
+customer_segments   = 3  # +1
+uvp                 = 3  # +1
+solution            = 3  # +1
+channels            = 3  # +1
+revenue             = 3  # no change
+cost_structure      = 3  # +1
+key_metrics         = 3  # no change
+unfair_advantage    = 3  # +2
+average             = 3.0  # target achieved
+
+[scoring.delta_from_v1]
+blocks_improved  = 7
+max_delta_block  = "unfair_advantage"  # +2
+avg_delta        = 0.9
+
+[scoring.pmf_gate_status]
+problem_validated     = false  # インタビュー未実施
+segment_validated     = false  # pre-commitment 未取得
+uvp_validated         = false  # AB テスト未実施
+pmf_ready             = false  # 全て false → まだ problem-solution fit 段階
+
+[scoring.riskiest_assumptions]
+rank1 = "供給側コールドスタート — gate1 (pre-commitment 10社) の達成が全ての前提"
+rank2 = "問題深刻度 — インタビューQ2中央値が >= 3日でなければビジネス成立しない"
+rank3 = "UVP 刺さり — LP CTR < 5% なら訴求軸の全面見直しが必要"
+
+[scoring.next_iteration_goals]
+target_maturity  = 4.0
+target_date      = "2026-06-27"
+required_actions = [
+  "供給側インタビュー 20社 実施 + データ集計 (Week 1-3)",
+  "需要側インタビュー 20社 実施 + データ集計 (Week 1-3)",
+  "LP A/Bテスト 3パターン実施 (Week 2-4, ¥15万広告費)",
+  "供給側 pre-commitment キャンペーン → 10社書面合意 (Week 3-6)",
+  "v0 Concierge MVP 立ち上げ (Week 5-8): Google Sheet + Tally フォーム",
+]
+# → iter-3 でこれらの実測データを maturity スコアに反映

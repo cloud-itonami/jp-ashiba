@@ -1,0 +1,338 @@
+# ashiba.gftd.ai Lean BMC — Iteration 15 (Global Acceleration Phase — Month 1)
+# Phase: グローバル加速フェーズ (海外比率 15% + EBITDA 15% + v4 本番 + SEA)
+# Date: 2026-05-27
+# SSoT: kotoba Quad store (examples/ashiba-bmc)
+
+[meta]
+product     = "ashiba.gftd.ai"
+version     = "v15"
+iteration   = 15
+date        = "2026-05-27"
+phase       = "Global Acceleration Phase — Month 1"
+model       = "Lean Canvas Hybrid (9 blocks)"
+prior       = "iter-14 avg 5.0 (PROFITABLE GLOBAL VALIDATED ★)"
+strategy    = "No IPO — 海外比率 15% + EBITDA margin 15% + v4 AI 本番 + SEA 展開"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PROBLEM (5/5 — stable + SEA 展開根拠強化)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.problem]
+maturity = 5
+summary  = "国内 + 韓国 + 台湾 + SEA stable / インド 建設市場 ペイン調査開始"
+
+[[blocks.problem.entries]]
+entry_id  = "p_domestic"
+statement = "国内ペイン普遍的 (stable)"
+validated = true
+
+[[blocks.problem.entries]]
+entry_id  = "p_apac"
+statement = "APAC (韓国+台湾+タイ+ベトナム) 同一ペイン構造 確認 (stable)"
+validated = true
+evidence  = "iter-14: SEA 73% 確認 + 韓국 台湾 91% stable"
+
+[[blocks.problem.entries]]
+entry_id  = "p_india_survey"
+statement = "インド (ムンバイ・デリー) 建設業者でも同一ペイン — 中長期 TAM 最大化"
+validated = false
+experiment = "2028-Q1 JETRO + 日本建設協会 India office 経由 8社ヒアリング"
+falsifiable = "2028-Q1 India ペイン確認 ≥ 70% OR インド戦略 2030 以降に延期"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CUSTOMER SEGMENTS (4/5 ← 5/5: 台湾 8社 → 30社 拡大仮説 / SEA 首社)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.customer_segments]
+maturity = 4
+summary  = "国内 stable / 韓国 47社 → 100社 拡大中 / 台湾 8社 → 30社 仮説 / タイ 5社 仮説"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_enterprise5"
+statement = "ゼネコン 5社 Enterprise stable"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_korea_100"
+statement = "韓国 100社 active (2027-Q4) — 現 47社 → 100社"
+validated = false
+progress  = "2027-Q3: 47社 active。3Q 末 70社 見込み → Q4 100社"
+falsifiable = "2027-Q4 に 100社 OR 韓国拡大モデル修正"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_taiwan_30"
+statement = "台湾 30社 active (2028-Q1) — 現 8社 pilot → 30社 full expand"
+validated = false
+experiment = "台湾 BizDev パートナー 経由 拡大 / 追加 LOI 22社 目標"
+falsifiable = "2028-Q1 に 30社 OR 台湾モデル (代理店 → 法人化) 再検討"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_thailand_5"
+statement = "タイ 5社 pilot 2028-Q1 (BDC 経由)"
+validated = false
+experiment = "2027-Q4 タイ BDC 契約後 → 2028-Q1 pilot 5社 開始"
+falsifiable = "2028-Q1 にタイ 5社 pilot OR SEA 2028-Q3 以降に延期"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNIQUE VALUE PROPOSITION (5/5 — stable)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.uvp]
+maturity = 5
+summary  = "v3 stable / JIS 義務化 / 多言語 AI stable / v4 AI 動画 UVP 仮説"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_v3_multilingual"
+statement = "v3 AI 多言語 (日韓繁中) 88%+ stable"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_jis_mandatory"
+statement = "JIS A 8951:2026 義務化 仕様権保有 stable"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_v4_audit"
+statement = "v4 AI: 動画施工 audit → 安全スコア自動発行 = 保険料 連動 UVP"
+validated = false
+experiment = "損保会社 2社と v4 AI 安全スコア × 保険料割引 PoC (2028-Q1)"
+falsifiable = "2028-Q1 に損保 PoC 合意 OR v4 UVP 再設計"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SOLUTION (4/5 ← 5/5: v4 AI 本番 rollout 仮説 / タイ API 設計)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.solution]
+maturity = 4
+summary  = "v3 stable / 韓国+台湾 stable / v4 AI 本番 2028-Q1 仮説 / タイ API 設計"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_v3_global"
+statement = "v3 AI 多言語 本番 stable (日韓繁中)"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_taiwan_stable"
+statement = "台湾版 API beta stable — 8社 pilot 稼働"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_v4_rollout"
+statement = "v4 AI 動画解析 本番 rollout 2028-Q1 (PoC 82% → 本番 80%+ 維持)"
+validated = false
+experiment = "2027-Q4: 本番 infra 構築 (GPU streaming, 30秒動画 → 3秒判定) → 2028-Q1 deploy"
+falsifiable = "2028-Q1 本番 精度 80%+ OR rollout 延期 2028-Q2"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_thailand_api"
+statement = "タイ版 API (タイ語 UI / THB 決済 / タイ建設法令対応) 2028-Q2 beta"
+validated = false
+experiment = "台湾 API を base に タイ語 + THB 決済 ローカライズ (2028-Q1 設計)"
+falsifiable = "2028-Q2 タイ API beta OR SEA 展開見直し"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CHANNELS (4/5 ← 5/5: タイ BDC 契約仮説 / 台湾 30社 チャネル)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.channels]
+maturity = 4
+summary  = "韓국 47→100社 拡大中 / 台湾 パートナー 拡大中 / タイ BDC 契約仮説 / SEO 3,500"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_korea_100"
+statement = "韓国 현대건설 + 파트너 経由 100社 2027-Q4"
+validated = false
+progress  = "現 47社。Q3 末 70社見込み。100社 roadmap on-track"
+falsifiable = "2027-Q4 に 100社 OR 拡大戦略修正"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_taiwan_expand"
+statement = "台湾 BizDev パートナー 経由 30社 拡大 (2028-Q1)"
+validated = false
+experiment = "台灣建材供應商協會 + 追加 2社パートナー 経由 22社 LOI 追加"
+falsifiable = "2028-Q1 台湾 30社 OR 代理店モデル → 法人化"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_thailand_bdc"
+statement = "タイ BDC 1社契約 (2027-Q4) — SEA 展開の起点"
+validated = false
+experiment = "2027-Q4 Bangkok 建設業者ネットワーク 経由 BDC 1社 契約"
+falsifiable = "2027-Q4 タイ BDC 1社 OR 2028 延期決定"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_seo_3500"
+statement = "SEO organic 3,500/月 (2027-Q4) — コンテンツ拡充"
+validated = false
+progress  = "現 2,812/月。ライター 6名 月 40本 publish 開始"
+falsifiable = "2027-Q4 に 3,500/月 OR SEO 予算 調整"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REVENUE STREAMS (4/5 ← 5/5: GMV ¥120M + EBITDA 15% 仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.revenue]
+maturity = 4
+summary  = "GMV ¥103M stable / EBITDA 11.2% stable / GMV ¥120M + 15% margin 仮説"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_gmv_103m"
+statement = "GMV ¥103M/月 stable (iter-14 確認)"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_ebitda_stable"
+statement = "EBITDA +¥690K/月 (margin 11.2%) stable"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_gmv_120m"
+statement = "GMV ¥120M/月 (2027-Q4) — 韓国 100社 + 台湾 ramp + 国内成長"
+validated = false
+experiment = "国内 ¥108M + 韓国 ¥10M + 台湾 ¥2M = ¥120M (2027-Q4)"
+falsifiable = "2027-Q4 GMV ¥120M OR 成長モデル修正"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_ebitda_15pct"
+statement = "EBITDA margin 15%+ (2027-Q4) — GMV ¥120M × 6% - OPEX ¥6.1M"
+validated = false
+experiment = "OPEX 増加 (採用 +5名) を GMV 成長で吸収 → margin 15%"
+falsifiable = "2027-Q4 EBITDA margin ≥ 15% OR OPEX 最適化"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# COST STRUCTURE (5/5 — stable + SEA コスト設計)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+maturity = 5
+summary  = "EBITDA モデル stable / SEA 代理店コスト設計 / 43名体制 runway 32ヶ月"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_ebitda_model"
+statement = "OPEX 管理モデル stable (¥5.49M/月 ベース)"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_taiwan_agent"
+statement = "台湾 代理店モデル stable (¥180K/月)"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_sea_agent"
+statement = "SEA 代理店モデル: タイ BDC ¥150K/月 — 法人設立なし"
+validated = true
+evidence  = "2027-Q3: タイ BDC コスト試算。代理店 ¥150K ROI 優位 (法人設立 ¥8M 初期比)"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_team_43"
+statement = "全体 43名体制 runway 32ヶ月 (GMV 成長連動採用)"
+validated = true
+evidence  = "38名 → +5名 (v4 AI エンジニア 3名 + SEA BizDev 2名)。runway 32ヶ月"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# KEY METRICS (4/5 ← 5/5: 海外比率 15% 仮説 / EBITDA 15% 仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+maturity = 4
+summary  = "NRR 131% stable / D365 32.8% stable / 海外比率 15% + EBITDA 15% 仮説"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_nrr_131"
+statement = "NRR 131% stable"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_d365"
+statement = "D365 32.8% 実測 stable"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_intl_15pct"
+statement = "海外 GMV 比率 15%+ (2027-Q4) — 韓国 ¥10M + 台湾 ¥2M / ¥120M"
+validated = false
+experiment = "韓국 100社 × 平均 GMV ¥100K = ¥10M + 台湾 20社 × ¥100K = ¥2M"
+falsifiable = "2027-Q4 海外比率 ≥ 15% OR 海外戦略ペース調整"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_ebitda_15pct"
+statement = "EBITDA margin 15%+ (2027-Q4) — 規模効果で改善"
+validated = false
+experiment = "GMV ¥120M × 6% = ¥7.2M / OPEX ¥6.1M → margin 15.3%"
+falsifiable = "2027-Q4 EBITDA margin ≥ 15% OR OPEX 削減 施策"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNFAIR ADVANTAGE (5/5 — stable + v4 AI 特許仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+maturity = 5
+summary  = "DID 5,500件 / JIS 義務化 / v3 特許 stable / v4 AI 施工 audit 特許仮説"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_jis_mandatory"
+statement = "JIS 義務化 仕様権保有 stable"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_did_5500"
+statement = "DID 5,500件 相関 0.83 + 台湾 DID 200件 + タイ DID 開始"
+validated = true
+evidence  = "2027-Q3: 国内 4,800 + 韓국 380 + 台湾 280 + タイ 40 = 5,500件"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_v3_patent"
+statement = "v3 AI 特許 出願完了 stable (日本+韓국+PCT)"
+validated = true
+evidence  = "iter-14 確認済"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_v4_patent"
+statement = "v4 AI 動画施工 audit 特許出願 (日本+韓국+PCT) 2028-Q1"
+validated = false
+experiment = "v4 PoC 完了後 弁理士と出願準備。施工動画 → 安全スコア 自動判定手法"
+falsifiable = "2028-Q1 特許出願 OR 出願方針変更"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SCORING
+# ─────────────────────────────────────────────────────────────────────────────
+[scoring.maturity_per_block]
+problem           = 5
+customer_segments = 4  # Korea 100社 + 台湾 30社 + タイ 5社 仮説
+uvp               = 5  # stable + v4 損保 UVP 仮説
+solution          = 4  # v4 本番 + タイ API 仮説
+channels          = 4  # Korea 100社 + タイ BDC + SEO 3,500 仮説
+revenue           = 4  # GMV ¥120M + EBITDA 15% 仮説
+cost_structure    = 5  # stable + SEA 代理店 + 43名 confirmed
+key_metrics       = 4  # 海外比率 15% + EBITDA 15% 仮説
+unfair_advantage  = 5  # stable + v4 特許 仮説
+average           = 4.4
+
+[scoring.global_acceleration_status]
+verdict           = "Global Acceleration Phase — Month 1"
+strategy          = "No IPO — 海外比率 15% + EBITDA 15% + v4 本番"
+prior_validated   = "PROFITABLE GLOBAL VALIDATED ★ (iter-14)"
+gmv_monthly       = "¥103M stable → ¥120M (2027-Q4 仮説)"
+ebitda_margin     = "11.2% → 15% (2027-Q4 仮説)"
+nrr               = "131%"
+did_records       = 5500
+korea_active      = "47社 → 100社 (2027-Q4 仮説)"
+taiwan_pilot      = "8社 stable → 30社 (2028-Q1 仮説)"
+thailand_bdc      = "2027-Q4 契約仮説"
+
+[scoring.riskiest_assumptions]
+rank_1 = "韓国 100社 2027-Q4 — 47→100社 拡大スピード"
+rank_2 = "タイ BDC 1社契約 2027-Q4 — SEA 起点"
+rank_3 = "v4 AI 本番 2028-Q1 — GPU streaming infra 構築コスト"
+
+[scoring.next_iteration_goals]
+target_avg = 5.0
+milestones = [
+  "韓国 100社 active (2027-Q4)",
+  "タイ BDC 1社契約 (2027-Q4)",
+  "GMV ¥120M/月 (2027-Q4)",
+  "EBITDA margin 15%+ (2027-Q4)",
+  "海外 GMV 比率 15%+ (2027-Q4)",
+]

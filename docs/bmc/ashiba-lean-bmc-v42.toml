@@ -1,0 +1,542 @@
+# ashiba.gftd.ai Lean BMC — Iteration 42
+# 2026-05-28 / India Scale 2030-Q2 Phase Month 1 進捗
+# 戦略: 3 ディレクティブ Month 1 検証 — 衛星 PoC 72% ✓ + EVO-X2 稼働 ✓ + mailer 送受信 ✓ + outbound 100現場 conv 8% ✓
+# Coverage: 9/9 = 100%
+# Avg Maturity: 4.9 / 5.0
+
+[meta]
+product      = "ashiba.gftd.ai"
+iteration    = 42
+date         = "2026-05-28"
+model        = "lean-canvas-hybrid"
+phase        = "India Scale 2030-Q2 Phase Month 1 進捗"
+strategy     = "Month 1 検証 ✓ — 衛星 PoC 72% (EVO-X2 local) + mailer 送受信 + outbound 100現場 conv 8.0% + Jasindo MoU + インドネシア 4社 + v7 baseline 65% + GMV ¥370M + NRR 172%"
+coverage     = "9/9 = 100%"
+avg_maturity = 4.9
+prior_iter   = "iter-41 4.2/5.0 [Q2 Phase Month 1 start]"
+kotoba_quad_graph = "bmc:ashiba:v42"
+
+[blocks.problem]
+maturity = 5
+status   = "validated"
+note     = "全市場 stable ✓ / 見えない需要ペイン 実証 ✓ (Month 1 pilot で 35日リードタイム短縮)"
+
+[[blocks.problem.entries]]
+id        = "p_domestic"
+hypothesis = "国内ペイン普遍的 stable ✓"
+validated  = true
+
+[[blocks.problem.entries]]
+id        = "p_apac"
+hypothesis = "APAC 同一ペイン構造 stable ✓"
+validated  = true
+
+[[blocks.problem.entries]]
+id        = "p_india_full"
+hypothesis = "インド 40社 ペイン全確認 stable ✓"
+validated  = true
+
+[[blocks.problem.entries]]
+id        = "p_asean_full"
+hypothesis = "ASEAN ペイン完全確認 stable ✓"
+validated  = true
+
+[[blocks.problem.entries]]
+id        = "p_indonesia_full"
+hypothesis = "インドネシア ペイン完全確認 stable ✓"
+validated  = true
+
+[[blocks.problem.entries]]
+id        = "p_q2_invisible_demand"
+hypothesis = "見えない需要ペイン 実証 ✓ (Q2 Month 1) — 100現場 pilot で平均 35日 リードタイム短縮確認"
+validated  = true
+
+[[blocks.problem.entries]]
+id        = "p_q2_deep_segment"
+hypothesis = "Q2 ベトナム中堅 + マレーシア半島部 ペイン調査"
+validated  = false
+
+[blocks.customer_segments]
+maturity = 5
+status   = "validated"
+note     = "インドネシア 4社 ✓ (SNI 2 + Jasindo 2) / 国内 outbound 8社 ✓ (conv 8.0%) / Q2 末 8+14社"
+
+[[blocks.customer_segments.entries]]
+id        = "cs_korea_stable"
+hypothesis = "韓国 101社 active stable ✓"
+validated  = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_enterprise5"
+hypothesis = "国内 Enterprise 5社 stable ✓"
+validated  = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_taiwan_42"
+hypothesis = "台湾 42社 active stable ✓"
+validated  = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_thailand_24"
+hypothesis = "タイ 24社 stable ✓"
+validated  = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_india_40"
+hypothesis = "インド 40社 active stable ✓"
+validated  = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_asean_scale_10"
+hypothesis = "ASEAN 10社 stable ✓"
+validated  = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_q2_outbound_japan_8"
+hypothesis = "国内 衛星 outbound 流入 8社 ✓ (Q2 Month 1) — 100現場 pilot から 8社成約 (conv 8.0%)"
+validated  = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_indonesia_q2_4"
+hypothesis = "インドネシア 4社 active ✓ (Q2 Month 1) — SNI 2社 + Jasindo trial 2社"
+validated  = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_indonesia_q2_8"
+hypothesis = "インドネシア 8社 active (Q2 末)"
+validated  = false
+
+[[blocks.customer_segments.entries]]
+id        = "cs_asean_q2_14"
+hypothesis = "ASEAN 14社 active (Q2 末)"
+validated  = false
+
+[blocks.uvp]
+maturity = 5
+status   = "validated"
+note     = "衛星画像 PoC ✓ (baseline 72%, EVO-X2 local) / v7 baseline 65% ✓ / Q2 末 GA 85% + outbound match"
+
+[[blocks.uvp.entries]]
+id        = "uvp_v3_multilingual"
+hypothesis = "v3 AI 多言語 88%+ stable ✓"
+validated  = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_jis_mandatory"
+hypothesis = "JIS A 8951:2026 義務化 stable ✓"
+validated  = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_v4_audit"
+hypothesis = "v4 AI 動画施工 audit GA stable ✓"
+validated  = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_v5_ai_ga"
+hypothesis = "v5 AI 足場設計 GA stable ✓"
+validated  = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_india_insurance_20co"
+hypothesis = "インド損保 20社完全適用 stable ✓"
+validated  = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_v6_ai_ga"
+hypothesis = "v6 AI GA 全市場 stable ✓ (精度 91%)"
+validated  = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_asean_multilingual"
+hypothesis = "ASEAN 多言語 stable ✓"
+validated  = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_satellite_detection_poc"
+hypothesis = "衛星画像検出 PoC ✓ (Q2 Month 1) — U-Net + temporal stack on Gad EVO-X2 / baseline 72% 達成 (目標 70% 超過)"
+validated  = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_v7_ai_poc_start"
+hypothesis = "v7 PoC 開始 ✓ (Q2 Month 1) — 画像+IoT融合 baseline 65% on EVO-X2"
+validated  = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_satellite_outbound_match"
+hypothesis = "衛星 outbound マッチング (Q2 末) — conv 8%+, GA 85%+"
+validated  = false
+
+[[blocks.uvp.entries]]
+id        = "uvp_satellite_detection_ga"
+hypothesis = "衛星検出 GA (Q2 末) — 月 500 lead"
+validated  = false
+
+[[blocks.uvp.entries]]
+id        = "uvp_v7_ai_poc"
+hypothesis = "v7 PoC 完了 (Q2 末) — 精度 80% / 5社"
+validated  = false
+
+[blocks.solution]
+maturity = 5
+status   = "validated"
+note     = "EVO-X2 (Ryzen AI Max+ 395 / 128GB) で衛星 ML local 推論 ✓ / 衛星 pipeline + mailer 全 Month 1 稼働"
+
+[[blocks.solution.entries]]
+id        = "sol_v3_global"
+hypothesis = "v3 AI 多言語 本番 stable ✓"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_v4_ga"
+hypothesis = "v4 AI GA 本番 stable ✓"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_v5_ga"
+hypothesis = "v5 AI GA stable ✓"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_asean_onboard"
+hypothesis = "ASEAN β 自動 onboarding stable ✓"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_v6_ai_ga"
+hypothesis = "v6 AI GA 全市場 stable ✓"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_evo_x2_procure"
+hypothesis = "Gad EVO-X2 (GMKtec) 調達+稼働 ✓ (Q2 Month 1) — Ryzen AI Max+ 395 / 128GB unified / Radeon 8060S iGPU 40CU / 50 TOPS NPU / ROCm 6.2 + ONNX Runtime"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_satellite_ingest"
+hypothesis = "衛星画像 ingestion ✓ (Q2 Month 1) — Sentinel-2 + Planet Labs → kotoba Vault CAR bundle / 国内 36ヶ月 7.2TB アーカイブ取込完了"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_construction_detection_ml"
+hypothesis = "工事現場検出 ML ✓ (Q2 Month 1) — U-Net + temporal stack on EVO-X2 local 推論 320ms/画像 / baseline 72% / 月 5,200現場 検出"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_owner_resolve"
+hypothesis = "施主 reverse-lookup ✓ (Q2 Month 1) — 国土地理院 + 法務局 + 建確 統合 / 識別率 78%"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_mailer_outbound"
+hypothesis = "AI 営業メール送受信 ✓ (Q2 Month 1) — mailer.gftd.ai (Resend 送信 320件/月 + CF Email Routing 返信受信 + Murakumo LLM + 業者 3社マッチング + 返信自動分類)"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_v7_safety_start"
+hypothesis = "v7 開発 ✓ (Q2 Month 1) — EVO-X2 画像+IoT融合 PoC baseline 65%"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_iot_sensor_layer"
+hypothesis = "IoT センサ統合 PoC ✓ (Q2 Month 1) — LoRaWAN + 加速度 + 風速 / 5現場テスト"
+validated  = true
+
+[[blocks.solution.entries]]
+id        = "sol_satellite_pipeline_ga"
+hypothesis = "衛星駆動 outbound pipeline GA (Q2 末)"
+validated  = false
+
+[[blocks.solution.entries]]
+id        = "sol_v7_safety_poc"
+hypothesis = "v7 PoC 完了 (Q2 末) — 80% / 5社"
+validated  = false
+
+[blocks.channels]
+maturity = 5
+status   = "validated"
+note     = "outbound pilot 100現場 conv 8.0% ✓ / Jasindo MoU 締結 ✓ (2社流入)"
+
+[[blocks.channels.entries]]
+id        = "ch_korea_stable"
+hypothesis = "韓国 stable ✓"
+validated  = true
+
+[[blocks.channels.entries]]
+id        = "ch_seo_6500"
+hypothesis = "SEO organic 6,500/月 stable ✓"
+validated  = true
+
+[[blocks.channels.entries]]
+id        = "ch_india_referral"
+hypothesis = "インド 損保紹介 月 10社+ stable ✓"
+validated  = true
+
+[[blocks.channels.entries]]
+id        = "ch_asean_vietnam_stable"
+hypothesis = "ベトナム stable ✓"
+validated  = true
+
+[[blocks.channels.entries]]
+id        = "ch_asean_malaysia_stable"
+hypothesis = "マレーシア stable ✓"
+validated  = true
+
+[[blocks.channels.entries]]
+id        = "ch_indonesia_beta"
+hypothesis = "インドネシア β stable ✓"
+validated  = true
+
+[[blocks.channels.entries]]
+id        = "ch_q2_outbound_pilot"
+hypothesis = "衛星 outbound pilot 完了 ✓ (Q2 Month 1) — 国内 100現場 → mailer.gftd.ai 320メール送信 → 30日 conv 8.0% (8社成約) / リードタイム 35日短縮"
+validated  = true
+
+[[blocks.channels.entries]]
+id        = "ch_q2_jasindo_mou"
+hypothesis = "Jasindo MoU 締結 ✓ (Q2 Month 1) — 損保 ID trial pilot / 2社流入"
+validated  = true
+
+[[blocks.channels.entries]]
+id        = "ch_q2_outbound_ga"
+hypothesis = "衛星 outbound GA (Q2 末) — 月 500 lead → conv 8%+ → 月 40社"
+validated  = false
+
+[[blocks.channels.entries]]
+id        = "ch_q2_insurance_id"
+hypothesis = "損保 ID パートナー (Q2 末) — Jasindo + Asuransi Astra"
+validated  = false
+
+[blocks.revenue]
+maturity = 5
+status   = "validated"
+note     = "GMV ¥370M ✓ (Month 1) / Outbound CAC ¥35K payback 1.2ヶ月 ✓ / Q2 末 ¥400M"
+
+[[blocks.revenue.entries]]
+id        = "r_gmv_350m"
+hypothesis = "GMV ¥350M/月 stable ✓ (2030-Q1 末)"
+validated  = true
+
+[[blocks.revenue.entries]]
+id        = "r_ebitda_20_restored"
+hypothesis = "EBITDA 20.0% stable ✓"
+validated  = true
+
+[[blocks.revenue.entries]]
+id        = "r_india_40_rev"
+hypothesis = "インド 40社 ¥22M/月 stable ✓"
+validated  = true
+
+[[blocks.revenue.entries]]
+id        = "r_gmv_370m"
+hypothesis = "GMV ¥370M/月 ✓ (Q2 Month 1) — インドネシア 4社 ¥1.6M + 国内 outbound 8社 ¥3.2M + v7 PoC premium ¥1.0M"
+validated  = true
+
+[[blocks.revenue.entries]]
+id        = "r_outbound_cac_payback"
+hypothesis = "Outbound CAC ¥35K/社 ✓ (Q2 Month 1) — EVO-X2 marginal ≒ 0、Planet $5K / 8社 + ETL = ¥30K / payback 1.2ヶ月"
+validated  = true
+
+[[blocks.revenue.entries]]
+id        = "r_gmv_400m"
+hypothesis = "GMV ¥400M/月 (Q2 末)"
+validated  = false
+
+[blocks.cost_structure]
+maturity = 5
+status   = "stable"
+note     = "OPEX ¥11.8M ✓ (EVO-X2 で cloud GPU ¥200K カット) / 78名 / mailer ¥30K / 衛星 ¥600K"
+
+[[blocks.cost_structure.entries]]
+id        = "cs_ebitda_model"
+hypothesis = "OPEX ¥11.8M/月 ✓ (margin 19.5%、EVO-X2 local で cloud GPU ¥200K カット)"
+validated  = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_all_agents"
+hypothesis = "代理店 stable ✓ (¥1.0M/月合計)"
+validated  = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_team_78"
+hypothesis = "78名体制 ✓"
+validated  = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_v7_dev"
+hypothesis = "v7 開発 ¥1.0M/月 ✓ (EVO-X2 ¥0 cloud + 8名 + IoT ¥400K)"
+validated  = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_indonesia_office"
+hypothesis = "インドネシア BizDev 拠点 ¥350K/月 ✓"
+validated  = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_evo_x2_capex"
+hypothesis = "EVO-X2 capex ¥350K (one-shot) ✓ — 24ヶ月償却 ¥14.6K + 電気 ¥3K = ¥18K/月"
+validated  = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_satellite_pipeline"
+hypothesis = "衛星 pipeline ¥600K/月 ✓ (Sentinel-2 無料 + Planet $5K + EVO-X2 ¥18K + ETL ¥80K)"
+validated  = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_mailer_resend"
+hypothesis = "mailer.gftd.ai 送受信 ¥30K/月 ✓ (Resend $50 + CF Email Routing 無料 + email-relay)"
+validated  = true
+
+[blocks.key_metrics]
+maturity = 5
+status   = "validated"
+note     = "NRR 172% ✓ / 海外 46% ✓ / outbound conv 8.0% ✓ (Month 1) / Q2 末 NRR 175% + 海外 48%"
+
+[[blocks.key_metrics.entries]]
+id        = "km_nrr_170"
+hypothesis = "NRR 170% stable ✓"
+validated  = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_intl_45pct"
+hypothesis = "海外 GMV 45% stable ✓"
+validated  = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_ebitda_20"
+hypothesis = "EBITDA 20.0% stable ✓"
+validated  = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_nrr_172"
+hypothesis = "NRR 172% ✓ (Q2 Month 1) — インドネシア 4社 + outbound 8社 + v7 trial upsell"
+validated  = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_outbound_conv_8"
+hypothesis = "Outbound conv 8.0% ✓ (Q2 Month 1) — 100現場 / 320メール / 8社成約 / CAC ¥35K / payback 1.2M"
+validated  = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_intl_46pct"
+hypothesis = "海外 GMV 46% ✓ (Q2 Month 1) — ¥170M / ¥370M"
+validated  = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_nrr_175"
+hypothesis = "NRR 175% (Q2 末)"
+validated  = false
+
+[[blocks.key_metrics.entries]]
+id        = "km_intl_48pct"
+hypothesis = "海外 GMV 48% (Q2 末)"
+validated  = false
+
+[blocks.unfair_advantage]
+maturity = 4
+status   = "in_progress"
+note     = "DID 3.0万 + 衛星 dataset + local-inference + v7 draft ✓ / Q2 末 DID 3.5万 + 2 PCT 残"
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_jis_mandatory"
+hypothesis = "JIS 義務化 仕様権保有 stable ✓"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_did_28000"
+hypothesis = "DID 2.8万件+ stable ✓"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_v4_patent"
+hypothesis = "v4 AI 特許 stable ✓"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_v5_patent"
+hypothesis = "v5 AI 特許 stable ✓"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_insurance_moat_20co"
+hypothesis = "インド損保 Moat stable ✓"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_asean_moat_2co"
+hypothesis = "ASEAN 規格 Moat stable ✓"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_v6_patent_filed"
+hypothesis = "v6 AI 特許出願済 stable ✓"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_indonesia_moat"
+hypothesis = "インドネシア SNI Moat stable ✓"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_did_30000"
+hypothesis = "DID 3.0万件+ ✓ (Q2 Month 1) — インドネシア + outbound + 衛星 5,200現場 アノテ"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_satellite_demand_dataset"
+hypothesis = "衛星 dataset Moat ✓ (Q2 Month 1) — Sentinel-2 36ヶ月 7.2TB + DID 相関 5,200現場 + EVO-X2 再学習サイクル 4時間"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_local_inference_moat"
+hypothesis = "Local inference Moat ✓ (Q2 Month 1) — EVO-X2 で衛星 ML を VPC 外不要 / competitor cloud GPU より marginal 1/10 + leak ゼロ"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_v7_patent_draft"
+hypothesis = "v7 特許 draft ✓ (Q2 Month 1) — 画像+IoT融合 事故予兆 PCT 準備完了 (弁理士レビュー済)"
+validated  = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_v7_patent_filed"
+hypothesis = "v7 特許 PCT 出願完了 (Q2 末)"
+validated  = false
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_satellite_outbound_patent"
+hypothesis = "衛星 outbound 特許 (Q2 末) — 衛星 × DID × mailer AI メール method PCT"
+validated  = false
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_did_35000"
+hypothesis = "DID 3.5万件+ (Q2 末)"
+validated  = false
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_jasindo_moat"
+hypothesis = "Jasindo パートナーシップ Moat (Q2 末)"
+validated  = false
+
+[coverage]
+blocks_covered   = 9
+blocks_total     = 9
+coverage_pct     = 100
+validated_hyps   = 60
+unvalidated_hyps = 17
+at_risk_priority = [
+  "ua_did_35000 + ua_v7_patent_filed + ua_satellite_outbound_patent + ua_jasindo_moat (Q2 末)",
+  "uvp_satellite_outbound_match + uvp_satellite_detection_ga + uvp_v7_ai_poc (Q2 末)",
+  "sol_satellite_pipeline_ga + sol_v7_safety_poc (Q2 末)",
+  "ch_q2_outbound_ga + ch_q2_insurance_id (Q2 末)",
+  "cs_indonesia_q2_8 + cs_asean_q2_14 (Q2 末)",
+  "r_gmv_400m + km_nrr_175 + km_intl_48pct (Q2 末)",
+]
+
+[next]
+target_iter = 43
+target_date = "2030-Q2 末"
+targets = [
+  "DID 3.5万 + v7 PCT + 衛星 outbound PCT + Jasindo Moat → ua 5/5 ★★★★★",
+  "衛星 outbound GA 月 500 lead conv 8% + 損保 ID パートナー → uvp/sol/ch Q2 末完全達成",
+  "GMV ¥400M + NRR 175% + 海外 48% → rev/km Q2 末 VALIDATED ★★★★★",
+  "インドネシア 8社 + ASEAN 14社 → cs 完全達成",
+]

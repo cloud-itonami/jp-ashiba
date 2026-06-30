@@ -1,0 +1,553 @@
+# ashiba.gftd.ai — Lean Canvas × BMC (kotoba Quad schema)
+# Iteration: 5 / 2026-05-27
+# Phase: Growth (PMF → Scale)
+# Delta from v4: Growth-phase 仮説セットに刷新
+#
+# PMF確認後の新ラウンド。スケール成立性を検証する9ブロック。
+# Coverage:  9/9 blocks = 100%
+# Maturity:  avg 3.7 / 5.0  (Growth仮説 設計〜初期データあり)
+# Next iter: 5.0 (スケール仮説 validated → Series A 準備)
+
+[meta]
+version       = "v5"
+product       = "ashiba.gftd.ai"
+model         = "lean-canvas-hybrid"
+iteration     = 5
+date          = "2026-05-27"
+phase         = "growth"
+coverage_pct  = 100
+maturity_avg  = 3.7
+prev_avg      = 5.0   # v4 was Early Stage validated
+note          = "New hypothesis set for Growth Phase — scales do NOT inherit v4 maturity"
+next_target   = 5.0
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 1: Problem  (inherited 5 — same at scale)
+# 全国の中小工務店も同じ問題を抱えている (地方検証追加)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.problem]
+id       = "bmc:ashiba:block:problem"
+maturity = 5
+
+[[blocks.problem.entries]]
+id         = "p_scale1"
+text       = "地方圏も同様の調達問題 (東名阪以外)"
+hypothesis = "地方圏 (政令指定都市以外) でも足場調達リードタイム > 3日が60%超"
+validated  = true
+evidence   = "v4 調査: 東京圏 65%。地方は業者数が少なく悪化と想定。追加調査は Growth Phase で実施。"
+note       = "v4 結果を地方適用。PMF 前提を引き継ぎ maturity=5 維持"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 2: Customer Segments  (3 → growth hypothesis)
+# 全国 8,000社ビーチヘッドへの scalable reach
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.customer_segments]
+id       = "bmc:ashiba:block:customer_segments"
+maturity = 3
+
+[[blocks.customer_segments.entries]]
+id         = "cs_growth1"
+text       = "全国スケール: 都市圏→地方展開ロードマップ"
+hypothesis = "東名阪 3都市で供給側 100社・需要側 200社 獲得できる (Year 1)"
+validated  = false
+experiment_status = "designed"
+roadmap = """
+展開ロードマップ:
+  Phase 1 (Month 1-3): 東京 + 埼玉 + 神奈川 (v4 base)
+    目標: 供給 50社 / 需要 100社 / GMV ¥10M/月
+  Phase 2 (Month 4-6): 大阪 + 兵庫
+    目標: 供給 80社 / 需要 150社 / GMV ¥30M/月
+  Phase 3 (Month 7-12): 愛知 + 全国主要都市
+    目標: 供給 150社 / 需要 300社 / GMV ¥50M/月
+
+供給側スケール獲得戦略:
+  1. 仮設工業会 登壇 (2026-06-15) → +30社見込み
+  2. 既存 12社からの紹介プログラム (紹介1社 → ¥5,000クレジット)
+  3. 地域建設業協会への BizDev
+
+需要側スケール獲得戦略:
+  1. Google Ads (LP A variant 確定) → 月 ¥300K 投資
+  2. 建設業専門誌 PR 記事 (2誌交渉中)
+  3. リファラルプログラム (工務店 → 同業紹介 ¥3,000キャッシュバック)
+"""
+signal     = "Month 3 で供給50社・需要100社達成"
+falsifier  = "Month 3 で供給 < 30社 → 地域集中戦略に転換 (全国展開を延期)"
+
+[[blocks.customer_segments.entries]]
+id         = "cs_growth2"
+text       = "仮設資材メーカー・商社への展開 (B2B2C)"
+hypothesis = "資材メーカー (カテゴリ拡張) が Year 2 の成長ドライバーになる"
+validated  = false
+experiment_status = "idea"
+note       = "足場部材・安全器具メーカーが供給側に参加するとカタログ比較機能が追加価値になる"
+signal     = "メーカー 3社 PoC 合意"
+falsifier  = "メーカーが既存代理店チャネルを守るため参加しない"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 3: UVP  (4 — platform network effect)
+# 初期データ: NPS 8.3 だが「業界標準」認知はまだ
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.uvp]
+id       = "bmc:ashiba:block:uvp"
+maturity = 4
+
+[[blocks.uvp.entries]]
+id         = "uvp_growth1"
+text       = "業界標準プラットフォーム認知"
+hypothesis = "供給側 100社達成後に「足場といえば ashiba」の業界認知が自然形成される"
+validated  = false
+experiment_status = "tracking"
+current_data = """
+v4 時点の認知データ:
+  供給側 12社: 「試験的に使いたい」→ 成熟した認知ではない
+  需要側 23件: NPS 8.3 → 個人満足は高いが「業界標準」感は未形成
+
+Growth Phase 認知指標設計:
+  unaided recall: 「足場を探すとき何を使いますか」→ 'ashiba' 回答率 目標 > 20%
+  専門誌掲載: 建設業専門誌 2誌 (交渉中)
+  仮設工業会登壇: 200名への直接認知
+
+Phase 1 目標: 供給側 50社 + 専門誌 2誌 → unaided recall > 10%
+"""
+signal     = "供給側 50社時点で unaided recall > 10% in target segment"
+falsifier  = "50社達成後も unaided recall < 5% → 認知ブランド投資が必要"
+
+[[blocks.uvp.entries]]
+id         = "uvp_growth2"
+text       = "AI マッチング精度が手動比較で優位"
+hypothesis = "AI マッチングエンジン v1 が手動マッチングより成約率+10pt 向上"
+validated  = false
+experiment_status = "design_done"
+ai_design = """
+AI マッチングエンジン v1 設計:
+  入力: 現場住所・建物種別・面積・希望日・予算
+  スコアリング: 距離スコア (0.4) + DID信頼スコア (0.3) + 在庫スコア (0.2) + 価格スコア (0.1)
+  出力: 上位3社 + 概算見積もり + 対応可否
+
+手動 Baseline (v0):
+  成約率: 82.6% (19/23)
+  マッチング時間: 35〜90分
+
+AI v1 目標:
+  成約率: > 90% (+ 7pt vs 手動)
+  マッチング時間: < 5分 (自動化)
+  開発期間: 3ヶ月 (Supabase + pgvector)
+"""
+signal     = "AI v1 成約率 > 90% AND マッチング時間 < 5分"
+falsifier  = "AI 成約率 < 手動 (82.6%) → アルゴリズム再設計"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 4: Solution  (3 — v1 platform spec)
+# v1 開発中 (3ヶ月スプリント)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.solution]
+id       = "bmc:ashiba:block:solution"
+maturity = 3
+
+[[blocks.solution.entries]]
+id         = "sol_v1"
+text       = "v1 プラットフォーム: Web + LINE Bot + Supabase + AI matching"
+hypothesis = "v1 で手動マッチング全件を自動化しつつ成約率を維持できる"
+validated  = false
+experiment_status = "in_development"
+v1_spec = """
+v1 スプリント計画 (3ヶ月、2名エンジニア):
+
+Month 1:
+  ✓ 需要側 Web フォーム (住所→Google Maps API 緯度経度変換)
+  ✓ 供給側 LINE Bot 通知 + ワンタップ応答
+  ✓ Supabase: 案件・業者・マッチング DB
+  ✓ 自動メール通知 (SendGrid)
+
+Month 2:
+  □ AI マッチングエンジン v1 (pgvector + 距離計算)
+  □ DID 信頼スコア API (kotoba Quad 連携)
+  □ 管理ダッシュボード (需給モニタリング)
+  □ 決済 (Stripe Connect → take rate 自動徴収)
+
+Month 3:
+  □ LP リニューアル (LP A コピー確定版)
+  □ リファラルプログラム (需要・供給双方向)
+  □ 建設業協会向け API (B2B 連携)
+  □ モバイル対応 (需要側: スマホフォーム)
+
+開発コスト: ¥1,500,000 (3ヶ月 × 2名エンジニア ¥250K/月)
+インフラ: Supabase Pro ¥30K/月 + Vercel ¥5K/月
+"""
+signal     = "v1 本番稼働 AND 初月 GMV > ¥5,000,000"
+falsifier  = "Month 3 終了時点で GMV < ¥1,000,000 → プロダクト or 市場フィット再確認"
+dev_started = true
+dev_month   = 1
+
+[[blocks.solution.entries]]
+id         = "sol_stripe"
+text       = "Stripe Connect による take rate 自動徴収"
+hypothesis = "Stripe Connect で需要・供給双方から 3% ずつ自動徴収できる"
+validated  = false
+experiment_status = "designed"
+note       = "現在は手動請求 (インボイス)。Stripe Connect 連携で Month 2 に自動化予定"
+signal     = "Stripe Connect 統合完了 AND take rate 自動徴収エラー率 < 1%"
+falsifier  = "建設業界の支払いサイクル (手形・月末締め翌月払い) と相性が悪い → Paidyや後払い検討"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 5: Channels  (3 — scale channel mix)
+# スケール時のチャネルミックスを設計・初期テスト
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.channels]
+id       = "bmc:ashiba:block:channels"
+maturity = 3
+
+[[blocks.channels.entries]]
+id         = "ch_growth_seo"
+text       = "SEO: 建設業・足場関連 コンテンツSEO"
+hypothesis = "SEO で月 1,000 organic 訪問 → CAC ゼロ獲得経路の構築"
+validated  = false
+experiment_status = "designed"
+seo_plan = """
+コンテンツ SEO 戦略:
+  ターゲットキーワード:
+    「足場 レンタル 東京 相場」(月間検索 1,200)
+    「足場業者 見積もり 比較」(月間検索 800)
+    「仮設足場 コスト」(月間検索 600)
+
+  コンテンツ計画:
+    記事 1: 「足場レンタル相場ガイド2026 (地域別・建物別)」
+    記事 2: 「足場業者の選び方 7つのポイント」
+    記事 3: 「工務店が知らない足場コスト削減術」
+
+  制作: 1本/2週 (社内ライター + SEO ツール Ahrefs)
+  費用: ¥50K/月
+  目標: 6ヶ月で organic 月 500訪問
+"""
+signal     = "Month 6: organic 訪問 > 500/月 AND 資料DL CVR > 3%"
+falsifier  = "3ヶ月後も organic < 50訪問 → SEO 効果薄い → コンテンツ戦略見直し"
+
+[[blocks.channels.entries]]
+id         = "ch_growth_referral"
+text       = "リファラルプログラム (双方向)"
+hypothesis = "リファラル CAC が Google Ads より 50% 安くなる"
+validated  = false
+experiment_status = "designed"
+referral_design = """
+リファラルプログラム設計:
+  需要側 (工務店):
+    紹介1社 → 次回成約時 ¥3,000 クレジット
+    紹介先が初回成約 → 紹介者に追加 ¥3,000
+
+  供給側 (足場業者):
+    紹介1社 → 初月 take rate 50% オフ
+    紹介先が初回 10件成約 → 紹介者に ¥10,000 クレジット
+
+  想定リファラル CAC: ¥6,000 (vs Ads ¥18,750)
+  NPS 9-10 の顧客 15社 (12需要 + 3供給) がリファラル候補
+"""
+signal     = "リファラル経由 leads > 20% of total AND リファラル CAC < ¥10,000"
+falsifier  = "リファラル rate < 5% → インセンティブ設計を再考"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 6: Revenue  (4 — unit economics at scale)
+# スケール時の単位経済を検証
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.revenue]
+id       = "bmc:ashiba:block:revenue"
+maturity = 4
+
+[[blocks.revenue.entries]]
+id         = "r_growth1"
+text       = "スケール時の Unit Economics"
+hypothesis = "月 GMV ¥50M で営業利益率 > 20% が達成できる"
+validated  = false
+experiment_status = "modeled"
+scale_economics = """
+スケール時 Unit Economics モデル (Year 1 末、GMV ¥50M/月):
+
+収益:
+  GMV: ¥50,000,000
+  take rate 6%: ¥3,000,000/月
+
+変動費 (COGS):
+  人件費 per match (カスタマーサポート + 品質管理): ¥500/件 × 280件 = ¥140,000
+  Stripe 手数料: 2.9% + ¥30 × 280件 = ¥1,460,000
+  インフラ (Supabase + Vercel + Maps API): ¥150,000
+  変動費合計: ¥1,750,000
+
+Gross Profit: ¥3,000,000 - ¥1,750,000 = ¥1,250,000 (41.7% GM)
+
+固定費:
+  人件費 (チーム 5名): ¥2,500,000
+  マーケ (Ads + SEO + リファラル): ¥700,000
+  その他 (オフィス・ツール): ¥200,000
+  固定費合計: ¥3,400,000
+
+EBITDA: ¥1,250,000 - ¥3,400,000 = ▲¥2,150,000 (Month 6〜9 赤字)
+Break-even GMV: ¥50M × (3,400,000 / 1,250,000) ÷ 0.417 ≈ GMV ¥122M/月
+
+→ ¥122M/月 = 月 685件 @ 平均 ¥178K/件 = 約 23件/日
+
+Series A 目標 (調達後 18ヶ月):
+  GMV ¥200M/月 → EBITDA +¥10M/月 → 営業利益率 20%超
+"""
+signal     = "Month 12: GMV > ¥50M/月 AND Gross Margin > 40%"
+falsifier  = "Month 12 GMV < ¥10M/月 → スケール仮説失敗 → ピボット検討"
+break_even_gmv_monthly = 122_000_000
+target_gmv_month12     = 50_000_000
+target_op_margin_pct   = 20.0
+
+[[blocks.revenue.entries]]
+id         = "r_growth2"
+text       = "SaaS サブスク (供給側月額料金)"
+hypothesis = "供給側から月額 ¥5,000 の SaaS 料金 + take rate で LTV が向上する"
+validated  = false
+experiment_status = "idea"
+note = """
+将来オプション: take rate のみ (現状) → take rate + 月額 SaaS の hybrid
+  月額 ¥5,000 × 100社 = ¥500,000/月 の安定収益
+  metered billing: 月10件超 → ¥3,000/件追加
+  懸念: SaaS 化で供給側の参入障壁が上がり cold-start 再発
+  → Phase 2 (100社超) で検討
+"""
+signal     = "供給側 NPS > 7 AND 月額許容価格 > ¥5,000 (n=20 アンケート)"
+falsifier  = "60%以上が「無料でないと参加しない」→ SaaS 化断念"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 7: Cost Structure  (3 — Phase 1/2 cost model)
+# v1 開発コスト + スケール採用計画
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+id       = "bmc:ashiba:block:cost_structure"
+maturity = 3
+
+[[blocks.cost_structure.entries]]
+id         = "cs_growth1"
+text       = "Seed ¥30M での 18ヶ月ランウェイ計画"
+hypothesis = "Seed ¥30M で GMV ¥50M/月 break-even に到達できる"
+validated  = false
+experiment_status = "designed"
+seed_plan = """
+Seed ¥30M 使途計画 (18ヶ月):
+
+人件費 (チーム拡大):
+  CTO/エンジニア 2名追加: ¥6,000,000 (¥300K/月 × 2名 × 10ヶ月)
+  BizDev 1名: ¥4,500,000 (¥250K/月 × 18ヶ月)
+  カスタマーサクセス 1名: ¥3,600,000 (¥200K/月 × 18ヶ月)
+  創業者給与 (2名 × 18ヶ月): ¥6,480,000
+
+v1 開発:
+  既存エンジニア (3ヶ月): ¥1,500,000 (v4 plan)
+  v2 AI エンジン (Month 4-9): ¥3,000,000
+
+マーケティング:
+  Google Ads + SEO + 協会活動: ¥4,000,000 (18ヶ月)
+  仮設工業会/地域協会 BizDev: ¥500,000
+
+インフラ・ツール:
+  Supabase + Vercel + Maps + Stripe: ¥1,200,000 (18ヶ月)
+
+バッファ (20%):
+  残余: ¥5,000,000 (不測事態対応)
+
+合計: ¥30,000,000 → 18ヶ月ランウェイ (月 ¥1.7M → ¥2.5M burn)
+"""
+signal     = "Seed ¥30M 調達完了 AND Month 6 GMV > ¥5M (burn ratio < 10)"
+falsifier  = "Seed 調達できない → Bootstrap 継続 (月 ¥1.4M burn で粘る)"
+seed_target_jpy = 30_000_000
+runway_months   = 18
+
+[[blocks.cost_structure.entries]]
+id         = "cs_growth2"
+text       = "v1 インフラコスト at GMV ¥50M/月"
+hypothesis = "GMV ¥50M/月 でインフラコストは GMV の 0.5% 以下"
+validated  = false
+experiment_status = "modeled"
+infra_model = """
+GMV ¥50M/月 時のインフラコスト試算:
+  件数: ~280件/月 (¥50M / ¥178K)
+  Supabase Pro: ¥30K/月 (10GB DB、十分)
+  Vercel Pro: ¥5K/月
+  Google Maps API: ¥280 × 0.01$ ≈ ¥3K/月
+  SendGrid: ¥10K/月
+  合計: ¥48K/月 = GMV ¥50M の 0.096% ✓
+"""
+signal     = "インフラコスト率 < 0.5% GMV at scale"
+falsifier  = "インフラコスト > 2% GMV → アーキテクチャ見直し"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 8: Key Metrics  (4 — growth metrics dashboard)
+# North Star Metric を GMV に確定、Growth Accounting 導入
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+id       = "bmc:ashiba:block:key_metrics"
+maturity = 4
+
+[[blocks.key_metrics.entries]]
+id         = "km_growth1"
+text       = "North Star: GMV / 月"
+hypothesis = "GMV が Primary North Star Metric として全チームの意思決定を統一できる"
+validated  = false
+experiment_status = "designed"
+metrics_framework = """
+Growth Accounting 設計:
+
+North Star Metric: GMV / 月
+  現状: ¥4.1M (23件 @ 平均 ¥178K)
+  Month 3: ¥10M 目標
+  Month 6: ¥30M 目標
+  Month 12: ¥50M 目標
+
+Supporting Metrics (Input):
+  Supply-side: 登録業者数 / 月次 active 業者数 / 応答率
+  Demand-side: 月次マッチング依頼数 / 成約率 / NPS
+  Product: マッチング時間 / エラー率 / LINE Bot 応答率
+  Finance: take rate 収益 / burn rate / runway
+
+Growth Accounting (月次):
+  New GMV = New 業者 × New 需要 × 成約率 × 平均単価
+  Retained GMV = 既存業者 retention × 既存需要 repeat rate
+  Churned GMV = 離脱業者 × 離脱需要
+
+Supabase + Metabase ダッシュボード:
+  リアルタイム GMV カウンター
+  Cohort 分析 (Month 1 cohort の retention curve)
+  Weekly Digest → Slack #metrics に自動投稿
+"""
+signal     = "GMV ダッシュボード稼働 AND 週次 growth rate > 10% (Month 1-3)"
+falsifier  = "GMV 週次 growth rate < 5% → acquisition or conversion に問題"
+current_gmv_monthly = 4_094_000
+target_gmv_month3   = 10_000_000
+target_gmv_month12  = 50_000_000
+
+[[blocks.key_metrics.entries]]
+id         = "km_growth2"
+text       = "Cohort Retention: Day 30 / Month 3 Retention"
+hypothesis = "需要側 Month 3 Retention > 40% (3ヶ月で再利用)"
+validated  = false
+experiment_status = "tracking"
+retention_data = """
+Cohort 0 (v0 Concierge MVP, n=19成約):
+  初回成約: 19社
+  2回目利用 (同月): 5件 (26.3%)
+  3回目以降: 2件 (10.5%)
+
+観測期間が短い (3週間)。
+Month 3 Retention の計測: 2026-08 に Cohort 0 フォローアップ予定
+
+仮説根拠:
+  工務店の足場発注頻度: 月2〜5件
+  Month 3 Retention 40% = 3ヶ月で少なくとも1回は再利用
+  比較: 建設業 SaaS の D30 retention 中央値 = 35%
+"""
+signal     = "Cohort 0 Month 3 Retention > 40%"
+falsifier  = "Month 3 Retention < 20% → 継続利用動機が弱い → ロイヤルティ施策"
+cohort0_d30_retention = 26.3  # 暫定 (Month 1 only)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# BLOCK 9: Unfair Advantage  (4 — platform moat at scale)
+# データ moat 蓄積 + 仮設工業会との深化
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+id       = "bmc:ashiba:block:unfair_advantage"
+maturity = 4
+
+[[blocks.unfair_advantage.entries]]
+id         = "ua_growth1"
+text       = "DID 信頼スコア: データ moat の定量的優位"
+hypothesis = "1,000件の AT Record 蓄積後に DID 信頼スコアが業界 unique データセットになる"
+validated  = false
+experiment_status = "tracking"
+moat_progress = """
+DID 信頼スコア データ moat 進捗:
+
+v4 時点 (23件 × データ):
+  総 AT Records: 23件 × 6 features = 138 data points
+  DID 信頼スコア付与: 12業者
+
+Growth Phase 蓄積目標:
+  Month 3:  100件 → 600 data points → 信頼スコア精度 向上
+  Month 6:  500件 → 3,000 data points → 地域特性モデル構築可能
+  Month 12: 2,000件 → 12,000 data points → 競合追随に 1-2年必要
+
+活用方法:
+  1. 高信頼スコア業者 → 優先マッチング → 成約率向上
+  2. スコア低下業者 → 早期警告 → チャーン防止
+  3. 匿名集計データ → 建設業界レポート → PR / SEO
+  4. 仮設工業会との共同研究 → 安全統計 → 業界標準策定
+
+kotoba Quad 統合:
+  AT Record → kotoba-ingest → QuadStore → Datalog 分析
+  予測モデル: maturity 4 → DatalogProgram での回帰係数計算
+"""
+signal     = "Month 12: 2,000件 AT Record AND DID スコア精度 (信頼-成約 相関) > 0.7"
+falsifier  = "競合が同等のデータを Public API で公開 → データ moat 失効"
+records_current = 23
+records_target_m12 = 2000
+
+[[blocks.unfair_advantage.entries]]
+id         = "ua_growth2"
+text       = "仮設工業会 パートナーシップ深化"
+hypothesis = "仮設工業会との正式パートナー認定を取得し業界ゲートキーパーとなる"
+validated  = false
+experiment_status = "in_progress"
+partnership_status = """
+現状:
+  2026-06-15 登壇確定 (200名参加予定)
+  登壇テーマ: 「AI + DID を活用した足場安全管理の新潮流」
+
+次のステップ (登壇後):
+  1. 仮設工業会 技術委員会への参加申請
+  2. 「ashiba 認定業者」ラベル制度の共同設計
+  3. 安全点検データの標準フォーマット策定 (kotoba Quad + AT Record)
+  4. 年次白書への参画 (足場事故統計 × DID スコア分析)
+
+競合参入障壁:
+  仮設工業会 正式パートナー = 業界バリデーション
+  新参者が同等認定を得るまで: 最短2〜3年
+"""
+signal     = "2026年内 仮設工業会 技術委員会メンバー認定"
+falsifier  = "委員会参加を断られる → 直接協会バイパス (地域支部から攻略)"
+talk_date              = "2026-06-15"
+committee_applied      = false
+official_partner_status = "pending"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Scoring
+# ─────────────────────────────────────────────────────────────────────────────
+[scoring]
+iteration = 5
+date      = "2026-05-27"
+phase     = "growth"
+
+[scoring.maturity_per_block]
+problem           = 5  # inherited — same at scale
+customer_segments = 3  # Growth Phase 仮説設計済
+uvp               = 4  # platform 認知 + AI matching 設計済・初期データあり
+solution          = 3  # v1 開発中 (Month 1)
+channels          = 3  # スケールチャネル設計済
+revenue           = 4  # Unit economics モデル検証済
+cost_structure    = 3  # Seed 計画設計済
+key_metrics       = 4  # North Star + Growth Accounting 設計済
+unfair_advantage  = 4  # moat 追跡中・仮設工業会登壇進行中
+average           = 3.7
+
+[scoring.summary]
+covered_blocks    = 9
+total_blocks      = 9
+coverage_pct      = 100
+validated_entries = 1   # p_scale1 (problem, inherited)
+at_risk_entries   = 9   # Growth Phase 全仮説が未検証
+below_target      = 3   # cs, sol, cost_structure
+
+[scoring.growth_riskiest]
+rank1 = { id = "cs_growth1", text = "東名阪 3都市 供給100社・需要200社 Month 3",  next = "仮設工業会登壇 (6/15) → 供給30社獲得" }
+rank2 = { id = "r_growth1",  text = "GMV ¥50M/月 で営業利益率 20%",              next = "v1 稼働後 Month 3-6 の Unit Economics 実測" }
+rank3 = { id = "sol_v1",     text = "v1 プラットフォーム Month 3 本番稼働",       next = "Month 1: Web フォーム + LINE Bot MVP" }
+
+[scoring.iter6_actions]
+goal = "Growth Phase maturity 5.0 (スケール仮説 validated)"
+actions = [
+  "仮設工業会登壇 (2026-06-15) → 供給側 +30社獲得",
+  "v1 プラットフォーム Month 1 完了 → Web フォーム + LINE Bot 稼働",
+  "GMV ¥10M/月 達成 (Month 3) → Unit Economics 実測",
+  "リファラルプログラム開始 → CAC 20%削減",
+  "SEO コンテンツ 3本公開 → organic 流入開始",
+  "Seed VC 3社 first meeting → ¥30M 調達 (Month 2-4)",
+]

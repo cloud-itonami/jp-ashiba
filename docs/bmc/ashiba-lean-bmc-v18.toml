@@ -1,0 +1,338 @@
+# ashiba.gftd.ai Lean BMC — Iteration 18 (Deep Global Phase — Month 1)
+# Phase: ディープグローバルフェーズ (v4 GA + 台湾30社 + タイpilot + インド探索)
+# Date: 2026-05-27
+# SSoT: kotoba Quad store (examples/ashiba-bmc)
+
+[meta]
+product     = "ashiba.gftd.ai"
+version     = "v18"
+iteration   = 18
+date        = "2026-05-27"
+phase       = "Deep Global Phase — Month 1"
+model       = "Lean Canvas Hybrid (9 blocks)"
+prior       = "iter-17 avg 5.0 (GLOBAL ACCELERATION Q4 VALIDATED ★★)"
+strategy    = "No IPO — v4 GA 本番 + 台湾 30社 + タイ pilot + インド探索 + 海外比率 20%"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PROBLEM (5/5 — stable)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.problem]
+maturity = 5
+summary  = "国内 + APAC stable / インド ペイン調査実施 2028-Q1"
+
+[[blocks.problem.entries]]
+entry_id  = "p_domestic"
+statement = "国内ペイン普遍的 (stable)"
+validated = true
+
+[[blocks.problem.entries]]
+entry_id  = "p_apac"
+statement = "APAC (韓国+台湾+タイ+ベトナム) 同一ペイン構造 (stable)"
+validated = true
+
+[[blocks.problem.entries]]
+entry_id  = "p_india_survey"
+statement = "インド (ムンバイ・デリー) 建設業者でも同一ペイン — 8社ヒアリング 2028-Q1 実施"
+validated = false
+experiment = "2028-Q1: JETRO + 日本建設協会 India office 経由 8社ヒアリング"
+falsifiable = "2028-Q1 ペイン確認 ≥ 70% OR インド 2030 以降に延期"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CUSTOMER SEGMENTS (4/5 ← 台湾 30社 + タイ 5社 仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.customer_segments]
+maturity = 4
+summary  = "国内+韓国 stable / 台湾 30社 2028-Q1 / タイ 5社 pilot 2028-Q1 / インド探索"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_korea_stable"
+statement = "韓国 101社 active stable (iter-17 確認)"
+validated = true
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_enterprise5"
+statement = "国内 Enterprise 5社 stable + ゼネコン tier 拡大中"
+validated = true
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_taiwan_30"
+statement = "台湾 30社 active 2028-Q1 (BizDev パートナー 経由、LOI 15社 → 成約 30社)"
+validated = false
+experiment = "台灣建材供應商協會 + 新パートナー 経由 追加 LOI → 2028-Q1 成約"
+falsifiable = "2028-Q1 台湾 30社 OR 代理店モデル → 法人化へ転換"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_thailand_5"
+statement = "タイ 5社 pilot 2028-Q1 (BDC LOI 後 Thana Construction Group 主導)"
+validated = false
+experiment = "BDC LOI → 2028-Q1 pilot 5社 開始 (タイ語 UI + THB 決済)"
+falsifiable = "2028-Q1 に 5社 pilot OR SEA 2028-Q3 以降に延期"
+
+[[blocks.customer_segments.entries]]
+entry_id  = "cs_india_explore"
+statement = "インド 建設業者 5社 ヒアリング設計完了 — ペイン確認後 2029 パイロット"
+validated = false
+experiment = "2028-Q1 JETRO 経由 5社 ヒアリング → ペイン強度 + TAM 検証"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNIQUE VALUE PROPOSITION (4/5 ← v4 AI 損保 UVP 仮説未確認)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.uvp]
+maturity = 4
+summary  = "v3 多言語 stable / JIS stable / v4 AI 損保 UVP PoC 合意仮説"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_v3_multilingual"
+statement = "v3 AI 多言語 (日韓繁中) 88%+ stable"
+validated = true
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_jis_mandatory"
+statement = "JIS A 8951:2026 義務化 仕様権保有 stable"
+validated = true
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_v4_audit"
+statement = "v4 AI 動画施工 audit → 安全スコア自動発行 = 保険料 連動 UVP (2028-Q1 GA)"
+validated = false
+experiment = "v4 GA deploy 後、損保 2社 と PoC 開始 (2028-Q1)"
+falsifiable = "2028-Q1 損保 PoC 合意 OR v4 UVP 再設計"
+
+[[blocks.uvp.entries]]
+entry_id  = "uvp_v4_insurance_poc"
+statement = "損保 2社 との v4 AI 安全スコア × 保険料割引 PoC 合意 (2028-Q1)"
+validated = false
+experiment = "東京海上 + 三井住友海上 にアプローチ中。v4 GA 後 PoC 提案"
+falsifiable = "2028-Q1 に 1社以上 PoC 合意 OR 損保連携モデル再設計"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SOLUTION (4/5 ← v4 GA 本番 deploy 仮説 / タイ API 仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.solution]
+maturity = 4
+summary  = "v3 + 台湾 stable / v4 GA 本番 2028-Q1 / タイ API 2028-Q2 / インド 2029"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_v3_global"
+statement = "v3 AI 多言語 本番 stable (日韓繁中)"
+validated = true
+
+[[blocks.solution.entries]]
+entry_id  = "sol_taiwan_stable"
+statement = "台湾版 API stable — 15社 LOI 全稼働"
+validated = true
+
+[[blocks.solution.entries]]
+entry_id  = "sol_v4_ga"
+statement = "v4 AI GA 本番 deploy 2028-Q1 (infra 完了済み → 本番リリース)"
+validated = false
+experiment = "2028-Q1-01: GA deploy → 2028-Q1-15: 先行 10社 beta → 2028-Q2: 全社展開"
+falsifiable = "2028-Q1 GA deploy 完了 OR 延期理由 明確化"
+
+[[blocks.solution.entries]]
+entry_id  = "sol_thailand_api"
+statement = "タイ版 API (タイ語 UI / THB 決済 / タイ建設法令対応) 2028-Q2 beta"
+validated = false
+experiment = "台湾 API を base に タイ語ローカライズ (2028-Q1 設計 → Q2 beta)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CHANNELS (5/5 — stable)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.channels]
+maturity = 5
+summary  = "韓国 101社 stable / SEO 3,520 stable / 台湾 BizDev stable / タイ BDC LOI stable"
+
+[[blocks.channels.entries]]
+entry_id  = "ch_korea_stable"
+statement = "韓国 チャネル stable (101社 active、月 +8社 pace 継続)"
+validated = true
+
+[[blocks.channels.entries]]
+entry_id  = "ch_seo_stable"
+statement = "SEO organic 3,520/月 stable (コンテンツ 月 40本 継続)"
+validated = true
+
+[[blocks.channels.entries]]
+entry_id  = "ch_taiwan_bizdev"
+statement = "台湾 BizDev パートナー stable (15社 LOI 稼働、30社 拡大中)"
+validated = true
+
+[[blocks.channels.entries]]
+entry_id  = "ch_thailand_bdc"
+statement = "タイ BDC LOI stable (Thana Construction Group 経由 pilot 準備中)"
+validated = true
+
+[[blocks.channels.entries]]
+entry_id  = "ch_india_explore"
+statement = "インド チャネル設計 — JETRO + 建設協会 India office ネットワーク"
+validated = false
+experiment = "2028-Q1 ヒアリング後 → 2028-Q3 チャネル設計"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REVENUE STREAMS (5/5 — stable + ¥135M 仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.revenue]
+maturity = 5
+summary  = "GMV ¥122M stable / EBITDA 15.4% stable / ¥135M + v4 UVP 仮説"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_gmv_122m"
+statement = "GMV ¥122M/月 stable (iter-17 確認)"
+validated = true
+
+[[blocks.revenue.entries]]
+entry_id  = "r_ebitda_154"
+statement = "EBITDA margin 15.4% stable (iter-17 確認)"
+validated = true
+
+[[blocks.revenue.entries]]
+entry_id  = "r_gmv_135m"
+statement = "GMV ¥135M/月 (2028-Q2) — 台湾 30社 + タイ pilot + v4 AI upsell 寄与"
+validated = false
+experiment = "国内 ¥115M + 韓국 ¥12M + 台湾 ¥5M + タイ ¥3M = ¥135M (2028-Q2)"
+falsifiable = "2028-Q2 GMV ¥135M OR 成長モデル修正"
+
+[[blocks.revenue.entries]]
+entry_id  = "r_v4_upsell"
+statement = "v4 AI upsell 収益: 動画 audit 追加オプション ¥50K/月/社 → ¥5M/月"
+validated = false
+experiment = "GA 後 先行 10社 × ¥50K = ¥500K → 全社展開 100社 × ¥50K = ¥5M (2028-Q3)"
+falsifiable = "2028-Q2 upsell 10社 合意 OR 価格モデル再設計"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# COST STRUCTURE (5/5 — stable)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+maturity = 5
+summary  = "OPEX ¥6.18M stable / 全代理店モデル確定 / インド探索コスト予算済み"
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_ebitda_model"
+statement = "OPEX ¥6.18M stable — margin 15% 維持しながら v4 + SEA 投資"
+validated = true
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_taiwan_sea_agent"
+statement = "台湾 + タイ 代理店モデル stable (¥330K/月合計)"
+validated = true
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_team_43"
+statement = "43名体制 stable — v4 AI 3名 + SEA BizDev 2名 稼働中"
+validated = true
+
+[[blocks.cost_structure.entries]]
+entry_id  = "cs_india_budget"
+statement = "インド探索予算 ¥300K (JETRO 委託) — 2028-Q1 単発コスト"
+validated = true
+evidence  = "JETRO 海外展開支援補助金 活用。単発 ¥300K、追加コストなし"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# KEY METRICS (4/5 ← 海外比率 20% 仮説 / NRR 140% 仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+maturity = 4
+summary  = "NRR 135% stable / D365 34.2% stable / 海外比率 20% + NRR 140% 2028-Q2 仮説"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_nrr_135"
+statement = "NRR 135% stable (iter-17 確認)"
+validated = true
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_d365_342"
+statement = "D365 34.2% stable (iter-17 確認)"
+validated = true
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_ebitda_154"
+statement = "EBITDA 15.4% stable (iter-17 確認)"
+validated = true
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_intl_20pct"
+statement = "海外 GMV 比率 20%+ (2028-Q2) — 台湾 30社 + タイ + v4 upsell 寄与"
+validated = false
+experiment = "¥135M × 20% = ¥27M 海外 (韓국 ¥12M + 台湾 ¥10M + タイ ¥5M)"
+falsifiable = "2028-Q2 海外比率 ≥ 20% OR 海外戦略調整"
+
+[[blocks.key_metrics.entries]]
+entry_id  = "km_nrr_140"
+statement = "NRR 140% (2028-Q2) — v4 AI upsell + 台湾 拡大 寄与"
+validated = false
+experiment = "v4 追加オプション × 既存顧客 upsell → NRR 140%"
+falsifiable = "2028-Q2 NRR ≥ 140% OR upsell モデル再設計"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UNFAIR ADVANTAGE (4/5 ← v4 特許出願 仮説)
+# ─────────────────────────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+maturity = 4
+summary  = "JIS + v3 特許 stable / DID 6,200+ / v4 特許出願 2028-Q1 / インド Moat 探索"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_jis_mandatory"
+statement = "JIS 義務化 仕様権保有 stable"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_did_6200"
+statement = "DID 6,200件+ stable (相関 0.85)"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_v3_patent"
+statement = "v3 AI 特許 出願完了 stable (日本+韓国+PCT)"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_v4_patent"
+statement = "v4 AI 動画施工 audit 特許出願 (日本+韓国+PCT) 2028-Q1"
+validated = false
+progress  = "弁理士と出願書類 作成中。2028-Q1-15 出願予定"
+falsifiable = "2028-Q1 に出願完了 OR 出願戦略変更 (実用新案検討)"
+
+[[blocks.unfair_advantage.entries]]
+entry_id  = "ua_india_network"
+statement = "インド 建設業者ネットワーク独占契約 — 中長期 Moat (2029)"
+validated = false
+experiment = "JETRO ヒアリング後 → 現地代理店 または M&A 対象調査"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SCORING
+# ─────────────────────────────────────────────────────────────────────────────
+[scoring.maturity_per_block]
+problem           = 5
+customer_segments = 4  # 台湾 30社 + タイ 5社 + インド 探索 仮説
+uvp               = 4  # v4 AI 損保 UVP + PoC 合意 仮説
+solution          = 4  # v4 GA deploy 仮説 + タイ API 仮説
+channels          = 5  # stable
+revenue           = 5  # stable + ¥135M + v4 upsell 仮説
+cost_structure    = 5  # stable
+key_metrics       = 4  # 海外比率 20% + NRR 140% 仮説
+unfair_advantage  = 4  # v4 特許 + インド Moat 仮説
+average           = 4.4
+
+[scoring.deep_global_status]
+verdict           = "Deep Global Phase — Month 1"
+strategy          = "No IPO — v4 GA + 台湾 30社 + タイ pilot + 海外比率 20% + インド探索"
+prior_validated   = "GLOBAL ACCELERATION Q4 VALIDATED ★★ (iter-17)"
+gmv_monthly       = "¥122M stable → ¥135M (2028-Q2 仮説)"
+ebitda_margin     = "15.4% stable"
+nrr               = "135% stable"
+intl_ratio_target = "20%+ (2028-Q2) — 現 11.5%"
+
+[scoring.riskiest_assumptions]
+rank_1 = "v4 GA 本番 deploy 2028-Q1 — infra 完了だが GA 品質 QA が鍵"
+rank_2 = "台湾 30社 2028-Q1 — LOI 15社 → 追加 15社 成約"
+rank_3 = "損保 PoC 合意 2028-Q1 — 規制・認定の壁"
+
+[scoring.next_iteration_goals]
+target_avg = 5.0
+milestones = [
+  "v4 GA 本番 deploy 完了 (2028-Q1) → solution 5/5",
+  "損保 1社 PoC 合意 (2028-Q1) → uvp 5/5",
+  "台湾 30社 active (2028-Q1) → cs 5/5",
+  "タイ 5社 pilot 開始 (2028-Q1) → cs 5/5",
+  "v4 特許出願 完了 (2028-Q1) → ua 5/5",
+]

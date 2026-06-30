@@ -1,0 +1,140 @@
+{:body "# jp-ashiba LangGraph 4-actor Deploy Runbook
+
+**Version**: iter-55 (2026-05-28)
+**Owner**: `gftdcojp` agent / Gad infra
+**SSoT ADR**: [ADR-2605281130](../../../90-docs/adr/2605281130-jp-ashiba-q2-strategy-satellite-evo-x2-mailer-langgraph.md)
+
+End-to-end deploy procedure from a clean machine to a verified 1-tile smoke pass.
+Each step is **idempotent** and **reversible**. Tools used: `preflight.sh`,
+`deploy_jp_ashiba.sh`, `verify_1tile.sh`, `kotoba` CLI, `kubectl`, `zbctl`, `docker buildx`.
+
+## Artifacts inventory (iter-46 → iter-54)
+
+| Path | Purpose | Iter introduced |
+|---|---|---|
+| `20-actors/jp-ashiba/actor-manifest.jsonld` | T1 MCP-Compose actor declaration | 45 |
+| `20-actors/jp-ashiba/py/{satellite_detector,owner_resolver,outbound_emailer,safety_predictor}/__init__.cljc` | 4 LangGraph actors (Pull-Transact pattern) | 46 → 51 |
+| `20-actors/jp-ashiba/py/app.cljc` | Granian ASGI entrypoint | 48 |
+| `20-actors/jp-ashiba/py/smoke.cljc` | 4-check actor integrity validator | 53 |
+| `20-actors/jp-ashiba/Dockerfile` | Container image (python:3.12-slim + granian + pyzeebe + langgraph + kotoba-py) | 48 |
+| `50-infra/k8s/jp-ashiba-langgraph/deployment.yaml` | K8s Granian pod + Service + ConfigMap | 47 |
+| `50-infra/k8s/jp-ashiba-langgraph/preflight.sh` | 9-check pre-deploy gate | 47 → 53 |
+| `00-contracts/bpmn/ai/gftd/jp-ashiba/site_detect_to_send.bpmn` (v2 slim) | BPMN process_def (4 ServiceTask + 3 Gateway + 5 EndEvent) | 47 → 52 |
+| `00-contracts/datomic/jp-ashiba/schema.edn` | 21 :ashiba/* attrs (transacted at startup) | 52 |
+| `00-contracts/datomic/jp-ashiba/fixtures/1tile-input.json` | Sample BPMN start payload | 54 |
+| `00-contracts/datomic/jp-ashiba/fixtures/expected-1tile-datoms.edn` | Test oracle (21/21 attrs expected) | 54 |
+| `70-tools/scripts/bpmn/deploy_jp_ashiba.sh` | BPMN + schema deploy script | 54 |
+| `70-tools/scripts/bpmn/verify_1tile.sh` | Post-deploy 6-assertion verifier | 55 |
+| `60-apps/ai-gftd-project-kotoba/examples/ashiba-bmc/` | BMC scoring Rust example (Datom + Datalog) | 49 |
+
+## Pre-deploy
+
+1. **Preflight** (all 9 must ✓):
+   ```bash
+   ./50-infra/k8s/jp-ashiba-langgraph/preflight.sh
+   ```
+
+2. **Cluster context check**:
+   ```bash
+   kubectl config current-context   # confirm correct cluster
+   kubectl get nodes                # confirm K8s reachable
+   ```
+
+3. **Secrets (one-time)**:
+   ```bash
+   kubectl create namespace jp-ashiba-langgraph
+   kubectl -n jp-ashiba-langgraph create secret generic mailer-resend \\
+     --from-literal=RESEND_API_KEY=\"$(security find-generic-password -s gftd.resend -a API_KEY -w)\"
+   kubectl -n jp-ashiba-langgraph create secret generic zeebe-auth \\
+     --from-literal=CLIENT_ID=\"$ZEEBE_CLIENT_ID\" \\
+     --from-literal=CLIENT_SECRET=\"$ZEEBE_CLIENT_SECRET\"
+   ```
+
+## Build & push
+
+```bash
+cd 20-actors/jp-ashiba
+docker buildx build --platform linux/amd64 \\
+  --push -t ghcr.io/gftdcojp/jp-ashiba-langgraph:iter-55 .
+docker buildx imagetools inspect ghcr.io/gftdcojp/jp-ashiba-langgraph:iter-55
+```
+
+## Deploy
+
+1. **K8s pod + Service**:
+   ```bash
+   kubectl apply -f 50-infra/k8s/jp-ashiba-langgraph/deployment.yaml
+   kubectl -n jp-ashiba-langgraph rollout status deploy/jp-ashiba-langgraph --timeout=180s
+   ```
+
+2. **BPMN process_def + Datomic schema**:
+   ```bash
+   ZEEBE_ADDRESS=zeebe.bpmn-dispatcher.svc.cluster.local:26500 \\
+     ./70-tools/scripts/bpmn/deploy_jp_ashiba.sh
+   ```
+
+3. **Confirm pod ready**:
+   ```bash
+   kubectl -n jp-ashiba-langgraph logs deploy/jp-ashiba-langgraph --tail=50 \\
+     | grep \"task registered\"
+   # expect 4 lines: ai.gftd.apps.jp-ashiba.satellite-detector.detect, ...
+   ```
+
+## Smoke
+
+1. **Start 1-tile process instance**:
+   ```bash
+   curl -X POST \"$ZEEBE_REST_BASE/v2/process-instances\" \\
+        -H 'content-type: application/json' \\
+        -H \"authorization: Bearer $ZEEBE_TOKEN\" \\
+        -d @00-contracts/datomic/jp-ashiba/fixtures/1tile-input.json
+   ```
+
+2. **Wait for run_graph to populate** (~5–10s for the happy path):
+   ```bash
+   sleep 10
+   ```
+
+3. **Verify**:
+   ```bash
+   RUN_GRAPH=kotoba://graph/ashiba:run:smoke-iter54 \\
+     ./70-tools/scripts/bpmn/verify_1tile.sh
+   ```
+   All 6 assertions (Q1–Q4 positive + N1, N2 negative) must pass.
+
+## Rollback
+
+```bash
+# Pod
+kubectl -n jp-ashiba-langgraph rollout undo deploy/jp-ashiba-langgraph
+
+# BPMN — Zeebe keeps version history; just deploy older BPMN file
+zbctl deploy resource 00-contracts/bpmn/ai/gftd/jp-ashiba/site_detect_to_send.bpmn.v1 \\
+  --address $ZEEBE_ADDRESS
+
+# Datomic schema — retract attrs (rare; usually forward-only)
+kotoba transact --graph kotoba://graph/ashiba:schema --file \\
+  00-contracts/datomic/jp-ashiba/schema-rollback.edn
+```
+
+## Observability
+
+- **Granian pod**: `kubectl -n jp-ashiba-langgraph logs -f deploy/jp-ashiba-langgraph`
+- **Zeebe Operate** (if available): `https://operate.gftd.ai/processes/Process_jp_ashiba_site_detect_to_send`
+- **Datomic queries** (read-only): `kotoba sparql --graph kotoba://graph/ashiba:run:* \"[...]\"`
+- **mailer.gftd.ai** outbound: `curl https://mailer.gftd.ai/xrpc/ai.gftd.apps.mailer.stats`
+- **CF Email Routing** Analytics: GraphQL `emailRoutingAdaptiveGroups` (≥15min propagation delay — see ADR-2605281130 iter-45 finding)
+
+## Iteration history (BMC link)
+
+| iter | maturity | milestone |
+|---|---|---|
+| 47 | 4.6 | BPMN + K8s manifest |
+| 48 | 4.6 | Dockerfile + Granian app + Datalog SLO |
+| 49 | 4.6 | kotoba-datomic Rust pipeline 検証 (371 datoms) |
+| 50–51 | 4.6 | 4 actor Datomic-first refactor |
+| 52 | 4.6 | BPMN slim + 21-attr schema + preflight 8/8 |
+| 53 | 4.6 | smoke.cljc + Pull-Transact graph 検証 (preflight 9/9) |
+| 54 | 4.6 | deploy script + 1-tile test oracle |
+| **55** | **4.6** | **verify_1tile.sh + this runbook** |
+"}

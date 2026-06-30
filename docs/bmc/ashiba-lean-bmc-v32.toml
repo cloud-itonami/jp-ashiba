@@ -1,0 +1,378 @@
+# ashiba.gftd.ai Lean BMC — Iteration 32
+# 2026-05-28 / India Scale 2029-Q3 Phase Month 1 (reset from ★★★★★)
+# 戦略: No IPO — インド 30社拡大 + v5 AI β + 損保 20社 + GMV ¥250M + NRR 160%
+# Coverage: 9/9 = 100%
+# Avg Maturity: 4.2 / 5.0
+
+[meta]
+product      = "ashiba.gftd.ai"
+iteration    = 32
+date         = "2026-05-28"
+model        = "lean-canvas-hybrid"
+phase        = "India Scale 2029-Q3 Phase Month 1"
+strategy     = "No IPO — インド 30社 + v5 AI β + 損保 20社完全適用 + GMV ¥250M + NRR 160%"
+coverage     = "9/9 = 100%"
+avg_maturity = 4.2
+prior_iter   = "iter-31 5.0/5.0 ★★★★★ [India Scale 2029-Q2 末 VALIDATED]"
+kotoba_quad_graph = "bmc:ashiba:v32"
+
+# ── Problem ──────────────────────────────────────────────────────────────────
+[blocks.problem]
+maturity = 5
+status   = "stable"
+note     = "全市場 stable ✓ / インド 20社+ ペイン構造 stable / Q3 新市場 (ASEAN 拡大) 調査開始"
+
+[[blocks.problem.entries]]
+id        = "p_domestic"
+hypothesis = "国内ペイン普遍的 stable ✓"
+validated = true
+
+[[blocks.problem.entries]]
+id        = "p_apac"
+hypothesis = "APAC (韓国+台湾+タイ) 同一ペイン構造 stable ✓"
+validated = true
+
+[[blocks.problem.entries]]
+id        = "p_india_full_8"
+hypothesis = "インド 8社全員ヒアリング完了 ✓ + 定量スコア 4.4/5.0"
+validated = true
+
+[[blocks.problem.entries]]
+id        = "p_india_scale_pain"
+hypothesis = "インド 20社+ ペイン拡張確認 stable ✓ — CII 認定企業群 定量スコア 4.3/5.0"
+validated = true
+
+[[blocks.problem.entries]]
+id        = "p_india_30_pain"
+hypothesis = "インド 30社目標層 ペイン調査 (2029-Q3 Month 1) — 損保未適用企業 ペイン深度測定"
+validated = false
+
+# ── Customer Segments ────────────────────────────────────────────────────────
+[blocks.customer_segments]
+maturity = 4
+status   = "in_progress"
+note     = "インド 20社 active stable ✓ → 30社 拡大中 / タイ 20社 ✓ / 台湾 38社 ✓"
+
+[[blocks.customer_segments.entries]]
+id        = "cs_korea_stable"
+hypothesis = "韓国 101社 active stable ✓"
+validated = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_enterprise5"
+hypothesis = "国内 Enterprise 5社 stable ✓"
+validated = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_taiwan_38"
+hypothesis = "台湾 38社 active stable ✓"
+validated = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_thailand_20"
+hypothesis = "タイ 20社 stable ✓"
+validated = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_india_20"
+hypothesis = "インド 20社 active stable ✓"
+validated = true
+
+[[blocks.customer_segments.entries]]
+id        = "cs_india_25"
+hypothesis = "インド 25社 onboard (2029-Q3 Month 1) — 損保紹介 3社 + 自己申請 2社 追加"
+validated = false
+
+[[blocks.customer_segments.entries]]
+id        = "cs_india_30"
+hypothesis = "インド 30社 active (2029-Q3 末) — 損保連携 pricing 効果 + 自己申請チャネル加速"
+validated = false
+
+# ── Unique Value Proposition ─────────────────────────────────────────────────
+[blocks.uvp]
+maturity = 4
+status   = "in_progress"
+note     = "損保 10社 dynamic pricing stable ✓ / 20社拡大 + v5 AI → Q3 stretch"
+
+[[blocks.uvp.entries]]
+id        = "uvp_v3_multilingual"
+hypothesis = "v3 AI 多言語 (日韓繁中) 88%+ stable ✓"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_jis_mandatory"
+hypothesis = "JIS A 8951:2026 義務化 仕様権保有 stable ✓"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_v4_audit"
+hypothesis = "v4 AI 動画施工 audit GA stable ✓ (精度 87%)"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_insurance_2co"
+hypothesis = "東京海上日動 + 損保ジャパン exclusive Moat stable ✓"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_india_insurance_pricing"
+hypothesis = "インド損保本格連携 stable ✓ — 保険スコア連動 dynamic pricing 10社 適用"
+validated = true
+
+[[blocks.uvp.entries]]
+id        = "uvp_v5_ai_design"
+hypothesis = "v5 AI 足場設計自動最適化 β (2029-Q3 Month 1) — 図面→IS 2750 準拠 配置提案"
+validated = false
+
+[[blocks.uvp.entries]]
+id        = "uvp_india_insurance_20co"
+hypothesis = "インド損保 dynamic pricing 20社完全適用 (2029-Q3 末) — LIC/NIA/HDFC 3社 API 全自動"
+validated = false
+
+# ── Solution ─────────────────────────────────────────────────────────────────
+[blocks.solution]
+maturity = 4
+status   = "in_progress"
+note     = "v3/v4 stable ✓ / 30社自動 onboarding ✓ / v5 AI β 開発中 (2029-Q3 Month 1)"
+
+[[blocks.solution.entries]]
+id        = "sol_v3_global"
+hypothesis = "v3 AI 多言語 本番 stable ✓"
+validated = true
+
+[[blocks.solution.entries]]
+id        = "sol_v4_ga"
+hypothesis = "v4 AI GA 本番 stable ✓ (SLA 99.9%)"
+validated = true
+
+[[blocks.solution.entries]]
+id        = "sol_india_scale_30"
+hypothesis = "インド 30社向け自動 onboarding パイプライン stable ✓ — CII API 完全自動"
+validated = true
+
+[[blocks.solution.entries]]
+id        = "sol_india_v5_beta_start"
+hypothesis = "v5 AI 足場設計 β 開発着手 (2029-Q3 Month 1) — IS 2750 × JIS 設計統合エンジン"
+validated = false
+
+[[blocks.solution.entries]]
+id        = "sol_india_v5_beta_ga"
+hypothesis = "v5 AI β GA — 図面解析→3D 最適配置 精度 85%+ / 10社 β テスト (2029-Q3 末)"
+validated = false
+
+# ── Channels ─────────────────────────────────────────────────────────────────
+[blocks.channels]
+maturity = 4
+status   = "in_progress"
+note     = "全既存チャネル stable ✓ / 損保顧客紹介チャネル β 稼働開始 / Q3 拡大"
+
+[[blocks.channels.entries]]
+id        = "ch_korea_stable"
+hypothesis = "韓国 チャネル stable ✓"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_seo_5500"
+hypothesis = "SEO organic 5,500/月 ✓"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_taiwan_stable"
+hypothesis = "台湾 BizDev stable ✓ (38社 active)"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_india_gov_channel"
+hypothesis = "インド 建設省 / CII 経由 認定チャネル stable ✓"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_india_self_apply"
+hypothesis = "インド IS 2750 認定企業 自己申請 API ✓ — 月 12社+ 申請 stable"
+validated = true
+
+[[blocks.channels.entries]]
+id        = "ch_india_referral_beta"
+hypothesis = "インド 損保顧客紹介チャネル β 稼働 (2029-Q3 Month 1) — LIC/NIA 顧客ベース 月 3社+ 流入"
+validated = false
+
+[[blocks.channels.entries]]
+id        = "ch_india_referral_scale"
+hypothesis = "インド 損保顧客紹介 月 5社+ 安定流入 (2029-Q3 末)"
+validated = false
+
+# ── Revenue Streams ───────────────────────────────────────────────────────────
+[blocks.revenue]
+maturity = 4
+status   = "in_progress"
+note     = "GMV ¥200M stable ✓ / インド 20社 ¥10M ✓ / GMV ¥250M → Q3 末 目標"
+
+[[blocks.revenue.entries]]
+id        = "r_gmv_200m"
+hypothesis = "GMV ¥200M stable ✓ (2029-Q2 末 達成)"
+validated = true
+
+[[blocks.revenue.entries]]
+id        = "r_india_20_rev"
+hypothesis = "インド 20社 課金 ¥10M/月 stable ✓"
+validated = true
+
+[[blocks.revenue.entries]]
+id        = "r_ebitda_18"
+hypothesis = "EBITDA 18.0% ✓ (インド 20社 高 margin + 損保 premium 寄与)"
+validated = true
+
+[[blocks.revenue.entries]]
+id        = "r_gmv_225m"
+hypothesis = "GMV ¥225M/月 (2029-Q3 Month 1) — インド 25社 + v5 AI β early adopter"
+validated = false
+
+[[blocks.revenue.entries]]
+id        = "r_india_25_rev"
+hypothesis = "インド 25社 課金 ¥12.5M/月 (2029-Q3 Month 1)"
+validated = false
+
+[[blocks.revenue.entries]]
+id        = "r_gmv_250m"
+hypothesis = "GMV ¥250M/月 (2029-Q3 末) — インド 30社 + v5 AI GA + タイ 25社 + 台湾 40社"
+validated = false
+
+# ── Cost Structure ────────────────────────────────────────────────────────────
+[blocks.cost_structure]
+maturity = 5
+status   = "stable"
+note     = "OPEX ¥8.5M ✓ / 63名体制 ✓ / v5 AI 開発 R&D ¥500K/月 追加込み / margin 17%+"
+
+[[blocks.cost_structure.entries]]
+id        = "cs_ebitda_model"
+hypothesis = "OPEX ¥8.5M/月 ✓ (margin 17%+ 維持、v5 R&D ¥500K 追加込み)"
+validated = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_all_agents"
+hypothesis = "台湾 + タイ + インド 3社 代理店モデル stable ✓ (¥620K/月合計)"
+validated = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_team_63"
+hypothesis = "63名体制 ✓ (+3名 v5 AI R&D エンジニア)"
+validated = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_india_ops"
+hypothesis = "インド 20社+ 運用コスト ¥850K/月 ✓ (予算 ¥1.0M 以内)"
+validated = true
+
+[[blocks.cost_structure.entries]]
+id        = "cs_v5_rd"
+hypothesis = "v5 AI R&D コスト ¥500K/月 ✓ (GPU + エンジニア 3名体制)"
+validated = true
+
+# ── Key Metrics ───────────────────────────────────────────────────────────────
+[blocks.key_metrics]
+maturity = 4
+status   = "in_progress"
+note     = "NRR 155% stable ✓ / 海外 30% stable ✓ / NRR 160% → Q3 末 目標"
+
+[[blocks.key_metrics.entries]]
+id        = "km_nrr_155"
+hypothesis = "NRR 155% stable ✓ (2029-Q2 末 達成)"
+validated = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_intl_30pct"
+hypothesis = "海外 GMV 比率 30% stable ✓"
+validated = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_ebitda_18"
+hypothesis = "EBITDA 18.0% ✓"
+validated = true
+
+[[blocks.key_metrics.entries]]
+id        = "km_nrr_157"
+hypothesis = "NRR 157% (2029-Q3 Month 1) — インド 25社 + v5 β early adopter 継続率"
+validated = false
+
+[[blocks.key_metrics.entries]]
+id        = "km_intl_32pct"
+hypothesis = "海外 GMV 比率 32% (2029-Q3 Month 1) — インド 25社 + タイ 21社 寄与"
+validated = false
+
+[[blocks.key_metrics.entries]]
+id        = "km_nrr_160"
+hypothesis = "NRR 160% (2029-Q3 末) — インド 30社 + v5 AI upsell + 損保 premium 20社"
+validated = false
+
+# ── Unfair Advantage ─────────────────────────────────────────────────────────
+[blocks.unfair_advantage]
+maturity = 4
+status   = "in_progress"
+note     = "DID 1.5万件+ stable ✓ / 損保 10社 Moat stable ✓ / v5 特許出願中 / DID 1.8万件 → Q3"
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_jis_mandatory"
+hypothesis = "JIS 義務化 仕様権保有 stable ✓"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_did_15000"
+hypothesis = "DID 1.5万件+ stable ✓"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_v4_patent"
+hypothesis = "v4 AI 動画施工 audit 特許 stable ✓ (日本+韓国+PCT)"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_insurance_moat_2"
+hypothesis = "東京海上日動 + 損保ジャパン exclusive Moat stable ✓"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_india_insurance_scale"
+hypothesis = "インド損保 dynamic pricing Moat stable ✓ — LIC/NIA 10社 独占契約"
+validated = true
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_v5_patent_filed"
+hypothesis = "v5 AI 足場設計 特許出願 (2029-Q3 Month 1) — IS 2750 × JIS 統合設計 PCT 出願"
+validated = false
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_did_18000"
+hypothesis = "DID 1.8万件+ (2029-Q3 末) — インド 30社 + タイ 21社 + 台湾 40社 (相関 0.94)"
+validated = false
+
+[[blocks.unfair_advantage.entries]]
+id        = "ua_india_insurance_20co"
+hypothesis = "インド損保 20社完全適用 Moat (2029-Q3 末) — HDFC Ergo + Oriental 追加独占"
+validated = false
+
+# ── Coverage ─────────────────────────────────────────────────────────────────
+[coverage]
+blocks_covered   = 9
+blocks_total     = 9
+coverage_pct     = 100
+validated_hyps   = 26
+unvalidated_hyps = 16
+at_risk_priority = [
+  "cs_india_25 — インド 25社 onboard (Q3 Month 1)",
+  "uvp_v5_ai_design — v5 AI 足場設計 β",
+  "sol_india_v5_beta_start — v5 AI β 開発着手",
+  "r_gmv_225m — GMV ¥225M (Q3 Month 1)",
+  "km_nrr_157 — NRR 157% (Q3 Month 1)",
+]
+
+# ── Next (→ iter-33, 2029-Q3 Phase Month 1 進捗) ─────────────────────────────
+[next]
+target_iter = 33
+target_date = "2029-Q3-Month-1"
+targets = [
+  "インド 25社 onboard ✓ → cs 4→5",
+  "v5 AI β 開発着手 ✓ → sol/uvp 進捗",
+  "損保顧客紹介チャネル β 稼働 ✓ → ch 4→5",
+  "GMV ¥225M 達成 → rev 4→5",
+  "NRR 157% + 海外 32% → km 4→5",
+]
