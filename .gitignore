@@ -37,3 +37,4 @@ venv/
 *.log
 coverage/
 test-results/
+.cpcache/

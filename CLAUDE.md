@@ -1,5 +1,7 @@
 > **DEPRECATED / MIGRATED**: Actor runtime migrated to `20-actors/jp-ashiba/actor-manifest.jsonld` (T1 MCP-Compose). The local `lg_ashiba` Python BMC helper scaffold has been pruned and replaced by `clj/` (`load_bmc`, `score_bmc`, `run_bmc`). This project is retained as docs/BMC + CLJ helper runtime + T3 fallback context only.
 
+> **2026-07-07: 4-actor pyzeebe scaffold ported py → cljc, py/ removed.** `projects/ai-gftd-apps-gftdcojp/20-actors/jp-ashiba/py/` (4 pyzeebe actor stubs + `app.py` entrypoint + `kotoba_seal.py`, ~1016 lines, deprecated per owner "jp-ashiba も cljc に") has been deleted along with its `Dockerfile` (py-only Granian/pyzeebe build). Pure logic is now `clj/src/ashiba/{seal,satellite_detector,owner_resolver,outbound_emailer,safety_predictor}.cljc`, ns `ashiba.{seal,satellite-detector,owner-resolver,outbound-emailer,safety-predictor}`. `actor-manifest.jsonld` is retained (still the T1 manifest SSoT). See "4-Actor cljc Port" section below for scope, golden-test method, and follow-up.
+
 # ai-gftd-project-jp-ashiba
 
 jp-ashiba.gftd.ai — 足場需要マッチング AI Agent (performerType: service)
@@ -182,9 +184,9 @@ jp-ashiba.gftd.ai (CF Worker = edge proxy only, ADR-2605080600 準拠)
   └─ BPMN dispatcher 経由で L7 へ
   │
   ▼
-Actor runtime  ← **migrated to 20-actors/jp-ashiba; local BMC helper is clj/**
-  ├─ Granian ASGI runtime (L3 Python pod, ADR-2605080600)
-  ├─ pyzeebe primitives (4 actors, 20-actors/jp-ashiba/py/)
+Actor runtime  ← **migrated to 20-actors/jp-ashiba; pure logic is clj/src/ashiba/ (py/ pruned 2026-07-07)**
+  ├─ Granian ASGI runtime (L3 Python pod, ADR-2605080600) — **entrypoint retired with py/; next host TBD, see "4-Actor cljc Port" follow-up**
+  ├─ 4 actor pure-logic modules (`clj/src/ashiba/{satellite_detector,owner_resolver,outbound_emailer,safety_predictor}.cljc`; pyzeebe/Datomic/RPC IO still to be wired)
   │   ├─ satellite-detector (衛星 ML on Gad EVO-X2 RPC)
   │   ├─ owner-resolver (国土地理院 + 法務局 + 建確 ETL)
   │   ├─ outbound-emailer (mailer.gftd.ai sendEmail XRPC)
@@ -208,6 +210,79 @@ mcp.gftd.ai/xrpc/{NSID}
 ```
 
 > **Runtime note (updated after CLJ migration)**: app-local `lg_ashiba` Python helper code has been pruned. Current app-local executable surface is `clj/`, while actor orchestration history and primary actor manifest remain under `20-actors/jp-ashiba/`.
+
+## 4-Actor cljc Port (2026-07-07)
+
+**Source deleted**: `projects/ai-gftd-apps-gftdcojp/20-actors/jp-ashiba/py/` (`app.py`,
+`kotoba_seal.py`, `satellite_detector/`, `owner_resolver/`, `outbound_emailer/`,
+`safety_predictor/`, `smoke.py` — ~1016 lines) + its py-only `Dockerfile`, per owner
+instruction "jp-ashiba も cljc に" (Python deprecated repowide). A read-only reference
+copy remains at `orgs/gftdcojp/ai-gftd-apps-gftdcojp/20-actors/jp-ashiba/py/` (separate
+west checkout, not touched by this port).
+
+**Landed in this repo** (`clj/src/ashiba/`):
+
+| py module | cljc ns | Ported |
+|---|---|---|
+| `kotoba_seal.py` | `ashiba.seal` | tier classification (`public-attrs`/`tier-2-attrs`/`tier-3-attrs`/`attr-tier`), `is-sealed?`, `expects-seal?`, `validate-tx-payload!`, `self-check` — **byte-for-byte golden parity**. Plus a **new** real AES-256-GCM `seal!`/`unseal` (JVM `javax.crypto`, following the `sha256-hex` convention in `ai-gftd-arms/clj/src/arms/domain.cljc`) — python's `seal`/`unseal` are unconditional `raise NotImplementedError("wired at runtime")` stubs, so there is no python golden for the crypto itself; correctness there is a roundtrip test (`decrypt(encrypt(x)) == x`), not parity. |
+| `satellite_detector/__init__.py` | `ashiba.satellite-detector` | `route_by_confidence` (golden) + `build-detection-tx-edn` (the `transact_detection` f-string template, extracted so it's exercisable — python builds the same string then unconditionally raises). |
+| `owner_resolver/__init__.py` | `ashiba.owner-resolver` | `compute_match_rate`, `route_by_match_rate` (golden) + `build-owner-tx-edn`. |
+| `outbound_emailer/__init__.py` | `ashiba.outbound-emailer` | `route_by_send_status` (golden) + `build-send-tx-edn` (`:ashiba/sent-at` timestamp is caller-supplied, not `(Instant/now)` internally — kept the builder pure/deterministic; the clock is a host-injected boundary same as the DB conn). |
+| `safety_predictor/__init__.py` | `ashiba.safety-predictor` | `route_by_risk` (golden) + `build-prediction-tx-edn`. |
+| `app.py` (pyzeebe task registration pattern + BPMN slim-payload convention) | `ashiba.registry/actor-task-registry` | Recorded as data (task-type/actor-did/bpmn-input/bpmn-output/pulls-from/next-actor per actor) — the actual Zeebe broker connection + `ZeebeWorker` registration is host-injected wiring with no pure-logic content, so it's documented rather than executed. |
+
+**Golden method**: for each ported pure function, ran
+`uv run --no-project python3 -c "import <module>; print(<fn>(...))"` against the live
+`py/` source (before deletion) across boundary-value inputs (e.g. `route_by_confidence`
+at 0.0/0.29/0.3/0.69/0.7/1.0), captured stdout, and hand-verified the tx-edn f-string
+templates by re-evaluating the same f-string inline in python (since the real
+`transact_*` python functions always end in `raise NotImplementedError` — the template
+construction is dead code there, never returned). cljc tests assert against these
+captured values; each test file docstring records "captured 2026-07-07".
+
+**Test files**: `clj/test/ashiba/{seal,satellite_detector,owner_resolver,outbound_emailer,safety_predictor,registry}_test.cljc`. Full suite: `cd clj && clojure -M:test` → 23 tests / 122 assertions, 0 failures (as of this port; existing `bmc_test.cljc`/`server_test.cljc` untouched).
+
+**NOT ported (host-injected IO boundaries — remain `raise NotImplementedError("wired at
+Granian pod runtime")`-equivalent gaps, i.e. real work for whoever wires the runtime
+next)**:
+- kotoba-datomic `Connection`/`q()` pulls in all 4 actors (`pull_detection`,
+  `pull_site_state`, `pull_image_cid`) and the actual `conn.transact(...)` call in every
+  `transact_*` (the tx-edn *body* is ported/tested; the transact call itself is not).
+- EVO-X2 multimodal RPC (`unet_infer_on_evo_x2`, `fuse_image_iot_on_evo_x2`) over the
+  Tailscale tunnel.
+- External gov API calls in owner-resolver (`query_gsi_parcel`/国土地理院,
+  `fetch_houmu_registry`/法務局, `fetch_kenchiku_permit`/建築確認申請).
+- Murakumo LLM call (`generate_site_proposal`) and vendor ranking query
+  (`select_vendor_candidates`) in outbound-emailer.
+- `send_via_mailer_xrpc` (mailer.gftd.ai `sendEmail` XRPC / Resend).
+- `assign_site_id` (content-hash of epoch+tile via a kotoba CID helper not available on
+  this classpath).
+- `emit_alert` cross-actor `magatama.invoke` in safety-predictor.
+- The 4 pyzeebe task entries themselves (`detect_handler`/`resolve_handler`/
+  `send_handler`/`predict_handler`) and `app.py`'s Granian ASGI `/health` `/metrics`
+  `/actor-manifest` ASGI app + `bootstrap_zeebe_worker` Zeebe broker connection.
+- `smoke.py` (schema.edn cross-check against `00-contracts/datomic/jp-ashiba/schema.edn`)
+  was not ported — it was a CI lint harness over the python package layout, not actor
+  logic; if a schema/attr-coverage check is still wanted, it should be reimplemented as a
+  clj-kondo-friendly cljc test reading `00-contracts/datomic/jp-ashiba/schema.edn`
+  directly (not attempted here — out of scope for this port).
+
+**Follow-up (real work still to do, not blocking this port)**:
+1. Wire the 4 actors into an actual runtime: pick a host for the pyzeebe-equivalent task
+   loop (kotoba-server XRPC pod? langgraph-clj StateGraph per the `20-actors/jp-ashiba`
+   Actors convention in the superproject root `CLAUDE.md`?) and implement the
+   `Connection`/`q()` pull + `conn.transact(...)` + EVO-X2/mailer/gov-API IO calls that
+   call into these pure `ashiba.*` functions for the decision logic.
+2. Verify the `ashiba.seal` AES-256-GCM implementation against the *real*
+   kotoba-py SecureVault key management before using it for anything beyond local
+   testing — the current `derive-key` (SHA-256 of actor-did [+ run-graph]) is an
+   explicitly-documented bridging placeholder, not the production vault key.
+3. `00-contracts/datomic/jp-ashiba/schema.edn` cross-check (formerly `smoke.py`) is
+   unported; decide whether to reimplement it in cljc or drop it.
+4. BPMN process XML (`00-contracts/bpmn/ai/gftd/jp-ashiba/site_detect_to_send.bpmn`
+   per the old `app.py` docstring reference) was not inspected/updated as part of this
+   port — confirm it still matches `ashiba.registry/actor-task-registry`'s
+   `bpmn-input`/`bpmn-output` contract once real IO is wired.
 
 ## Multi-DID Actor Composition
 
