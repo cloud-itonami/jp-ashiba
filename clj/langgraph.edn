@@ -1,4 +1,1 @@
-{:profile :jp-ashiba
- :entrypoint ashiba.registry/dispatch
- :graphs {:bmc "load -> ingest -> score -> report"}
- :tasks ["health" "load_bmc" "score_bmc" "run_bmc"]}
+[{:db/id -1, :clj.langgraph/profile :jp-ashiba, :clj.langgraph/entrypoint "ashiba.registry/dispatch", :clj.langgraph/graphs "{:bmc \"load -> ingest -> score -> report\"}", :clj.langgraph/tasks ["health" "load_bmc" "score_bmc" "run_bmc"]}]
