@@ -1,0 +1,61 @@
+{
+  "@context": "https://atproto.gftd.ai/contexts/actor-manifest.jsonld",
+  "@id": "did:web:jp-ashiba.gftd.ai",
+  "@type": "AppActor",
+  "name": "jp-ashiba",
+  "domain": "jp-ashiba.gftd.ai",
+  "nanoid": "a5h1ba8k",
+  "description": "足場需要マッチング AI Agent (Python + LangGraph + Granian L7 K8s pod)",
+  "implementation": {
+    "language": "python",
+    "framework": "langgraph",
+    "runtime": "granian",
+    "tier": "T1-MCP-Compose",
+    "edge_proxy": "wasm/ai-gftd-wasm-jp-ashiba-a5h1ba8k/src/app.ts (T3 fallback only)",
+    "primary_path": "20-actors/jp-ashiba/py/",
+    "adrs": [
+      "2605080600-langgraph-server-granian-l3-runtime",
+      "2605082000-langgraph-graph-definition-as-data",
+      "2605082100-langgraph-checkpointer-storage",
+      "2605281130-jp-ashiba-q2-strategy-satellite-evo-x2-mailer-langgraph"
+    ]
+  },
+  "actors": [
+    {
+      "did": "did:web:jp-ashiba.gftd.ai:actor:satellite-detector",
+      "role": "satellite_detector",
+      "path": "20-actors/jp-ashiba/py/satellite_detector/",
+      "tool": "evo_x2_rpc",
+      "state_schema": {"tile_coords": "geojson", "epoch": "iso8601", "confidence": "float"},
+      "edge": "confidence > 0.7 → owner-resolver"
+    },
+    {
+      "did": "did:web:jp-ashiba.gftd.ai:actor:owner-resolver",
+      "role": "owner_resolver",
+      "path": "20-actors/jp-ashiba/py/owner_resolver/",
+      "tool": "gsi_api + houmu_api + kenchiku_api",
+      "state_schema": {"parcel_id": "string", "registry": "object", "permit": "object"},
+      "edge": "match_rate > 0.75 → outbound-emailer"
+    },
+    {
+      "did": "did:web:jp-ashiba.gftd.ai:actor:outbound-emailer",
+      "role": "outbound_emailer",
+      "path": "20-actors/jp-ashiba/py/outbound_emailer/",
+      "tool": "murakumo_llm + mailer_gftd_send_email",
+      "state_schema": {"site_proposal": "string", "vendor_candidates": "array<did>"},
+      "edge": "send_success → conversion_tracker"
+    },
+    {
+      "did": "did:web:jp-ashiba.gftd.ai:actor:safety-predictor",
+      "role": "safety_predictor",
+      "path": "20-actors/jp-ashiba/py/safety_predictor/",
+      "tool": "evo_x2_multimodal_rpc",
+      "state_schema": {"image_frames": "array", "iot_stream": "object"},
+      "edge": "accident_risk > 0.8 → alert_escalation"
+    }
+  ],
+  "checkpointer": "kotoba_vault_car",
+  "graph_def_storage": "kotoba_quad",
+  "scaffold_created": "2026-05-28T11:31:00Z (iter-45)",
+  "ssot_bmc": "60-apps/ai-gftd-project-jp-ashiba/docs/bmc/ashiba-lean-bmc-v45.toml"
+}

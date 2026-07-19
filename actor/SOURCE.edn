@@ -1,0 +1,4 @@
+{:actor/source "20-actors/jp-ashiba/actor-manifest.jsonld"
+ :actor/source-revision "0c4f388e74138a098aa8608012cc4ebfc3f5b2a6"
+ :actor/status :canonicalized-in-flat-repository
+ :actor/note "Historical Python paths in the manifest are provenance; current runtime ownership is defined by this repository."}
