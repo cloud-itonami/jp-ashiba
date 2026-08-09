@@ -1,0 +1,66 @@
+[{:db/id -1
+  :adr/id "jp-ashiba-0001"
+  :adr/title "README.md と operator-quickstart.md は plain markdown のままにする"
+  :adr/status "accepted"
+  :adr/date "2026-08-09"
+  :adr/repo "orgs/cloud-itonami/jp-ashiba"
+  :adr/body
+  "## Context
+
+この repo は 2026-07 に docs を EDN 化した（`ace7d3a` 'make README.md.edn
+datomic/datascript queryable'、`0b2aac4` で PILOT-2-design と RUNBOOK-deploy も）。
+結果として repo 直下に `README.md` が**存在しない**状態になり、`README.md.edn` だけが
+残った。その `README.md.edn` は実体としては 1 entity・4 属性の出自メモで、
+repo の中身を説明していない。
+
+同時に、この repo の内容を説明する唯一の長文は `CLAUDE.md` になった。これは
+agent 向けの歴史記録で、`ai-gftd-apps-gftdcojp` のサブディレクトリだった時代の
+パス（`20-actors/jp-ashiba/...`）と、存在しない Rust（`cargo run -p ashiba-bmc`）を
+参照したままである。
+
+2026-08-09 に repo-root の `README.md` と `docs/operator-quickstart.md` を
+plain markdown で追加した。これは repo の見た目の慣習（`*.md.edn`）に反するので、
+理由を残さないと次の人が『EDN 化し忘れ』として .edn に戻す。
+
+## Decision
+
+**repo-root の `README.md` と `docs/operator-quickstart.md` は plain markdown のまま
+にする。EDN 化しない。**
+
+`docs/adr/` 配下（この文書を含む）と、既存の `PILOT-2-design` / `RUNBOOK-deploy` /
+`README.md.edn` は EDN のままにする。
+
+## Rationale
+
+EDN 化の目的は『datom 面に載せて横断 query できるようにすること』であって、
+拡張子を揃えることではない。次の 2 文書はその目的の対象外である。
+
+1. **repo-root の README は入口であって dataset ではない。** GitHub が render するのは
+   `README.md` で、`README.md.edn` は render されない。入口を機械可読にする代わりに
+   人間から見えなくするのは目的を取り違えている。
+2. **quickstart は『踏む』文書である。** 手順を EDN の string blob に入れると、
+   読むのに reader が要る。手順書を読むために道具が要るなら手順書ではない。
+
+superproject の CLAUDE.md が EDN-only を課しているのは `90-docs/` 配下であって、
+子 repo の root README ではない。子 repo の `docs/*.md` については同じ CLAUDE.md が
+markdown の存在を前提に書いている（『子リポの docs/*.md にも適用される』）。
+
+加えて `manifest/itonami-maturity-evidence.edn` を作る scan は repo-root の
+`README.md` を読む。これは決定の理由ではなく確認である——**測られるから書く**のでは
+なく、入口が無いから書いたら、たまたま測られてもいた。
+
+## Consequences
+
+- `README.md`（人間の入口・現在地）と `CLAUDE.md`（歴史・移植記録）が併存する。
+  役割が違うので統合しない。`README.md` 側に『CLAUDE.md のどこが陳腐化しているか』の
+  表を置いて、読み手が誤読しないようにする。
+- `README.md.edn` は消さない。出自（`ai-gftd-apps-gftdcojp` からの分離）を持つ
+  datom で、`README.md` はそれを置き換えるものではない。
+- 新しい ADR は EDN で書く（`docs/adr/NNNN-*.edn`、`d/transact` 可能な tx-data）。
+
+## Not decided here
+
+- `CLAUDE.md` の陳腐化した記述そのものの修正。今回は README 側に『どこが古いか』を
+  明示するに留めた。本文の書き換えは別の作業。
+- `clj/bb.edn` と `edn-datomize.bb` の撤去（bb は ADR-2607173000 で退役済み）。
+  quickstart は bb を使わない経路だけを書いたが、ファイル自体は残っている。"}]
