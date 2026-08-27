@@ -6,14 +6,14 @@
    joining satellite-detector + owner-resolver's Datoms.
 
    DID:  did:web:jp-ashiba.gftd.ai:actor:outbound-emailer
-   Tools: Murakumo LLM (現場固有提案生成) + mailer.gftd.ai XRPC sendEmail (Resend)
+   Tools: Murakumo LLM (現場固有提案生成) + host-injected mail delivery
    Edge: send_success → conversion_tracker
 
    Ported: `route_by_send_status` (pure) + the `transact_send` tx-edn assembly
    template. NOT ported (host-injected IO, each a `raise NotImplementedError` in
    the source): `pull_site_state` (Datalog q() pull), `generate_site_proposal`
    (Murakumo LLM chat completion call), `select_vendor_candidates` (Datalog q() +
-   ranking), `send_via_mailer_xrpc` (mailer.gftd.ai HTTP POST / Resend), the actual
+   ranking), `send_via_mailer_xrpc` (host-injected HTTP POST / Resend), the actual
    `conn.transact(...)` in `transact_send`, and `send_handler` (pyzeebe task entry).
    The `:ashiba/sent-at` timestamp is a host-injected clock boundary — `build-send
    -tx-edn` takes it as an explicit `sent-at` argument rather than calling
@@ -23,9 +23,9 @@
 (def actor-did "did:web:jp-ashiba.gftd.ai:actor:outbound-emailer")
 (def task-type "ai.gftd.apps.jp-ashiba.outbound-emailer.send")
 (def next-actor "did:web:jp-ashiba.gftd.ai:actor:conversion-tracker")
-(def mailer-send-xrpc "https://mailer.gftd.ai/xrpc/ai.gftd.apps.mailer.sendEmail")
+(def mailer-send-xrpc nil)
 (def from-address "ashiba@mailer.gftd.ai")
-(def murakumo-url "https://murakumo.gftd.ai/v1")
+(def murakumo-url "https://api.murakumo.cloud/v1")
 (def scaffold-version "iter-51-datomic")
 
 (def written-attributes

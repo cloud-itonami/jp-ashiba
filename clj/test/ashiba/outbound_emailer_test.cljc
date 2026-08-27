@@ -8,9 +8,9 @@
   (is (= "did:web:jp-ashiba.gftd.ai:actor:outbound-emailer" oe/actor-did))
   (is (= "ai.gftd.apps.jp-ashiba.outbound-emailer.send" oe/task-type))
   (is (= "did:web:jp-ashiba.gftd.ai:actor:conversion-tracker" oe/next-actor))
-  (is (= "https://mailer.gftd.ai/xrpc/ai.gftd.apps.mailer.sendEmail" oe/mailer-send-xrpc))
+  (is (nil? oe/mailer-send-xrpc))
   (is (= "ashiba@mailer.gftd.ai" oe/from-address))
-  (is (= "https://murakumo.gftd.ai/v1" oe/murakumo-url))
+  (is (= "https://api.murakumo.cloud/v1" oe/murakumo-url))
   (is (= "iter-51-datomic" oe/scaffold-version))
   (is (= [":ashiba/proposal-text" ":ashiba/vendor-candidates" ":ashiba/mailer-message-id"
           ":ashiba/sent-at" ":ashiba/sent-by"]
