@@ -2,9 +2,9 @@
 
 > **2026-07-07: 4-actor pyzeebe scaffold ported py → cljc, py/ removed.** `projects/ai-gftd-apps-gftdcojp/20-actors/jp-ashiba/py/` (4 pyzeebe actor stubs + `app.py` entrypoint + `kotoba_seal.py`, ~1016 lines, deprecated per owner "jp-ashiba も cljc に") has been deleted along with its `Dockerfile` (py-only Granian/pyzeebe build). Pure logic is now `clj/src/ashiba/{seal,satellite_detector,owner_resolver,outbound_emailer,safety_predictor}.cljc`, ns `ashiba.{seal,satellite-detector,owner-resolver,outbound-emailer,safety-predictor}`. `actor-manifest.jsonld` is retained (still the T1 manifest SSoT). See "4-Actor cljc Port" section below for scope, golden-test method, and follow-up.
 
-# ai-gftd-project-jp-ashiba
+# jp-ashiba
 
-jp-ashiba.gftd.ai — 足場需要マッチング AI Agent (performerType: service)
+足場需要マッチング AI Agent (performerType: service)
 
 ## Overview
 
@@ -28,7 +28,7 @@ jp-ashiba.gftd.ai — 足場需要マッチング AI Agent (performerType: servi
 
 ### Lean Canvas (2026-05-28 / Iteration 44 — Live Probe Evidence)
 
-**戦略**: Resend API 経由で `test-iter44@mailer.gftd.ai` + `test-iter44@gftd.ai` (apex baseline) に live probe 2発 → 両方 `last_event=sent` ✓ / **CF Email Routing Analytics +90s で events=0** ✗ → **SMTP-layer 切断仮説** に分岐: (a) SPF/DMARC strict reject (同一 zone loop), (b) Analytics 大幅遅延 (>15min), (c) Workers Email API routing fail-open。外部 ESP (Gmail/Outlook) probe で切り分け予定。
+**戦略**: Resend API 経由で mailer inbox + apex baseline に live probe 2発 → 両方 `last_event=sent` ✓ / **CF Email Routing Analytics +90s で events=0** ✗ → **SMTP-layer 切断仮説** に分岐: (a) SPF/DMARC strict reject (同一 zone loop), (b) Analytics 大幅遅延 (>15min), (c) Workers Email API routing fail-open。外部 ESP (Gmail/Outlook) probe で切り分け予定。
 
 **Maturity 推移**: iter-43 4.3 → **iter-44 4.3** (numeric 不変、evidence depth が増加 — live probe 2発で 4件 true 追加)
 
@@ -55,7 +55,7 @@ summary CID: bafyr4idj6vuu6px3cptmcdye34n3zdurg5tfsruaoks3afoxjrer2gykdu (AEAD-s
 > **Q2 中核 3 ディレクティブ (2026-05-28 ユーザー確定)**:
 > 1. **衛星画像 outbound マッチング** — Sentinel-2 + Planet Labs から工事現場検出 → 施主 reverse-lookup → AI 営業メール → 足場業者マッチング (SEO inbound 6,500/月 を outbound 月 500 lead で補完)
 > 2. **Gad EVO-X2 (GMKtec / AMD Ryzen AI Max+ 395 / 128GB unified / Radeon 8060S iGPU + 50 TOPS NPU)** — 画像認識 (衛星 ML + v7 安全予測) を **local 推論**。cloud GPU 月 ¥200K カット + VPC 外不要 + leak ゼロ + marginal 1/10
-> 3. **mailer.gftd.ai (repowide primary email)** — 送信=Resend, 受信=Cloudflare Email Routing。`microsoft.gftd.ai` send facade 廃止 (ingest 専用)
+> 3. **outbound email (repowide primary)** — 送信=Resend, 受信=Cloudflare Email Routing。M365 send facade 廃止 (ingest 専用)
 
 | Block | Maturity | Status |
 |---|---|---|
@@ -93,7 +93,7 @@ summary CID: bafyr4idj6vuu6px3cptmcdye34n3zdurg5tfsruaoks3afoxjrer2gykdu (AEAD-s
 
 **Problem (1件)**: `p_q2_invisible_demand` — 100現場 pilot で平均 35日 リードタイム短縮実証
 
-### Q2 中核アーキテクチャ — 衛星 outbound × EVO-X2 × mailer.gftd.ai
+### Q2 中核アーキテクチャ — 衛星 outbound × EVO-X2 × outbound email
 
 ```
 [Cloud sources]
@@ -126,18 +126,17 @@ summary CID: bafyr4idj6vuu6px3cptmcdye34n3zdurg5tfsruaoks3afoxjrer2gykdu (AEAD-s
   施主/元請 特定 (国土地理院 地番 API + 法務局 不動産登記 + 建築確認申請)
         │
         ▼
-  mailer.gftd.ai (XRPC ai.gftd.apps.mailer.sendEmail)
-    Send: Resend SMTP (well@email.gftd.ai, SPF/DKIM/DMARC)
-    Receive: Cloudflare Email Routing (*@mailer.gftd.ai → email-relay)
+  outbound email (host-injected send; Resend SMTP)
+    Receive: Cloudflare Email Routing → email-relay
     返信自動分類: interested / decline / escalate
         │
         ▼
-  足場業者 3社マッチング → 30日 conversion 計測 → kakin.gftd.ai (成約手数料 6%)
+  足場業者 3社マッチング → 30日 conversion 計測 → kakin (成約手数料 6%)
 ```
 
 **経済性 (3 ディレクティブ統合効果)**:
 - cloud GPU 月 ¥200K カット (EVO-X2 capex ¥350K / 24ヶ月 + 電気 ¥3K = ¥18K/月)
-- mailer.gftd.ai 送受信 ¥30K/月 (Resend $50 + CF Email Routing 無料)
+- outbound email 送受信 ¥30K/月 (Resend $50 + CF Email Routing 無料)
 - 衛星 pipeline ¥600K/月 (Sentinel-2 無料 + Planet $5K + EVO-X2 + ETL)
 - Outbound CAC ¥35K/社 / payback 1.2ヶ月 (cloud GPU 推論なら CAC ¥70K)
 
@@ -165,12 +164,12 @@ summary CID: bafyr4idj6vuu6px3cptmcdye34n3zdurg5tfsruaoks3afoxjrer2gykdu (AEAD-s
 
 - 現場条件 (住所・建物種別・工期・面積) → AI 最適足場種別・数量・業者提案
 - 複数業者同時入札 → 最安値 / 最短配送 2軸比較
-- 電子契約 → 自動請求 (kakin.gftd.ai 連携)
+- 電子契約 → 自動請求 (kakin 連携)
 
 ### 供給側管理
 
 - 在庫・稼働状況リアルタイム管理
-- 配送スケジュール最適化 (maps.gftd.ai 連携)
+- 配送スケジュール最適化 (maps 連携)
 - DID 紐付き安全点検記録・信頼スコア蓄積
 
 ## Architecture
@@ -179,7 +178,7 @@ summary CID: bafyr4idj6vuu6px3cptmcdye34n3zdurg5tfsruaoks3afoxjrer2gykdu (AEAD-s
 工務店 / 建設会社 (XRPC client)
   │
   ▼
-jp-ashiba.gftd.ai (CF Worker = edge proxy only, ADR-2605080600 準拠)
+jp-ashiba (CF Worker = edge proxy only, ADR-2605080600 準拠)
   ├─ XRPC routing (TLS, edge auth, NSID lookup)
   └─ BPMN dispatcher 経由で L7 へ
   │
@@ -189,23 +188,23 @@ Actor runtime  ← **migrated to 20-actors/jp-ashiba; pure logic is clj/src/ashi
   ├─ 4 actor pure-logic modules (`clj/src/ashiba/{satellite_detector,owner_resolver,outbound_emailer,safety_predictor}.cljc`; pyzeebe/Datomic/RPC IO still to be wired)
   │   ├─ satellite-detector (衛星 ML on Gad EVO-X2 RPC)
   │   ├─ owner-resolver (国土地理院 + 法務局 + 建確 ETL)
-  │   ├─ outbound-emailer (mailer.gftd.ai sendEmail XRPC)
+  │   ├─ outbound-emailer (host-injected mail send)
   │   └─ safety-predictor (画像+IoT 融合 v7 on EVO-X2)
   ├─ LangGraph subgraphs (State + Edge + Tool per actor)
   │   ├─ graph_def_cid を kotoba Quad で永続化 (ADR-2605082000 graph-as-data)
   │   └─ Checkpointer = kotoba Vault CAR bundle (ADR-2605082100)
   ├─ マッチングエンジン (LangGraph + Murakumo LLM tool call)
   ├─ 足場資材カタログ / レンタル契約 lifecycle
-  ├─ デジタル契約・請求 (kakin.gftd.ai 連携)
+  ├─ デジタル契約・請求 (kakin 連携)
   ├─ 安全点検・DID 信頼スコア
   └─ GovernanceGate (RBAC + contract + trust)
   │
   ▼
-mcp.gftd.ai/xrpc/{NSID}
+XRPC / NSID routing
   ├─ kagami graph (RisingWave Hyperdrive)
-  ├─ kakin.gftd.ai (課金連携)
-  ├─ maps.gftd.ai (現場位置・配送最適化)
-  ├─ mailer.gftd.ai (Resend 送信 + CF Email Routing 受信)
+  ├─ kakin (課金連携)
+  ├─ maps (現場位置・配送最適化)
+  ├─ outbound email (Resend 送信 + CF Email Routing 受信)
   └─ kotoba (BMC + 事業知識グラフ + Quad/Datalog + Vault CAR)
 ```
 
@@ -254,7 +253,7 @@ next)**:
   `fetch_houmu_registry`/法務局, `fetch_kenchiku_permit`/建築確認申請).
 - Murakumo LLM call (`generate_site_proposal`) and vendor ranking query
   (`select_vendor_candidates`) in outbound-emailer.
-- `send_via_mailer_xrpc` (mailer.gftd.ai `sendEmail` XRPC / Resend).
+- `send_via_mailer_xrpc` (host-injected mail send / Resend).
 - `assign_site_id` (content-hash of epoch+tile via a kotoba CID helper not available on
   this classpath).
 - `emit_alert` cross-actor `magatama.invoke` in safety-predictor.
@@ -297,20 +296,20 @@ next)**:
 | `did:web:jp-ashiba.gftd.ai:actor:support` | 顧客対応 AI | 問い合わせ、FAQ、エスカレーション |
 | `did:web:jp-ashiba.gftd.ai:actor:satellite-detector` | 衛星検出 AI (Q2) | Sentinel-2 + Planet Labs → 工事現場 ML 検出 (U-Net + temporal stack on Gad EVO-X2) |
 | `did:web:jp-ashiba.gftd.ai:actor:owner-resolver` | 施主特定 AI (Q2) | 国土地理院 + 法務局 + 建築確認申請 統合 → 施主/元請 reverse-lookup |
-| `did:web:jp-ashiba.gftd.ai:actor:outbound-emailer` | 営業メール AI (Q2) | 現場固有提案 + 業者 3社マッチング → mailer.gftd.ai 送信 (Resend) + 返信受信 (CF Email Routing) + 自動分類 |
+| `did:web:jp-ashiba.gftd.ai:actor:outbound-emailer` | 営業メール AI (Q2) | 現場固有提案 + 業者 3社マッチング → outbound email 送信 (Resend) + 返信受信 (CF Email Routing) + 自動分類 |
 | `did:web:jp-ashiba.gftd.ai:actor:safety-predictor` | v7 安全予測 AI (Q2) | 画像+IoT 融合 (LoRaWAN + 加速度 + 風速) 事故予兆検知 on EVO-X2 |
 
 ## Cross-App Integration
 
 | App | 連携内容 |
 |---|---|
-| `kakin.gftd.ai` | 成約手数料 (6%)・サブスク課金・請求書発行 |
-| `maps.gftd.ai` | 現場位置情報・配送ルート最適化 |
-| `jinushi.gftd.ai` | 現場土地登記・建築許可確認 |
-| `yotei.gftd.ai` | 配送・工程スケジュール連携 |
+| `kakin` | 成約手数料 (6%)・サブスク課金・請求書発行 |
+| `maps` | 現場位置情報・配送ルート最適化 |
+| `jinushi` | 現場土地登記・建築許可確認 |
+| `yotei` | 配送・工程スケジュール連携 |
 | `kotoba` | BMC・事業知識グラフ (Quad + Datalog) / 衛星画像 Vault (CAR bundle, content-addressed) |
-| `mailer.gftd.ai` | **Primary email (repowide 2026-05-28)** — outbound 送信 (Resend) + inbound 受信 (CF Email Routing → email-relay → 返信自動分類) |
-| `microsoft.gftd.ai` | M365 **ingest 専用** (既存 Outlook inbox 読取のみ、send 廃止) |
+| outbound email | **Primary email (repowide 2026-05-28)** — outbound 送信 (Resend) + inbound 受信 (CF Email Routing → email-relay → 返信自動分類) |
+| M365 ingest | M365 **ingest 専用** (既存 Outlook inbox 読取のみ、send 廃止) |
 | **Gad EVO-X2** (Gad LAN) | 衛星 ML + v7 安全予測 local 推論 (Ryzen AI Max+ 395 / 128GB unified / 50 TOPS NPU) |
 | Sentinel-2 (Copernicus) | 衛星画像 raw ingestion (無料, 5日周期, 10m 解像度) |
 | Planet Labs SkySat | 高解像度オンデマンド撮影 (3m, $5K/月契約) |

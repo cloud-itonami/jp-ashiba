@@ -20,7 +20,7 @@
   (let [state (bmc/run-bmc fixture)]
     (is (= 100 (:coverage_pct state)))
     (is (pos? (count (:at_risk state))))
-    (is (re-find #"ashiba.gftd.ai Lean BMC Scoring Report" (:report state)))
+    (is (re-find #"jp-ashiba Lean BMC Scoring Report" (:report state)))
     (is (re-find #"Iteration : 45" (:report state)))))
 
 (deftest registry-test

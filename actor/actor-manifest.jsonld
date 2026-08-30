@@ -41,7 +41,7 @@
       "did": "did:web:jp-ashiba.gftd.ai:actor:outbound-emailer",
       "role": "outbound_emailer",
       "path": "20-actors/jp-ashiba/py/outbound_emailer/",
-      "tool": "murakumo_llm + mailer_gftd_send_email",
+      "tool": "murakumo_llm + host_injected_mail",
       "state_schema": {"site_proposal": "string", "vendor_candidates": "array<did>"},
       "edge": "send_success → conversion_tracker"
     },
