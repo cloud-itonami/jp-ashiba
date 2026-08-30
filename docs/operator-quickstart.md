@@ -52,7 +52,7 @@ clojure -M -e '(require (quote [ashiba.bmc :as bmc]))
 2026-08-09 に実際に出た出力:
 
 ```
-ashiba.gftd.ai Lean BMC Scoring Report
+jp-ashiba Lean BMC Scoring Report
 Iteration : 60 (2026-05-28)
 Phase     : India Scale 2030-Q2 Month 1 — All-actor seal+validate wired
 Graph     : local-cid:bmc:ashiba:v60
@@ -150,7 +150,7 @@ clojure -M -e '(require (quote [ashiba.satellite-detector :as sd]))
 |---|---|
 | 実際に衛星画像から現場を検出する | EVO-X2 への推論 RPC が未配線 |
 | 施主を特定する | 国土地理院 / 法務局 / 建築確認申請 API 呼び出しが未配線 |
-| 営業メールを送る | mailer.gftd.ai `sendEmail` XRPC が未配線 |
+| 営業メールを送る | host-injected mail send が未配線 |
 | Datomic に書く | tx EDN の**組み立て**はあるが `conn.transact` が無い |
 | BPMN から 4 actor を回す | Zeebe broker 接続と worker 登録が無い（契約は `ashiba.registry/actor-task-registry` にデータとしてあるだけ） |
 | `cargo run -p ashiba-bmc` | **Rust は存在しない**。CLAUDE.md の該当行は陳腐化。§2 を使う |

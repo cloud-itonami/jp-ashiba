@@ -4,7 +4,7 @@
 先に名乗る: **建設現場向け仮設足場の需給マッチング事業の、意思決定ロジックと
 Lean BMC コーパスを持つ repo** である。
 
-`cloud-itonami/jp-ashiba`。事業ドメインの想定サービス面は `jp-ashiba.gftd.ai`。
+`cloud-itonami/jp-ashiba`。
 
 ---
 
@@ -32,7 +32,7 @@ Lean BMC コーパスを持つ repo** である。
   移植済み・テスト済み**だが、実際に発行する呼び出しが無い
 - EVO-X2 への推論 RPC（`unet_infer_on_evo_x2`, `fuse_image_iot_on_evo_x2`）
 - 国土地理院 / 法務局 / 建築確認申請 の外部 API 呼び出し
-- mailer.gftd.ai の `sendEmail` XRPC（Resend 送信）
+- 営業メール送信（host-injected; Resend）
 - Murakumo LLM 呼び出し（提案文生成）
 - Zeebe broker への接続と 4 task の worker 登録 — 契約は
   `ashiba.registry/actor-task-registry` に**データとして**記録してあるだけ

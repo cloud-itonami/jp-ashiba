@@ -133,7 +133,7 @@
               (/ (reduce + (vals maturity)) total)
               0.0)
         lines (concat
-               ["ashiba.gftd.ai Lean BMC Scoring Report"
+               ["jp-ashiba Lean BMC Scoring Report"
                 (str "Iteration : " (or (:iteration meta) "?") " (" (or (:date meta) "?") ")")
                 (str "Phase     : " (or (:phase meta) ""))
                 (str "Graph     : " (:graph_id state))
