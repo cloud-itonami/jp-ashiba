@@ -11,7 +11,7 @@
    `fetch_houmu_registry` / `fetch_kenchiku_permit` (3 external gov API calls),
    `transact_owner`'s actual `conn.transact(...)`, and `resolve_handler` (the
    pyzeebe task entry)."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def actor-did "did:web:jp-ashiba.gftd.ai:actor:owner-resolver")
 (def task-type "ai.gftd.apps.jp-ashiba.owner-resolver.resolve")

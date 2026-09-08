@@ -15,7 +15,7 @@
    (EVO-X2 multimodal RPC), the actual `conn.transact(...)` in
    `transact_prediction`, `emit_alert` (cross-actor `magatama.invoke`), and
    `predict_handler` (pyzeebe task entry)."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def actor-did "did:web:jp-ashiba.gftd.ai:actor:safety-predictor")
 (def task-type "ai.gftd.apps.jp-ashiba.safety-predictor.predict")

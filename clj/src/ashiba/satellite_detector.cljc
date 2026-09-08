@@ -14,7 +14,7 @@
    host-injected boundary (kotoba-datomic Connection, EVO-X2 RPC client) that belongs
    to whatever runtime eventually hosts this actor, not to this pure-logic library.
    See CLAUDE.md follow-up list."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def actor-did "did:web:jp-ashiba.gftd.ai:actor:satellite-detector")
 (def task-type "ai.gftd.apps.jp-ashiba.satellite-detector.detect")
