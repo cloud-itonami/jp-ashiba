@@ -18,7 +18,7 @@
    The `:ashiba/sent-at` timestamp is a host-injected clock boundary — `build-send
    -tx-edn` takes it as an explicit `sent-at` argument rather than calling
    `(Instant/now)` internally, so the builder stays pure/deterministic and testable."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def actor-did "did:web:jp-ashiba.gftd.ai:actor:outbound-emailer")
 (def task-type "ai.gftd.apps.jp-ashiba.outbound-emailer.send")

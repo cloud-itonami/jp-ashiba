@@ -22,7 +22,7 @@
    (SHA-256 of actor-did [+ run-graph for tier-3]) is a bridging placeholder — it is NOT
    the real kotoba-py SecureVault key management (no HSM / no per-actor persisted key
    material). Wiring to the real actor vault key is a follow-up (see CLAUDE.md)."
-  (:require [clojure.string :as str])
+  (:require [kotoba.lang.text :as str])
   #?(:clj (:import [java.security MessageDigest SecureRandom]
                     [java.util Base64]
                     [javax.crypto Cipher]

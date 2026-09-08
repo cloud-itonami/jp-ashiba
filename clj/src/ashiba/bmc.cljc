@@ -1,5 +1,5 @@
 (ns ashiba.bmc
-  (:require [clojure.string :as str])
+  (:require [kotoba.lang.text :as str])
   (:import [org.tomlj Toml TomlArray TomlTable]))
 
 (def compact-inline-re
