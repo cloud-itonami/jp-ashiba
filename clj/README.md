@@ -17,11 +17,11 @@ local ingest summary so the task remains portable.
 Run tests:
 
 ```sh
-clojure -M:test
+kbb -M:test
 ```
 
 Run server:
 
 ```sh
-LANGSERVER_PORT=8080 clojure -M -m ashiba.server
+LANGSERVER_PORT=8080 kbb -M -m ashiba.server
 ```

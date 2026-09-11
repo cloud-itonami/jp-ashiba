@@ -9,4 +9,4 @@ COPY langgraph.edn ./
 ENV LANGSERVER_PORT=8080
 EXPOSE 8080
 
-CMD ["clojure", "-M", "-m", "ashiba.server"]
+CMD ["kbb", "-M", "-m", "ashiba.server"]
