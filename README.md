@@ -15,8 +15,8 @@ Lean BMC コーパスを持つ repo** である。
 | # | 何 | 場所 |
 |---|---|---|
 | 1 | **4 actor の純粋な判断関数**（衛星検出 / 施主特定 / 営業メール / 安全予測） | `clj/src/ashiba/` |
-| 2 | **Lean BMC の版管理コーパスと採点エンジン**（59 版 + Datalog 規則） | `docs/bmc/`, `clj/src/ashiba/bmc.cljc` |
-| 3 | **上の 2 つを叩く最小 HTTP dispatcher** | `clj/src/ashiba/server.cljc` |
+| 2 | **Lean BMC の版管理コーパスと採点エンジン**（59 版 + Datalog 規則） | `docs/bmc/`, `clj/src/ashiba/bmc.cljk` |
+| 3 | **上の 2 つを叩く最小 HTTP dispatcher** | `clj/src/ashiba/server.cljk` |
 
 動かし方は **[`docs/operator-quickstart.md`](docs/operator-quickstart.md)**。
 

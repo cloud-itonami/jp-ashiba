@@ -1,0 +1,21 @@
+{:format :kotoba.cljk-origin/v1
+ :renamed-on "2026-09-11"
+ :decision "adr-2609111500-cljk-rename-all-clojure-source (com-junkawasaki/root 90-docs/adr; owner instruction 2026-09-11)"
+ :rule "value = the extension the file had before the rename. A path ending in .clj.cljk or .cljs.cljk kept it in the name because both platform files existed (or the plain target was taken)."
+ :origins
+ {"clj/src/ashiba/bmc.cljk" ".cljc"
+  "clj/src/ashiba/outbound_emailer.cljk" ".cljc"
+  "clj/src/ashiba/owner_resolver.cljk" ".cljc"
+  "clj/src/ashiba/registry.cljk" ".cljc"
+  "clj/src/ashiba/safety_predictor.cljk" ".cljc"
+  "clj/src/ashiba/satellite_detector.cljk" ".cljc"
+  "clj/src/ashiba/seal.cljk" ".cljc"
+  "clj/src/ashiba/server.cljk" ".cljc"
+  "clj/test/ashiba/bmc_test.cljk" ".cljc"
+  "clj/test/ashiba/outbound_emailer_test.cljk" ".cljc"
+  "clj/test/ashiba/owner_resolver_test.cljk" ".cljc"
+  "clj/test/ashiba/registry_test.cljk" ".cljc"
+  "clj/test/ashiba/safety_predictor_test.cljk" ".cljc"
+  "clj/test/ashiba/satellite_detector_test.cljk" ".cljc"
+  "clj/test/ashiba/seal_test.cljk" ".cljc"
+  "clj/test/ashiba/server_test.cljk" ".cljc"}}
