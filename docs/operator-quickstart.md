@@ -139,7 +139,7 @@ clojure -M -e '(require (quote [ashiba.satellite-detector :as sd]))
 ```
 
 この 6 点は golden test が使っているのと同じ境界値。返る値が
-`clj/test/ashiba/satellite_detector_test.cljc` の期待値と一致する。
+`clj/test/ashiba/satellite_detector_test.cljk` の期待値と一致する。
 
 ## ここでは踏めないこと
 
