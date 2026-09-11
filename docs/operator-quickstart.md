@@ -25,7 +25,7 @@ cd clj
 ## 1. テストを通す（まずこれ）
 
 ```sh
-clojure -M:test
+kbb -M:test
 ```
 
 期待する出力の最後の 2 行:
@@ -45,7 +45,7 @@ Ran 23 tests containing 122 assertions.
 最新版は `v60`（`docs/bmc/` は v1..v60、**v49 は欠番**で実在 59 版）。
 
 ```sh
-clojure -M -e '(require (quote [ashiba.bmc :as bmc]))
+kbb -M -e '(require (quote [ashiba.bmc :as bmc]))
                (println (:report (bmc/run-bmc "../docs/bmc/ashiba-lean-bmc-v60.toml")))'
 ```
 
@@ -85,7 +85,7 @@ kotoba Datomic persistence:
 ## 3. HTTP dispatcher を起動して叩く
 
 ```sh
-LANGSERVER_PORT=18771 clojure -M -m ashiba.server
+LANGSERVER_PORT=18771 kbb -M -m ashiba.server
 ```
 
 別のシェルから。`/health` は GET、それ以外は `/run` に POST する。
@@ -134,7 +134,7 @@ curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:18771/nope
 actor の判断だけを見たいならサーバは要らない。全部純関数である。
 
 ```sh
-clojure -M -e '(require (quote [ashiba.satellite-detector :as sd]))
+kbb -M -e '(require (quote [ashiba.satellite-detector :as sd]))
                (println (mapv sd/route-by-confidence [0.0 0.29 0.3 0.69 0.7 1.0]))'
 ```
 

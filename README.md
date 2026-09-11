@@ -109,7 +109,7 @@ CLAUDE.md       設計・移植の歴史記録。※下記注意
 | `20-actors/jp-ashiba/actor-manifest.jsonld` | この repo では `actor/actor-manifest.jsonld` |
 | SSoT は `ashiba-lean-bmc-v45.toml` | 現在の最新は v60 |
 | RUNBOOK の `preflight.sh` / `deploy_jp_ashiba.sh` / `verify_1tile.sh` / `zbctl` | **この repo に無い**。RUNBOOK は「配線が終わった後の姿」を記した文書であって、今日踏める手順ではない |
-| `clj/bb.edn`（babashka タスク） | bb は ADR-2607173000 で退役。`clojure -M:test` を直接使う |
+| `clj/bb.edn`（babashka タスク） | bb は ADR-2607173000 で退役。`kbb -M:test` を直接使う |
 
 今日実際に踏める手順は `docs/operator-quickstart.md` **だけ**である。
 

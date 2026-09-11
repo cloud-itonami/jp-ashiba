@@ -14,7 +14,7 @@
 
 **SSoT**: `docs/bmc/ashiba-lean-bmc-v45.toml` (kotoba Quad 形式, **Analytics-lag verified + LangGraph scaffold**)
 **Actor manifest**: `20-actors/jp-ashiba/actor-manifest.jsonld` (T1 MCP-Compose)
-**Local BMC helper runtime**: `clj/` (`clojure -M:test`)
+**Local BMC helper runtime**: `clj/` (`kbb -M:test`)
 **Datalog スコアリング規則**: `docs/bmc/coverage.dl`
 **kotoba 統合例**: `../../ai-gftd-project-kotoba/examples/ashiba-bmc/`
 
@@ -239,7 +239,7 @@ templates by re-evaluating the same f-string inline in python (since the real
 construction is dead code there, never returned). cljc tests assert against these
 captured values; each test file docstring records "captured 2026-07-07".
 
-**Test files**: `clj/test/ashiba/{seal,satellite_detector,owner_resolver,outbound_emailer,safety_predictor,registry}_test.cljc`. Full suite: `cd clj && clojure -M:test` → 23 tests / 122 assertions, 0 failures (as of this port; existing `bmc_test.cljc`/`server_test.cljc` untouched).
+**Test files**: `clj/test/ashiba/{seal,satellite_detector,owner_resolver,outbound_emailer,safety_predictor,registry}_test.cljc`. Full suite: `cd clj && kbb -M:test` → 23 tests / 122 assertions, 0 failures (as of this port; existing `bmc_test.cljc`/`server_test.cljc` untouched).
 
 **NOT ported (host-injected IO boundaries — remain `raise NotImplementedError("wired at
 Granian pod runtime")`-equivalent gaps, i.e. real work for whoever wires the runtime
