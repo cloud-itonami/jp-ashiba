@@ -22,9 +22,8 @@
    (SHA-256 of actor-did [+ run-graph for tier-3]) is a bridging placeholder — it is NOT
    the real kotoba-py SecureVault key management (no HSM / no per-actor persisted key
    material). Wiring to the real actor vault key is a follow-up (see CLAUDE.md)."
-  (:require [kotoba.lang.text :as str])
+  (:require [kotoba.bytes :as kbytes] [kotoba.lang.text :as str])
   #?(:clj (:import [java.security MessageDigest SecureRandom]
-                    [java.util Base64]
                     [javax.crypto Cipher]
                     [javax.crypto.spec GCMParameterSpec SecretKeySpec])))
 
@@ -132,7 +131,7 @@
             envelope (byte-array (+ (count iv) (count ciphertext)))]
         (System/arraycopy iv 0 envelope 0 (count iv))
         (System/arraycopy ciphertext 0 envelope (count iv) (count ciphertext))
-        (str "signal:v1:" (.encodeToString (Base64/getEncoder) envelope))))))
+        (str "signal:v1:" (kbytes/base64-encode envelope))))))
 
 #?(:clj
    (defn unseal
@@ -143,7 +142,7 @@
         (throw (ex-info "unseal expects signal:v1: prefix"
                          {:got (subs sealed-value 0 (min 32 (count sealed-value)))})))
       (let [key (derive-key actor-did (when (= tier tier-3) run-graph))
-            envelope (.decode (Base64/getDecoder) (subs sealed-value (count "signal:v1:")))
+            envelope (kbytes/base64-decode-bytes (subs sealed-value (count "signal:v1:")))
             iv (java.util.Arrays/copyOfRange envelope 0 12)
             ciphertext (java.util.Arrays/copyOfRange envelope 12 (count envelope))
             cipher (Cipher/getInstance "AES/GCM/NoPadding")]
