@@ -1,8 +1,8 @@
 (ns ashiba.seal-test
   "Golden parity vs `uv run --no-project python3 -c \"import kotoba_seal ...\"`
    captured 2026-07-07 against 20-actors/jp-ashiba/py/kotoba_seal.py."
-  (:require [ashiba.seal :as seal]
-            [clojure.test :refer [deftest is testing]]))
+  (:require [kotoba.bytes :as kbytes] [ashiba.seal :as seal]
+            [kotoba.test :refer [deftest is testing]]))
 
 (deftest tier-classification-test
   (testing "tier constants"
@@ -52,14 +52,14 @@
 
 (deftest validate-tx-payload-test
   (testing "tier-3 plaintext is rejected (golden: raises)"
-    (is (thrown? #?(:clj clojure.lang.ExceptionInfo :cljs js/Error)
+    (is (thrown? js/Error
                  (seal/validate-tx-payload! ":ashiba/proposal-text" "raw plaintext"))))
   (testing "tier-3 sealed value is accepted (golden: no raise)"
     (is (nil? (seal/validate-tx-payload! ":ashiba/proposal-text" "signal:v1:ZmFrZWN0"))))
   (testing "tier-public scalar is accepted (golden: no raise)"
     (is (nil? (seal/validate-tx-payload! ":ashiba/confidence" 0.85))))
   (testing "tier-2 unsealed int is rejected (golden: raises)"
-    (is (thrown? #?(:clj clojure.lang.ExceptionInfo :cljs js/Error)
+    (is (thrown? js/Error
                  (seal/validate-tx-payload! ":ashiba/parcel-id" 123))))
   (testing "unclassified attr is a no-op (golden: no raise)"
     (is (nil? (seal/validate-tx-payload! ":ashiba/site-id" "anything")))))
@@ -71,20 +71,20 @@
                here is functional: decrypt(encrypt(x)) == x, and the envelope carries
                the signal:v1: prefix `is-sealed?` expects."
        (let [actor "did:web:jp-ashiba.gftd.ai:actor:owner-resolver"
-             plaintext (.getBytes "parcel-9" "UTF-8")
+             plaintext (kbytes/utf8-bytes "parcel-9")
              sealed (seal/seal! actor plaintext seal/tier-2)]
          (is (seal/is-sealed? sealed))
-         (is (= "parcel-9" (String. (seal/unseal actor sealed seal/tier-2) "UTF-8"))))
+         (is (= "parcel-9" (kbytes/utf8-string (seal/unseal actor sealed seal/tier-2)))))
        (let [actor "did:web:jp-ashiba.gftd.ai:actor:outbound-emailer"
              run-graph "kotoba://graph/ashiba:run:42"
-             plaintext (.getBytes "vendor proposal text" "UTF-8")
+             plaintext (kbytes/utf8-bytes "vendor proposal text")
              sealed (seal/seal! actor run-graph plaintext seal/tier-3)]
          (is (seal/is-sealed? sealed))
          (is (= "vendor proposal text"
-                (String. (seal/unseal actor run-graph sealed seal/tier-3) "UTF-8")))
+                (kbytes/utf8-string (seal/unseal actor run-graph sealed seal/tier-3))))
          (testing "wrong run-graph context fails to decrypt (tier-3 binds run_graph)"
            (is (thrown? Exception
                         (seal/unseal actor "kotoba://graph/ashiba:run:99" sealed seal/tier-3))))))
      (testing "cannot seal a TIER_PUBLIC attribute"
        (is (thrown? clojure.lang.ExceptionInfo
-                    (seal/seal! "did:web:x" (.getBytes "x" "UTF-8") seal/tier-public))))))
+                    (seal/seal! "did:web:x" (kbytes/utf8-bytes "x") seal/tier-public))))))

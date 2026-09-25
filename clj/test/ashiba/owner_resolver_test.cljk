@@ -2,7 +2,7 @@
   "Golden parity vs `uv run --no-project python3 -c \"import owner_resolver ...\"`
    captured 2026-07-07 against 20-actors/jp-ashiba/py/owner_resolver/__init__.py."
   (:require [ashiba.owner-resolver :as orz]
-            [clojure.test :refer [deftest is testing]]))
+            [kotoba.test :refer [deftest is testing]]))
 
 (deftest constants-test
   (is (= "did:web:jp-ashiba.gftd.ai:actor:owner-resolver" orz/actor-did))
