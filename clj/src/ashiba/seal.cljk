@@ -101,7 +101,7 @@
 
 #?(:clj
    (defn- sha256-bytes ^bytes [^String s]
-     (.digest (MessageDigest/getInstance "SHA-256") (.getBytes s "UTF-8"))))
+     (.digest (MessageDigest/getInstance "SHA-256") (kbytes/utf8-bytes s))))
 
 #?(:clj
    (defn- derive-key

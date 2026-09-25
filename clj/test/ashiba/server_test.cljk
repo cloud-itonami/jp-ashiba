@@ -1,6 +1,6 @@
 (ns ashiba.server-test
   (:require [ashiba.server :as server]
-            [clojure.test :refer [deftest is]]
+            [kotoba.test :refer [deftest is]]
             [jsonista.core :as json])
   (:import [java.net ServerSocket URI]
            [java.net.http HttpClient HttpRequest HttpRequest$BodyPublishers

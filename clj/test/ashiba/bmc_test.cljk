@@ -1,8 +1,8 @@
 (ns ashiba.bmc-test
   (:require [ashiba.bmc :as bmc]
             [ashiba.registry :as registry]
-            [clojure.java.io :as io]
-            [clojure.test :refer [deftest is testing]]))
+            [kotoba.io :as io]
+            [kotoba.test :refer [deftest is testing]]))
 
 (def fixture
   "../docs/bmc/ashiba-lean-bmc-v45.toml")

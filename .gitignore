@@ -38,3 +38,4 @@ venv/
 coverage/
 test-results/
 .cpcache/
+.nbb/
