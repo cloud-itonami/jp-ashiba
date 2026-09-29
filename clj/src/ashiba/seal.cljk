@@ -21,7 +21,7 @@
    so the tier-2/tier-3 envelope format is genuinely exercisable. The key derivation here
    (SHA-256 of actor-did [+ run-graph for tier-3]) is a bridging placeholder — it is NOT
    the real kotoba-py SecureVault key management (no HSM / no per-actor persisted key
-   material). Wiring to the real actor vault key is a follow-up (see CLAUDE.md)."
+   material). Wiring to the real actor vault key is a follow-up (see AGENTS.md)."
   (:require [kotoba.bytes :as kbytes] [kotoba.lang.text :as str])
   #?(:clj (:import [java.security MessageDigest SecureRandom]
                     [javax.crypto Cipher]

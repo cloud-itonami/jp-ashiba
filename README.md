@@ -38,7 +38,7 @@ Lean BMC コーパスを持つ repo** である。
   `ashiba.registry/actor-task-registry` に**データとして**記録してあるだけ
 
 つまりこの repo は、**外界に触る辺を全部剥がして、判断だけを残したもの**である。
-剥がした辺の一覧は `CLAUDE.md` の "NOT ported" 節が正本。
+剥がした辺の一覧は `AGENTS.md` の "NOT ported" 節が正本。
 
 ## 4 actor と、その判断
 
@@ -94,12 +94,12 @@ docs/
   RUNBOOK-deploy.md.edn    ※下記注意
 actor/          actor-manifest.jsonld（T1 MCP-Compose）+ 出自 SOURCE.edn
 schema.edn      生成物（edn-datomize）。手編集禁止
-CLAUDE.md       設計・移植の歴史記録。※下記注意
+AGENTS.md       設計・移植の歴史記録。※下記注意
 ```
 
 ## 既知の陳腐化（読む前に知っておくこと）
 
-**`CLAUDE.md` と `docs/RUNBOOK-deploy.md.edn` は、この repo が
+**`AGENTS.md` と `docs/RUNBOOK-deploy.md.edn` は、この repo が
 `ai-gftd-apps-gftdcojp` のサブディレクトリだった時代に書かれたもの**で、そのまま
 辿れない記述を含む。歴史記録としては有効なので消していないが、次を承知して読む:
 

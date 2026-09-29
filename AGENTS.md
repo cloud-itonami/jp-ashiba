@@ -269,7 +269,7 @@ next)**:
 **Follow-up (real work still to do, not blocking this port)**:
 1. Wire the 4 actors into an actual runtime: pick a host for the pyzeebe-equivalent task
    loop (kotoba-server XRPC pod? langgraph-clj StateGraph per the `20-actors/jp-ashiba`
-   Actors convention in the superproject root `CLAUDE.md`?) and implement the
+   Actors convention in the superproject root `AGENTS.md`?) and implement the
    `Connection`/`q()` pull + `conn.transact(...)` + EVO-X2/mailer/gov-API IO calls that
    call into these pure `ashiba.*` functions for the decision logic.
 2. Verify the `ashiba.seal` AES-256-GCM implementation against the *real*
