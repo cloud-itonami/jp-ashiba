@@ -153,7 +153,7 @@ kbb -M -e '(require (quote [ashiba.satellite-detector :as sd]))
 | 営業メールを送る | host-injected mail send が未配線 |
 | Datomic に書く | tx EDN の**組み立て**はあるが `conn.transact` が無い |
 | BPMN から 4 actor を回す | Zeebe broker 接続と worker 登録が無い（契約は `ashiba.registry/actor-task-registry` にデータとしてあるだけ） |
-| `cargo run -p ashiba-bmc` | **Rust は存在しない**。CLAUDE.md の該当行は陳腐化。§2 を使う |
+| `cargo run -p ashiba-bmc` | **Rust は存在しない**。AGENTS.md の該当行は陳腐化。§2 を使う |
 | RUNBOOK の `preflight.sh` 等 | この repo に無い |
 
-配線が終わっていない辺の完全な一覧は `CLAUDE.md` の "NOT ported" 節が正本。
+配線が終わっていない辺の完全な一覧は `AGENTS.md` の "NOT ported" 節が正本。

@@ -26,7 +26,7 @@
 ;; channel + ZeebeWorker lifecycle) with no pure-logic content to port — recorded
 ;; here as data so the BPMN contract stays discoverable from the pure-logic repo
 ;; even though the actual worker registration lives in whatever runtime hosts
-;; these actors next (see CLAUDE.md follow-up: "LangGraph/pyzeebe/BPMN 配線").
+;; these actors next (see AGENTS.md follow-up: "LangGraph/pyzeebe/BPMN 配線").
 ;;
 ;; **BPMN slim-payload convention** (kept by all 4 actors, per their docstrings):
 ;; a BPMN ServiceTask only ever passes `site_id` + `upstream_tx_cid` (+ whatever
